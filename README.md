@@ -1,3 +1,3 @@
-# My GIT Project
+# My GIT Repository
 
-First project.
+[First project.](https://gitlab.com/andreyKharit/my-git-project/tree/master/firstProject)
