@@ -1,3 +1,4 @@
-# My GIT Repository
+# GIT Repository
 
-[First project.](https://gitlab.com/andreyKharit/my-git-project/tree/master/firstProject)
+
+*  [First project](https://gitlab.com/andreyKharit/my-git-project/tree/master/firstProject)
