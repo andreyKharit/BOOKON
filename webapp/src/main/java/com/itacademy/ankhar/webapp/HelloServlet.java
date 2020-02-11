@@ -11,8 +11,11 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
+        String requestPath = req.getContextPath();
+        String requestURI = req.getRequestURI();
         writer.write("<h1>Servlet:</h1>");
-        writer.write("<p>Hello, servlet</p>");
+        writer.write("<p>" + requestPath + "</p>");
+        writer.write("<p>" + requestURI + "</p>");
         writer.write("<a href=\\webapp/s>goodbye</a>");
     }
 }

@@ -51,7 +51,7 @@ public class LoginFilter implements Filter {
         String requestPath = req.getContextPath();
         String requestURI = req.getRequestURI();
         return requestURI.equals(requestPath + "/login.jsp") ||
-                requestURI.equals(requestPath + "/auth") ||
+                requestURI.equals(requestPath + "/login") ||
                 requestURI.equals(requestPath + "/error401.jsp");
     }
 
