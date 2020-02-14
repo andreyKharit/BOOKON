@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(
-        urlPatterns = {"/*"},
+        urlPatterns = {"/"},
         filterName = "authFilter", initParams = {
         @WebInitParam(
                 name = "activeSwitch",
