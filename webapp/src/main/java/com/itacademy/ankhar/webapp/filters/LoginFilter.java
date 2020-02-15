@@ -2,43 +2,47 @@ package com.itacademy.ankhar.webapp.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(
-        urlPatterns = {"/"},
-        filterName = "authFilter", initParams = {
-        @WebInitParam(
-                name = "activeSwitch",
-                value = "true",
-                description = "authentication switch"
-        )
-}
+        urlPatterns = {"/*"},
+        filterName = "authFilter"
 )
 public class LoginFilter implements Filter {
-    private boolean activeSwitch;
+    private HttpServletRequest httpRequest;
+    private static final String[] PROTECTED_URLS = {
+            "/main-menu", "/subjects"
+    };
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        String switchStatus = filterConfig.getInitParameter("activeSwitch");
-        this.activeSwitch = switchStatus.equalsIgnoreCase("true");
+        //stub
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
-        HttpServletResponse resp = (HttpServletResponse) servletResponse;
-        if (activeSwitch) {
-            if (bypassFilter(req) || hasSessionAndUserId(req)) {
-                filterChain.doFilter(req, resp);
-            } else {
-                resp.sendError(401, "Authorization error.");
-            }
+        httpRequest = (HttpServletRequest) servletRequest;
+        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+
+        String loginURI = httpRequest.getContextPath() + "/login";
+        boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
+        boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.jsp");
+
+        if (hasSessionAndUserId(httpRequest) && (isLoginRequest || isLoginPage)) {
+            //login page AND logged in
+            httpRequest.getRequestDispatcher("/main-menu.jsp").forward(servletRequest, servletResponse);
+
+        } else if (!hasSessionAndUserId(httpRequest) && isLoginRequired()) {
+            //protected page AND not logged in
+            String loginPage = "/login.jsp";
+            RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
+            dispatcher.forward(servletRequest, servletResponse);
         } else {
-            filterChain.doFilter(req, resp);
+            //either not protected page or already logged in
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
@@ -47,14 +51,18 @@ public class LoginFilter implements Filter {
         //stub
     }
 
-    private boolean bypassFilter(HttpServletRequest req) {
-        String requestPath = req.getContextPath();
-        String requestURI = req.getRequestURI();
-        return requestURI.equals(requestPath + "/login.jsp") ||
-                requestURI.equals(requestPath + "/login") ||
-                requestURI.equals(requestPath + "/error401.jsp");
+    //check if URL is in protected list (PROTECTED_URLS)
+    private boolean isLoginRequired() {
+        String reqURL = httpRequest.getRequestURL().toString();
+        for (String protectedUrl : PROTECTED_URLS) {
+            if (reqURL.contains(protectedUrl)) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    //check for login
     private boolean hasSessionAndUserId(HttpServletRequest req) {
         HttpSession session = req.getSession();
         return session != null && session.getAttribute("userId") != null;

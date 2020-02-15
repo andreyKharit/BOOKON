@@ -7,6 +7,7 @@
 <hr/>
 <h3 style="text-align: center;">Submit your credentials to proceed.</h3>
 <hr/>
-<p style="text-align: center;"><a href="/webapp/login.jsp">LOGIN</a> or <a href="/register">REGISTER</a></p>
+<p style="text-align: center;"><a href="${pageContext.request.contextPath}/login.jsp">LOGIN</a> or <a href="/register">REGISTER</a></p>
+<%@include file="footer.jsp" %>
 </body>
 </html>

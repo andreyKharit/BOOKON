@@ -6,7 +6,10 @@
 <body>
 <h1>Subjects</h1>
 <c:forEach items="${subjects}" var="subject">
-    <li><c:out value="${subject.name}"/></li>
+    <li>
+    <c:out value="${subject.name}"/></br>
+    <c:out value="${subject.description}"/>
+    </li>
 </c:forEach>
 </body>
 </html>

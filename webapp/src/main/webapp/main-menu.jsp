@@ -15,8 +15,8 @@
 <ul>
     <li><a href="/profile">Profile</a></li>
     <li><a href="/browse-bookons">Browse BOOKONS</a></li>
-    <li><a href="/browse-users">Browse Users</a></li>
-    <li><a href="/sign-out">Sign Out</a></li>
+    <li><a href="${pageContext.request.contextPath}/subjects">Browse Users</a></li>
+    <li><a href="/logout">Sign Out</a></li>
 </ul>
 <hr/>
 
