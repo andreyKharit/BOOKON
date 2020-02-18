@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020
+ * Last updated: 2/19/20, 12:44 AM
+ * Author: Andrey Kharitonenko
+ */
+
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.Subject;
@@ -12,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "subjectServlet", urlPatterns = {"/subjects"})
+@WebServlet(name = "SubjectServlet", urlPatterns = {"/subjects"})
 public class SubjectServlet extends HttpServlet {
     private SubjectService subjectService = SubjectServiceImplementation.getInstance();
 

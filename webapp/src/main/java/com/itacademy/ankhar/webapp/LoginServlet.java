@@ -1,15 +1,19 @@
+/*
+ * Copyright (c) 2020
+ * Last updated: 2/19/20, 12:44 AM
+ * Author: Andrey Kharitonenko
+ */
+
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.AuthorizationServiceImplementation;
 import com.itacademy.ankhar.interfaces.AuthorizationService;
-import com.itacademy.ankhar.webapp.filters.LoginFilter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
@@ -33,8 +37,9 @@ public class LoginServlet extends HttpServlet {
         Long userId = auth.authorize(username, password);
         req.setAttribute("username", username);
         if (userId != null) {
-            if (userId == 1l) {
+            if (userId == 1L) {
 //                resp.sendRedirect(req.getContextPath() + "/main-menu.jsp");
+                req.getSession(false).setAttribute("authorized", true);
                 req.getRequestDispatcher( "/main-menu.jsp").forward(req, resp);
             } else {
 //                req.setAttribute("error", "Wrong username or password.");

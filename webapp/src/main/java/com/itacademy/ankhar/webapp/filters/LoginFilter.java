@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020
+ * Last updated: 2/19/20, 12:44 AM
+ * Author: Andrey Kharitonenko
+ */
 package com.itacademy.ankhar.webapp.filters;
 
 import javax.servlet.*;
@@ -22,6 +27,7 @@ public class LoginFilter implements Filter {
         //stub
     }
 
+    //TODO filter debug
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         httpRequest = (HttpServletRequest) servletRequest;
@@ -64,7 +70,7 @@ public class LoginFilter implements Filter {
 
     //check for login
     private boolean hasSessionAndUserId(HttpServletRequest req) {
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
         return session != null && session.getAttribute("userId") != null;
     }
 }

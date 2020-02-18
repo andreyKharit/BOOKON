@@ -1,3 +1,9 @@
+<%--
+  ~ Copyright (c) 2020
+  ~ Last updated: 2/19/20, 12:44 AM
+  ~ Author: Andrey Kharitonenko
+  --%>
+
 <html>
 <head>
     <title>BOOKON</title>
@@ -7,7 +13,7 @@
 <hr/>
 <h3 style="text-align: center;">Submit your credentials to proceed.</h3>
 <hr/>
-<p style="text-align: center;"><a href="${pageContext.request.contextPath}/login.jsp">LOGIN</a> or <a href="/register">REGISTER</a></p>
+<p style="text-align: center;"><a href="${pageContext.request.contextPath}/login.jsp">LOGIN</a>
 <%@include file="footer.jsp" %>
 </body>
 </html>

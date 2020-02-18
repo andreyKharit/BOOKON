@@ -1,5 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  ~ Copyright (c) 2020
+  ~ Last updated: 2/19/20, 12:44 AM
+  ~ Author: Andrey Kharitonenko
+  --%>
+<%--TODO jstl try--%>
 <head>
     <title>Subjects</title>
 </head>
@@ -12,4 +18,3 @@
     </li>
 </c:forEach>
 </body>
-</html>
