@@ -27,11 +27,9 @@ public class PathFinder {
         this.startPoint = startPoint;
         this.labyrinthMap = new int[this.labyrinth.getWidth()][this.labyrinth.getHeight()];
         for (int[] ints : labyrinthMap) {
-            Arrays.fill(ints, -1);
+            Arrays.fill(ints, 0);
         }
     }
-
-    //TODO find path
 
     /**
      * Finds path from start point to end point or return null if there is no path
@@ -40,6 +38,7 @@ public class PathFinder {
      * @return the path or null if path doesn't exists
      */
     public List<Point> findPath(Point endPoint) {
+        //return null if there is no valid path
         if (!isPathExists(endPoint)) {
             return null;
         }
@@ -53,8 +52,44 @@ public class PathFinder {
             System.out.println();
         }
 
+        int pointI = endPoint.getI();
+        int pointJ = endPoint.getJ();
 
+        //found end point number
+        int count = labyrinthMap[pointI][pointJ];
+        path.add(new Point(pointI, pointJ));
 
+        for (int i = count; i > 0; i--) {
+            Deque<Point> checkPointsForCount = new LinkedList<>();
+            boolean found = false;
+            //adding directions to queue
+            for (int d = 0; d < 4; d++) {
+                checkPointsForCount.add(new Point(
+                                (pointI + dirI[d]),
+                                (pointJ + dirJ[d])
+                        )
+                );
+            }
+            //checking all directions
+            //stop loop after getting first hit
+            while (!found || !checkPointsForCount.isEmpty()) {
+                Point currentPoint = checkPointsForCount.poll();
+                if (currentPoint != null) {
+                    int currentI = currentPoint.getI();
+                    int currentJ = currentPoint.getJ();
+                    if (currentI < labyrinth.getWidth() && currentI >= 0 &&
+                            currentJ < labyrinth.getHeight() && currentJ >= 0)
+                        if (labyrinthMap[currentPoint.getI()][currentPoint.getJ()] == i - 1) {
+                            path.add(currentPoint);
+                            pointI = currentI;
+                            pointJ = currentJ;
+                            found = true;
+                        }
+                }
+            }
+        }
+        //reversing path for successful test
+        Collections.reverse(path);
         return path;
     }
 
@@ -68,11 +103,14 @@ public class PathFinder {
         //checked points list to avoid infinite loop
         List<Point> checkedPoints = new LinkedList<>();
 
+        Queue<Integer> number = new LinkedList<>();
         Queue<Point> pointCheckQueue = new LinkedList<>();
         pointCheckQueue.add(startPoint);
+        number.add(0);
 
-        while (!pointCheckQueue.isEmpty()) {
+        while (!pointCheckQueue.isEmpty() && !number.isEmpty()) {
             Point currentPoint = pointCheckQueue.poll();
+            Integer currentNumber = number.poll();
             int pointI = currentPoint.getI();
             int pointJ = currentPoint.getJ();
             //if not outside of labyrinth
@@ -81,12 +119,15 @@ public class PathFinder {
                         pointJ < labyrinth.getHeight() && pointJ >= 0) {
                     //if current point is free
                     if (labyrinth.isRoom(pointI, pointJ)) {
+                        if (currentNumber != null)
+                        labyrinthMap[pointI][pointJ] = currentNumber;
                         //if current point is the end
                         if (currentPoint.equals(endPoint)) {
                             return true;
                         } else
                             //add new directions to the check queue
                             for (int d = 0; d < 4; d++) {
+                                number.add(currentNumber + 1);
                                 pointCheckQueue.add(new Point(
                                         (pointI + dirI[d]),
                                         (pointJ + dirJ[d])));
