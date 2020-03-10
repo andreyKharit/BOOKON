@@ -25,6 +25,6 @@ public class SignOutServlet extends HttpServlet {
         if (currentSession != null) {
             currentSession.invalidate();
         }
-        req.getRequestDispatcher(req.getContextPath() + "/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 }

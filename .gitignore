@@ -3,3 +3,5 @@
 firstProject/target
 */target
 */tester.*
+/target/
+/module/src/main/java/com/itacademy/ankhar/test

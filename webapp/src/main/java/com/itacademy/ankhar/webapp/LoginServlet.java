@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         if (userId != null) {
             if (userId == 1L) {
 //                resp.sendRedirect(req.getContextPath() + "/main-menu.jsp");
-                req.getSession(false).setAttribute("authorized", true);
+                req.getSession().setAttribute("authorized", true);
                 req.getRequestDispatcher( "/main-menu.jsp").forward(req, resp);
             } else {
 //                req.setAttribute("error", "Wrong username or password.");

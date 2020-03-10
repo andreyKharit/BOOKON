@@ -10,18 +10,16 @@
 <head>
     <meta charset="UTF-8">
     <title>BOOKON|MAIN MENU</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<h1 style="text-align: center;">BOOKON</h1>
-<p style="text-align: center;">Logged in as <%= request.getAttribute("username") %>.</p>
-<%! int counter = 0; %>
-<% counter += 5; %>
-<% counter *= 5; %>
-<p style="text-align: center;">Your lucky number is <%= counter %>!</p>
-<hr/>
+<%@include file="footer.jsp" %> 
+
 <ul>
-    <li><a href="/profile">Profile</a></li>
-    <li><a href="/browse-bookons">Browse BOOKONS</a></li>
+<%--    <li><a href="/profile">Profile</a></li>--%>
+<%--    <li><a href="/browse-bookons">Browse BOOKONS</a></li>--%>
     <li><a href="<c:url value="/subjects"/>">Browse Users</a></li>
     <li><a href="<c:url value="/logout"/>">Sign Out</a></li>
 </ul>

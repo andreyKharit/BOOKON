@@ -71,6 +71,6 @@ public class LoginFilter implements Filter {
     //check for login
     private boolean hasSessionAndUserId(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
-        return session != null && session.getAttribute("userId") != null;
+        return session != null && session.getAttribute("authorized") != null;
     }
 }

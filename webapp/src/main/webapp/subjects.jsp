@@ -13,8 +13,11 @@
 <h1>Subjects</h1>
 <c:forEach items="${subjects}" var="subject">
     <li>
-    <c:out value="${subject.name}"/></br>
-    <c:out value="${subject.description}"/>
+            <c:out value="${subject.name}"/></br>
+        <c:out value="${subject.description}"/>
     </li>
 </c:forEach>
+
+<%@include file="footer.jsp" %>
+
 </body>

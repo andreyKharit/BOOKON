@@ -120,14 +120,15 @@ public class PathFinder {
                     //if current point is free
                     if (labyrinth.isRoom(pointI, pointJ)) {
                         if (currentNumber != null)
-                        labyrinthMap[pointI][pointJ] = currentNumber;
+                            labyrinthMap[pointI][pointJ] = currentNumber;
                         //if current point is the end
                         if (currentPoint.equals(endPoint)) {
                             return true;
                         } else
                             //add new directions to the check queue
                             for (int d = 0; d < 4; d++) {
-                                number.add(currentNumber + 1);
+                                if (currentNumber != null)
+                                    number.add(currentNumber + 1);
                                 pointCheckQueue.add(new Point(
                                         (pointI + dirI[d]),
                                         (pointJ + dirJ[d])));
