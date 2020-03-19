@@ -3,63 +3,30 @@
   ~ Last updated: 2/26/20, 2:48 AM
   ~ Author: Andrey Kharitonenko
   --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+    .w3-sidebar {
+        z-index: 3;
+        width: 250px;
+        top: 43px;
+        bottom: 0;
+        height: inherit;
+    }
+</style>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: poppy
-  Date: 2/26/2020
-  Time: 2:48 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>Header</title>
-</head>
-<header>
-    <nav class="navbar fixed-top navbar-expand-md flex-nowrap navbar-new-top">
-        <a href="/" class="navbar-brand"><img src="#" alt=""/>BOOKON</a>
-        <ul class="nav navbar-nav mr-auto"></ul>
-        <ul class="navbar-nav flex-row">
-            <li class="nav-item">
-                <a class="nav-link px-2">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link px-2">Link</a>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="header-btn">Button</button>
-            </li>
-        </ul>
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-    <nav class="navbar fixed-top navbar-expand-md navbar-new-bottom">
-        <div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
-
-            <ul class="navbar-nav w-100 justify-content-center px-3">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Link</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+<!-- Header -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-theme-l1">BOOKON</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+            <c:if test="${sessionScope.authorized==true}">Authorized</c:if>
+        </a>
+    </div>
+</div>
