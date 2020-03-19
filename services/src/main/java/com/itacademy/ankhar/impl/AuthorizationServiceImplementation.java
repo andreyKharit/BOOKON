@@ -9,6 +9,7 @@ package com.itacademy.ankhar.impl;
 import com.itacademy.ankhar.interfaces.AuthorizationService;
 
 public class AuthorizationServiceImplementation implements AuthorizationService {
+    //TODO
     @Override
     public Long authorize(String login, String password) {
         if ("admin".equals(login) && "admin".equals(password)) {
