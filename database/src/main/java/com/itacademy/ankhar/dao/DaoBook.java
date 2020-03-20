@@ -29,7 +29,7 @@ public class DaoBook implements DaoTestInterface<Book> {
         List<Book> results = new ArrayList<>();
         try (Connection connection = JdbcProvider.getInstance().getConnection()) {
             try (Statement statement = connection.createStatement()) {
-                try (ResultSet resultSet = statement.executeQuery("SELECT * FROM ankhar_books")) {
+                try (ResultSet resultSet = statement.executeQuery("SELECT * FROM users.ankhar_books")) {
                     while (resultSet.next()) {
                         Book book = new Book();
                         book.setAuthorId(resultSet.getLong("author_id"));

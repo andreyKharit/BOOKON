@@ -35,6 +35,5 @@ public class DaoTest {
         allAuthors.stream().
                 map(c->c.getId() + " " + c.getName())
                 .forEach(System.out::println);
-
     }
 }

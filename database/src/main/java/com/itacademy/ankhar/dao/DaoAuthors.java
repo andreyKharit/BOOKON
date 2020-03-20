@@ -56,7 +56,7 @@ public class DaoAuthors implements DaoTestInterface<Author> {
     public Long create(Author record) throws Exception {
         try (Connection connection = JdbcProvider.getInstance().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO users.ankhar_authors (author_name) VALUES (45)")) {
+                    "INSERT INTO users.ankhar_authors (author_name) VALUES (?)")) {
                 statement.setString(1, record.getName());
                 int i = statement.executeUpdate();
                 if (i == 1) {
