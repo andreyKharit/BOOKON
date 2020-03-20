@@ -1,0 +1,31 @@
+SELECT pr.maker,
+       IIF(pc1.pc IS NULL, 'no', CONCAT('yes(', pc1.pc, ')')),
+       IIF(lp1.laptop IS NULL, 'no', CONCAT('yes(', lp1.laptop, ')')),
+       IIF(p1.printer IS NULL, 'no', CONCAT('yes(', p1.printer, ')'))
+FROM Product pr
+
+         LEFT JOIN
+
+     (SELECT pr.maker as 'pcmaker', COUNT(*) as 'pc'
+      FROM Product pr
+               JOIN pc p ON pr.model = p.model
+      GROUP BY pr.maker, pr.type) pc1
+     ON pr.maker = pc1.pcmaker
+
+         LEFT JOIN
+
+     (SELECT pr.maker as 'laptopmaker', COUNT(*) as 'laptop'
+      FROM Product pr
+               JOIN laptop lp1 ON pr.model = lp1.model
+      GROUP BY pr.maker, pr.type) lp1
+     ON pr.maker = lp1.laptopmaker
+
+         LEFT JOIN
+
+     (SELECT pr.maker as 'printermaker', COUNT(*) as 'printer'
+      FROM Product pr
+               JOIN printer p1 on pr.model = p1.model
+      GROUP BY pr.maker, pr.type) p1
+     ON pr.maker = p1.printermaker
+
+GROUP BY pr.maker, pc1.pc, lp1.laptop, p1.printer
