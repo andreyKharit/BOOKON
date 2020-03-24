@@ -6,6 +6,8 @@
 
 package com.itacademy.ankhar;
 
+import com.itacademy.ankhar.util.JdbcProvider;
+
 import java.sql.*;
 
 public class PreparedStatementExample {

@@ -1,10 +1,10 @@
 /*
  * Copyright (c) 2020
- * Last updated: 3/5/20, 8:57 PM
+ * Last updated: 3/24/20, 6:27 PM
  * Author: Andrey Kharitonenko
  */
 
-package com.itacademy.ankhar;
+package com.itacademy.ankhar.util;
 
 import java.io.IOException;
 import java.io.InputStream;

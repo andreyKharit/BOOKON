@@ -26,7 +26,9 @@
         <a href="#" class="w3-bar-item w3-button w3-theme-l1">BOOKON</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-            <c:if test="${sessionScope.authorized==true}">Authorized as </c:if>
+            <c:if test="${sessionScope.authorized==true}">
+                Authorized as <c:out value="${sessionScope.status}"/> <c:out value="${sessionScope.username}"/>
+            </c:if>
         </a>
     </div>
 </div>

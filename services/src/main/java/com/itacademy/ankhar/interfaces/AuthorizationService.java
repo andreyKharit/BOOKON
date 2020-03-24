@@ -7,5 +7,7 @@
 package com.itacademy.ankhar.interfaces;
 
 public interface AuthorizationService {
-    Long authorize(String login, String password);
+    boolean authorize(String login, String password);
+    boolean exists(String login);
+    String getStatus(String login);
 }

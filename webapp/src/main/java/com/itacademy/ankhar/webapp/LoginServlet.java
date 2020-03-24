@@ -34,17 +34,17 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        Long userId = auth.authorize(username, password);
+        boolean userId = auth.authorize(username, password);
         req.setAttribute("username", username);
-        if (userId != null) {
-            if (userId == 1L) {
+        if (userId) {
 //                resp.sendRedirect(req.getContextPath() + "/main-menu.jsp");
-                req.getSession().setAttribute("authorized", true);
-                req.getRequestDispatcher( "/main-menu.jsp").forward(req, resp);
-            } else {
+            req.getSession().setAttribute("authorized", true);
+            req.getSession().setAttribute("username", username);
+            req.getSession().setAttribute("status", auth.getStatus(username));
+            req.getRequestDispatcher("/main-menu.jsp").forward(req, resp);
+        } else {
 //                req.setAttribute("error", "Wrong username or password.");
-                resp.sendRedirect(req.getContextPath() + "/error401.jsp");
-            }
+            resp.sendRedirect(req.getContextPath() + "/error401.jsp");
         }
     }
 }

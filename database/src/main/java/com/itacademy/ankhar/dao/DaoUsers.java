@@ -6,16 +6,64 @@
 
 package com.itacademy.ankhar.dao;
 
+import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.util.JdbcProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 //TODO users
-public class DaoUsers implements DaoTestInterface<User> {
+public class DaoUsers implements DaoJdbcInterface<User> {
+
+    private static final Logger LOGGER = LogManager.getLogger(DaoUsers.class);
+
+    public Long findByUsername(String name) throws Exception {
+        LOGGER.info("Trying to get User by name.");
+        int exists = -1;
+        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+            try (PreparedStatement preparedStatement =
+                         connection.prepareStatement("SELECT * FROM users.ankhar_users WHERE username = ?")) {
+                preparedStatement.setString(1, name);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        exists = resultSet.getInt("contacts_id");
+                    }
+                }
+            } catch (Exception e) {
+                LOGGER.info("Error finding User.");
+                throw e;
+            }
+        }
+        return (long) exists;
+    }
 
     @Override
     public User get(Long id) throws Exception {
-        return null;
+        LOGGER.info("Trying to get User by Id.");
+        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+            try (PreparedStatement preparedStatement =
+                         connection.prepareStatement("SELECT * FROM users.ankhar_users WHERE contacts_id = ?")) {
+                preparedStatement.setLong(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        User user = new User();
+                        user.setUserId(resultSet.getLong("contacts_id"));
+                        user.setUserName(resultSet.getString("username"));
+                        user.setUserPassword(resultSet.getString("password"));
+                        user.setUserStatus(resultSet.getString("user_status"));
+                        LOGGER.info("User found.");
+                        return user;
+                    }
+                    LOGGER.info("Error finding User.");
+                    return null;
+                }
+            }
+        }
     }
 
     @Override

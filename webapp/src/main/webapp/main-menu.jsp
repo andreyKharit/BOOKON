@@ -45,7 +45,7 @@
         <div class="w3-twothird w3-container">
             <h1 class="w3-text-teal">Welcome</h1>
             <p>BOOKON is a library service. We do not provide digital access to our material, but you can use our
-            service to make borrow request. Click on the "Browse" button to see the list of available
+            service to make borrow requests. Click on the "Browse" button to see the list of available
             materials.</p>
         </div>
         <div class="w3-third w3-container">

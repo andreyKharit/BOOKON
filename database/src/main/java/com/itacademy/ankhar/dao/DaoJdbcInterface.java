@@ -8,7 +8,7 @@ package com.itacademy.ankhar.dao;
 
 import java.util.List;
 
-public interface DaoTestInterface<T> {
+public interface DaoJdbcInterface<T> {
     T get(Long id) throws Exception;
     List<T> getAll() throws Exception;
     Long create(T record) throws Exception;

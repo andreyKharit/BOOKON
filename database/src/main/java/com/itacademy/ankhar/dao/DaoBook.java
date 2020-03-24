@@ -7,7 +7,7 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Book;
-import com.itacademy.ankhar.JdbcProvider;
+import com.itacademy.ankhar.util.JdbcProvider;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoBook implements DaoTestInterface<Book> {
+public class DaoBook implements DaoJdbcInterface<Book> {
 
 
     //TODO
