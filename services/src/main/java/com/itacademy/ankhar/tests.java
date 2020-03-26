@@ -8,6 +8,7 @@ package com.itacademy.ankhar;
 
 import com.itacademy.ankhar.impl.AuthorizationServiceImplementation;
 import com.itacademy.ankhar.util.HashMD5Converter;
+import com.itacademy.ankhar.util.UserDBUtils;
 
 public class tests {
     public static void main(String[] args) {
@@ -16,5 +17,6 @@ public class tests {
         if (test.authorize("Harry", "pass")) {
             System.out.println("done");
         }
+        System.out.println(UserDBUtils.getInstance().getStatus("Harry"));
     }
 }

@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
         //stub
     }
 
-    //TODO filter invert urls
+    //TODO filter debug
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         httpRequest = (HttpServletRequest) servletRequest;

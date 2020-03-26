@@ -8,6 +8,7 @@ package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.AuthorizationServiceImplementation;
 import com.itacademy.ankhar.interfaces.AuthorizationService;
+import com.itacademy.ankhar.util.UserDBUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+@WebServlet(
+        name = "LoginServlet",
+        urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     private AuthorizationService auth = new AuthorizationServiceImplementation();
+    private UserDBUtils utils = UserDBUtils.getInstance();
 
     @Override
     public void init() throws ServletException {
@@ -40,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 //                resp.sendRedirect(req.getContextPath() + "/main-menu.jsp");
             req.getSession().setAttribute("authorized", true);
             req.getSession().setAttribute("username", username);
-            req.getSession().setAttribute("status", auth.getStatus(username));
+            req.getSession().setAttribute("status", utils.getStatus(username));
             req.getRequestDispatcher("/main-menu.jsp").forward(req, resp);
         } else {
 //                req.setAttribute("error", "Wrong username or password.");

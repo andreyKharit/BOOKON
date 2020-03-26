@@ -8,6 +8,4 @@ package com.itacademy.ankhar.interfaces;
 
 public interface AuthorizationService {
     boolean authorize(String login, String password);
-    boolean exists(String login);
-    String getStatus(String login);
 }

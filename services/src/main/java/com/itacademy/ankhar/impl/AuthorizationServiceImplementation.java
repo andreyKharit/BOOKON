@@ -10,12 +10,14 @@ import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.dao.DaoUsers;
 import com.itacademy.ankhar.interfaces.AuthorizationService;
 import com.itacademy.ankhar.util.HashMD5Converter;
+import com.itacademy.ankhar.util.UserDBUtils;
 
 public class AuthorizationServiceImplementation implements AuthorizationService {
     @Override
     public boolean authorize(String login, String password) {
         DaoUsers daoUsers = new DaoUsers();
-        if (exists(login)) {
+        UserDBUtils userDBUtils = UserDBUtils.getInstance();
+        if (userDBUtils.exists(login)) {
             try {
                 User user = daoUsers.get(daoUsers.findByUsername(login));
                 //checking login and password
@@ -29,32 +31,5 @@ public class AuthorizationServiceImplementation implements AuthorizationService 
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean exists(String login) {
-        DaoUsers daoUsers = new DaoUsers();
-        try {
-            if (daoUsers.findByUsername(login) != -1) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public String getStatus(String login) {
-        DaoUsers daoUsers = new DaoUsers();
-        if (exists(login)) {
-            try {
-                User user = daoUsers.get(daoUsers.findByUsername(login));
-                return user.getUserStatus();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
     }
 }
