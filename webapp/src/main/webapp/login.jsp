@@ -16,6 +16,7 @@
 <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container" style="text-align:center">
         <h1 class="w3-text-teal">LOGIN</h1>
+        <c:out value="${sessionScope.currentMessage}"/>
         <p>
         <form action="login" method="post">
             <input type="text" name="username">

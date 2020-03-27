@@ -6,6 +6,9 @@
 
 package com.itacademy.ankhar.webapp;
 
+import com.itacademy.ankhar.impl.RegistrationServiceImplementation;
+import com.itacademy.ankhar.interfaces.RegistrationService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +18,9 @@ import java.io.IOException;
 
 @WebServlet(
         name = "RegistrationServlet",
-        urlPatterns = {"/register"})
+        urlPatterns = {"/registration"})
 public class RegisterServlet extends HttpServlet {
+    private RegistrationService registrationService = new RegistrationServiceImplementation();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +31,13 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
+        try {
+            registrationService.createUser(username, password);
+            req.getSession().setAttribute("currentMessage", "New user created!");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        } catch (Exception e) {
+            resp.sendRedirect(req.getContextPath() + "/error401.jsp");
+        }
     }
 
     @Override

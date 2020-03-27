@@ -31,7 +31,6 @@
     <h4 class="w3-bar-item"><b>Menu</b></h4>
     <a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/main-menu.jsp">Welcome</a>
     <a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/subjects">Browse</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="#">Profile</a>
     <a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/logout">Log Out</a>
 </nav>
 
