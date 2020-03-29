@@ -30,9 +30,13 @@
         <i class="fa fa-remove"></i>
     <h4 class="w3-bar-item"><b>Menu</b></h4>
     <a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/main-menu.jsp">Welcome</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/subjects">Browse</a>
+    <c:if test="${sessionScope.status.equals('admin')}"><a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/subjects">Browse Users</a></c:if>
     <a class="w3-bar-item w3-button w3-hover-black" href="${pageContext.request.contextPath}/logout">Log Out</a>
 </nav>
+
+<c:if test="${sessionScope.authorized==true}">
+    Authorized as <c:out value="${sessionScope.status}"/> <c:out value="${sessionScope.username}"/>
+</c:if>
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
