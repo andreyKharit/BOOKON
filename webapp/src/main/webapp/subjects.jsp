@@ -60,34 +60,56 @@
                         <tr>
                             <td><c:out value="${user.userName}"/></td>
                             <td><c:out value="${user.userStatus}"/></td>
-                            <td><a href="${pageContext.request.contextPath}/subjects?edit=${user.userId}">edit</a></td>
-                            <td><button type="submit" name="delete" value="${user.userId}">delete</button></td>
+                            <c:if test="${!user.userStatus.equals('admin')}">
+                                <td>
+                                    <form action="subjects" method="post">
+                                        <select name="status">
+                                            <c:if test="${!user.userStatus.equals('user')}">
+                                                <option value="user">user</option>
+                                            </c:if>
+                                            <c:if test="${!user.userStatus.equals('worker')}">
+                                                <option value="worker">worker</option>
+                                            </c:if>
+                                            <c:if test="${!user.userStatus.equals('admin')}">
+                                                <option value="admin">admin</option>
+                                            </c:if>
+                                        </select>
+                                        <input type="hidden" name="hiddenId" value="${user.userId}">
+                                        <input type="submit" value="save status">
+                                    </form>
+                                </td>
+                            </c:if>
+                            <c:if test="${!user.userStatus.equals('admin')}">
+                                <td>
+                                    <button type="submit" name="delete" value="${user.userId}">delete</button>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </table>
             </form>
 
-<%--            <table border="1" cellpadding="5">--%>
-<%--                <tr>--%>
-<%--                    <th>ID</th>--%>
-<%--                    <th>Login</th>--%>
-<%--                    <th>Status</th>--%>
-<%--                </tr>--%>
-<%--                <c:forEach var="user" items="${requestScope.subjects}">--%>
-<%--                    <tr>--%>
-<%--                        <td><c:out value="${user.userId}"/></td>--%>
-<%--                        <td><c:out value="${user.userName}"/></td>--%>
-<%--                        <td><c:out value="${user.userStatus}"/></td>--%>
-<%--                        <c:if test="${!user.userStatus.equals('admin')}">--%>
-<%--                            <td><input type="submit" name="edit" value="Edit" onClick="window.location='editUser.jsp';"--%>
-<%--                                       style="background-color:#49743D;font-weight:bold;color:#ffffff;"></td>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${!user.userStatus.equals('admin')}">--%>
-<%--                            <td><button type="submit" formmethod="post" name="delete" value="${user.userId}">delete</button></td>--%>
-<%--                        </c:if>--%>
-<%--                    </tr>--%>
-<%--                </c:forEach>--%>
-<%--            </table>--%>
+            <%--            <table border="1" cellpadding="5">--%>
+            <%--                <tr>--%>
+            <%--                    <th>ID</th>--%>
+            <%--                    <th>Login</th>--%>
+            <%--                    <th>Status</th>--%>
+            <%--                </tr>--%>
+            <%--                <c:forEach var="user" items="${requestScope.subjects}">--%>
+            <%--                    <tr>--%>
+            <%--                        <td><c:out value="${user.userId}"/></td>--%>
+            <%--                        <td><c:out value="${user.userName}"/></td>--%>
+            <%--                        <td><c:out value="${user.userStatus}"/></td>--%>
+            <%--                        <c:if test="${!user.userStatus.equals('admin')}">--%>
+            <%--                            <td><input type="submit" name="edit" value="Edit" onClick="window.location='editUser.jsp';"--%>
+            <%--                                       style="background-color:#49743D;font-weight:bold;color:#ffffff;"></td>--%>
+            <%--                        </c:if>--%>
+            <%--                        <c:if test="${!user.userStatus.equals('admin')}">--%>
+            <%--                            <td><button type="submit" formmethod="post" name="delete" value="${user.userId}">delete</button></td>--%>
+            <%--                        </c:if>--%>
+            <%--                    </tr>--%>
+            <%--                </c:forEach>--%>
+            <%--            </table>--%>
             </p>
         </div>
     </div>

@@ -32,9 +32,18 @@ public class SubjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String delete = req.getParameter("delete");
+        String edit = req.getParameter("status");
+        String hiddenId = req.getParameter("hiddenId");
         if (delete != null) {
             try {
                 subjectService.deleteUser(Long.valueOf(delete));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (edit != null && hiddenId != null) {
+            try {
+                subjectService.updateUserStatus(Long.valueOf(hiddenId), edit);
             } catch (Exception e) {
                 e.printStackTrace();
             }

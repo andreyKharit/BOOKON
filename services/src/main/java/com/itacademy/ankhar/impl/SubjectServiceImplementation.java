@@ -51,4 +51,16 @@ public class SubjectServiceImplementation implements SubjectService {
             throw e;
         }
     }
+    public boolean updateUserStatus(Long userId, String status) throws Exception {
+        try {
+            DaoJdbcInterface<User> userDaoJdbc = DaoUsers.getEntity();
+            User updateUser = userDaoJdbc.get(userId);
+            updateUser.setUserStatus(status);
+            userDaoJdbc.update(updateUser);
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }
