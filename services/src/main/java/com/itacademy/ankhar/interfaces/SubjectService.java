@@ -6,10 +6,10 @@
 
 package com.itacademy.ankhar.interfaces;
 
-import com.itacademy.ankhar.Subject;
+import com.itacademy.ankhar.User;
 
 import java.util.List;
 
 public interface SubjectService {
-    List<Subject> getSubjects();
+    List<User> getSubjects();
 }

@@ -6,7 +6,7 @@
 
 package com.itacademy.ankhar.webapp;
 
-import com.itacademy.ankhar.Subject;
+import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.impl.SubjectServiceImplementation;
 import com.itacademy.ankhar.interfaces.SubjectService;
 
@@ -24,7 +24,7 @@ public class SubjectServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Subject> subjects = subjectService.getSubjects();
+        List<User> subjects = subjectService.getSubjects();
         req.setAttribute("subjects", subjects);
         req.getRequestDispatcher("subjects.jsp").forward(req, resp);
     }
