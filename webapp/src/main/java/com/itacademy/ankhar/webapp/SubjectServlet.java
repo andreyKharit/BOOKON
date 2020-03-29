@@ -28,4 +28,17 @@ public class SubjectServlet extends HttpServlet {
         req.setAttribute("subjects", subjects);
         req.getRequestDispatcher("subjects.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String delete = req.getParameter("delete");
+        if (delete != null) {
+            try {
+                subjectService.deleteUser(Long.valueOf(delete));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        resp.sendRedirect(req.getContextPath() + "/subjects");
+    }
 }

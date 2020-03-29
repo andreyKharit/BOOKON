@@ -22,11 +22,19 @@ import java.util.List;
 public class DaoUsers implements DaoJdbcInterface<User> {
 
     private static final Logger LOGGER = LogManager.getLogger(DaoUsers.class);
-    private static final DaoUsers entity = new DaoUsers();
+    private static DaoUsers entity = new DaoUsers();
 
-    private DaoUsers() {}
+    private DaoUsers() {
+    }
 
     public static DaoUsers getEntity() {
+        if (entity == null) {
+            synchronized (DaoUsers.class) {
+                if (entity == null) {
+                    entity = new DaoUsers();
+                }
+            }
+        }
         return entity;
     }
 
@@ -123,11 +131,36 @@ public class DaoUsers implements DaoJdbcInterface<User> {
 
     @Override
     public Long update(User record) throws Exception {
-        return null;
+        LOGGER.info("Trying to update User.");
+        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE users.ankhar_users SET user_status = ? WHERE contacts_id = ?")) {
+                statement.setString(1, record.getUserStatus());
+                statement.setLong(2, record.getUserId());
+                int i = statement.executeUpdate();
+                if (i == 1) {
+                    return null;
+                } else {
+                    LOGGER.info("Error updating User.");
+                    throw new Exception();
+                }
+            }
+        }
     }
 
     @Override
     public boolean delete(Long id) throws Exception {
-        return false;
+        LOGGER.info("Trying to delete User.");
+        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+            try (Statement statement = connection.createStatement()) {
+                int i = statement.executeUpdate("DELETE FROM users.ankhar_users WHERE contacts_id = " + id);
+                if (i == 1) {
+                    return true;
+                } else {
+                    LOGGER.info("Error deleting User.");
+                    throw new Exception();
+                }
+            }
+        }
     }
 }

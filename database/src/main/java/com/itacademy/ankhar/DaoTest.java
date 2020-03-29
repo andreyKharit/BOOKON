@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DaoTest {
     public static void main(String[] args) throws Exception {
-        DaoJdbcInterface<Author> daoAuthors = new DaoAuthors();
+        DaoJdbcInterface<Author> daoAuthors = DaoAuthors.getEntity();
         DaoJdbcInterface<User> daoUsers = DaoUsers.getEntity();
 
         List<Author> allAuthors = daoAuthors.getAll();
@@ -23,7 +23,7 @@ public class DaoTest {
                 map(c -> c.getId() + " " + c.getName())
                 .forEach(System.out::println);
 
-        DaoJdbcInterface<Book> daoBook = new DaoBook();
+        DaoJdbcInterface<Book> daoBook = DaoBook.getEntity();
 
         List<Book> allBooks = daoBook.getAll();
         allBooks.stream().

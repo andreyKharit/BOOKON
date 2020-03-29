@@ -17,6 +17,21 @@ import java.util.List;
 
 public class DaoBook implements DaoJdbcInterface<Book> {
 
+    private static DaoBook entity = new DaoBook();
+
+    private DaoBook() {
+    }
+
+    public static DaoBook getEntity() {
+        if (entity == null) {
+            synchronized (DaoBook.class) {
+                if (entity == null) {
+                    entity = new DaoBook();
+                }
+            }
+        }
+        return entity;
+    }
 
     //TODO
     @Override

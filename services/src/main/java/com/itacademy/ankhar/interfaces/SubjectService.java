@@ -12,4 +12,5 @@ import java.util.List;
 
 public interface SubjectService {
     List<User> getSubjects();
+    boolean deleteUser(Long userId) throws Exception;
 }

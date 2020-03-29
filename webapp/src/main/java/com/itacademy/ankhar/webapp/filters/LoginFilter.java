@@ -19,7 +19,7 @@ import java.io.IOException;
 public class LoginFilter implements Filter {
     private HttpServletRequest httpRequest;
     private static final String[] PROTECTED_URLS = {
-            "/main-menu", "/subjects"
+            "/main-menu", "/subjects", "/delete"
     };
 
     @Override

@@ -10,6 +10,7 @@ import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.dao.DaoJdbcInterface;
 import com.itacademy.ankhar.dao.DaoUsers;
 import com.itacademy.ankhar.interfaces.SubjectService;
+import com.itacademy.ankhar.util.HashMD5Converter;
 
 import java.util.List;
 
@@ -39,5 +40,15 @@ public class SubjectServiceImplementation implements SubjectService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean deleteUser(Long userId) throws Exception {
+        try {
+            DaoJdbcInterface<User> userDaoJdbc = DaoUsers.getEntity();
+            userDaoJdbc.delete(userId);
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

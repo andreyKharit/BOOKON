@@ -18,6 +18,22 @@ import java.util.List;
 //TODO
 public class DaoAuthors implements DaoJdbcInterface<Author> {
 
+    private static DaoAuthors entity = new DaoAuthors();
+
+    private DaoAuthors() {
+    }
+
+    public static DaoAuthors getEntity() {
+        if (entity == null) {
+            synchronized (DaoAuthors.class) {
+                if (entity == null) {
+                    entity = new DaoAuthors();
+                }
+            }
+        }
+        return entity;
+    }
+
     private static final Logger LOGGER = LogManager.getLogger(DaoAuthors.class);
 
     public Author getByName(String name) throws Exception {
