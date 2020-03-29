@@ -6,8 +6,6 @@
 
 package com.itacademy.ankhar.util;
 
-import com.itacademy.ankhar.impl.SubjectServiceImplementation;
-import com.itacademy.ankhar.interfaces.SubjectService;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class HashMD5Converter {

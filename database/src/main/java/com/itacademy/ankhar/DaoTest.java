@@ -16,7 +16,7 @@ import java.util.List;
 public class DaoTest {
     public static void main(String[] args) throws Exception {
         DaoJdbcInterface<Author> daoAuthors = new DaoAuthors();
-        DaoJdbcInterface<User> daoUsers = new DaoUsers();
+        DaoJdbcInterface<User> daoUsers = DaoUsers.getEntity();
 
         List<Author> allAuthors = daoAuthors.getAll();
         allAuthors.stream().

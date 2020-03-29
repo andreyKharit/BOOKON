@@ -7,6 +7,7 @@
 package com.itacademy.ankhar.util;
 
 import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.dao.DaoJdbcInterface;
 import com.itacademy.ankhar.dao.DaoUsers;
 
 public class UserDBUtils {
@@ -28,7 +29,7 @@ public class UserDBUtils {
 
     //checks if user already exists in db
     public boolean exists(String login) {
-        DaoUsers daoUsers = new DaoUsers();
+        DaoUsers daoUsers = DaoUsers.getEntity();
         try {
             if (daoUsers.findByUsername(login) != -1) {
                 return true;
@@ -41,7 +42,7 @@ public class UserDBUtils {
 
     //checks for user status
     public String getStatus(String login) {
-        DaoUsers daoUsers = new DaoUsers();
+        DaoUsers daoUsers = DaoUsers.getEntity();
         UserDBUtils userDBUtils = UserDBUtils.getInstance();
         if (userDBUtils.exists(login)) {
             try {

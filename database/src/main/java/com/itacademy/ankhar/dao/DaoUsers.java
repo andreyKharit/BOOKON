@@ -22,6 +22,13 @@ import java.util.List;
 public class DaoUsers implements DaoJdbcInterface<User> {
 
     private static final Logger LOGGER = LogManager.getLogger(DaoUsers.class);
+    private static final DaoUsers entity = new DaoUsers();
+
+    private DaoUsers() {}
+
+    public static DaoUsers getEntity() {
+        return entity;
+    }
 
     public Long findByUsername(String name) throws Exception {
         LOGGER.info("Trying to get User by name.");

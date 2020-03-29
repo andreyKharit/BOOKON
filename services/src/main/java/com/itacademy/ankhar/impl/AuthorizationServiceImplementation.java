@@ -15,7 +15,7 @@ import com.itacademy.ankhar.util.UserDBUtils;
 public class AuthorizationServiceImplementation implements AuthorizationService {
     @Override
     public boolean authorize(String login, String password) {
-        DaoUsers daoUsers = new DaoUsers();
+        DaoUsers daoUsers = DaoUsers.getEntity();
         UserDBUtils userDBUtils = UserDBUtils.getInstance();
         if (userDBUtils.exists(login)) {
             try {

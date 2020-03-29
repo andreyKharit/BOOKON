@@ -11,7 +11,6 @@ import com.itacademy.ankhar.dao.DaoJdbcInterface;
 import com.itacademy.ankhar.dao.DaoUsers;
 import com.itacademy.ankhar.interfaces.SubjectService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectServiceImplementation implements SubjectService {
@@ -33,9 +32,8 @@ public class SubjectServiceImplementation implements SubjectService {
 
     @Override
     public List<User> getSubjects() {
-        List<User> subjectList = new ArrayList<>();
         try {
-            DaoJdbcInterface<User> daoUsers = new DaoUsers();
+            DaoJdbcInterface<User> daoUsers = DaoUsers.getEntity();
             return daoUsers.getAll();
         } catch (Exception e) {
             e.printStackTrace();

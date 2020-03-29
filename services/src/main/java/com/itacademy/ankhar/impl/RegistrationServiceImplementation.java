@@ -22,7 +22,7 @@ public class RegistrationServiceImplementation implements RegistrationService {
                 User newUser = new User();
                 newUser.setUserName(login);
                 newUser.setUserPassword(HashMD5Converter.getInstance().stringToMD5(password));
-                DaoJdbcInterface<User> userDaoJdbc = new DaoUsers();
+                DaoJdbcInterface<User> userDaoJdbc = DaoUsers.getEntity();
                 userDaoJdbc.create(newUser);
                 return true;
             } catch (Exception e) {
