@@ -8,13 +8,14 @@ package com.itacademy.ankhar;
 
 import javax.persistence.*;
 
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
+@Table(name = "ankhar_authors", uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
 @Entity(name = "author")
 public class Author {
     @Id
-    @GeneratedValue
+    @Column(name = "author_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(name = "author_name", nullable = false, unique = true)
     private String name;
 
     public Long getId() {

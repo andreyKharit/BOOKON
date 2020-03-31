@@ -23,4 +23,5 @@
         </dependency>
     </dependencies>
     <artifactId>model</artifactId>
+    <version>1.0-SNAPSHOT</version>
 </project>
