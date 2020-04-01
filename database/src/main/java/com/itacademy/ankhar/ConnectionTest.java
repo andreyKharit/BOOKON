@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/5/20, 9:06 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar;
 
-import com.itacademy.ankhar.util.JdbcProvider;
+import com.itacademy.ankhar.util.JdbcProviderUtil;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -15,7 +15,7 @@ import java.sql.Statement;
 
 public class ConnectionTest {
     public static void main(String[] args) throws Exception {
-        Connection connection = JdbcProvider.getInstance().getConnection();
+        Connection connection = JdbcProviderUtil.getInstance().getConnection();
         DatabaseMetaData metaData = connection.getMetaData();
 
         System.out.println(metaData.getDatabaseProductName());

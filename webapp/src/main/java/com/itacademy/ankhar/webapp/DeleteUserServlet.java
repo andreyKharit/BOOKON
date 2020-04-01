@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/29/20, 5:04 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.SubjectServiceImplementation;
-import com.itacademy.ankhar.interfaces.SubjectService;
+import com.itacademy.ankhar.interfaces.SubjectServiceI;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("delete") != null) {
             Long id = Long.parseLong(req.getParameter("delete"));
-            SubjectService subjectService = SubjectServiceImplementation.getInstance();
+            SubjectServiceI subjectService = SubjectServiceImplementation.getInstance();
             try {
                 subjectService.deleteUser(id);
             } catch (Exception e) {

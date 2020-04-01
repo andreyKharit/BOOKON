@@ -1,14 +1,14 @@
 /*
- * Copyright (c) 2020
- * Last updated: 2/19/20, 12:44 AM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.AuthorizationServiceImplementation;
-import com.itacademy.ankhar.interfaces.AuthorizationService;
-import com.itacademy.ankhar.util.UserDBUtils;
+import com.itacademy.ankhar.interfaces.AuthorizationServiceI;
+import com.itacademy.ankhar.util.UserDBUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import java.io.IOException;
         name = "LoginServlet",
         urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
-    private AuthorizationService auth = new AuthorizationServiceImplementation();
-    private UserDBUtils utils = UserDBUtils.getInstance();
+    private AuthorizationServiceI auth = new AuthorizationServiceImplementation();
+    private UserDBUtil utils = UserDBUtil.getInstance();
 
     @Override
     public void init() throws ServletException {
@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
             req.getSession().setAttribute("authorized", true);
             req.getSession().setAttribute("username", username);
             req.getSession().setAttribute("status", utils.getStatus(username));
+            req.getSession().setAttribute("currentMessage", "");
             req.getRequestDispatcher("/main-menu.jsp").forward(req, resp);
         } else {
 //                req.setAttribute("error", "Wrong username or password.");

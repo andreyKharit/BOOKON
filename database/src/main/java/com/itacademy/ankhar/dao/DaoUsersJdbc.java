@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/19/20, 1:45 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.util.JdbcProvider;
+import com.itacademy.ankhar.util.JdbcProviderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,19 +19,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO users
-public class DaoUsers implements DaoJdbcInterface<User> {
+public class DaoUsersJdbc implements DaoEntityI<User> {
 
-    private static final Logger LOGGER = LogManager.getLogger(DaoUsers.class);
-    private static DaoUsers entity = new DaoUsers();
+    private static final Logger LOGGER = LogManager.getLogger(DaoUsersJdbc.class);
+    private static DaoUsersJdbc entity = new DaoUsersJdbc();
 
-    private DaoUsers() {
+    private DaoUsersJdbc() {
     }
 
-    public static DaoUsers getEntity() {
+    public static DaoUsersJdbc getEntity() {
         if (entity == null) {
-            synchronized (DaoUsers.class) {
+            synchronized (DaoUsersJdbc.class) {
                 if (entity == null) {
-                    entity = new DaoUsers();
+                    entity = new DaoUsersJdbc();
                 }
             }
         }
@@ -41,7 +41,7 @@ public class DaoUsers implements DaoJdbcInterface<User> {
     public Long findByUsername(String name) throws Exception {
         LOGGER.info("Trying to get User by name.");
         int exists = -1;
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement("SELECT * FROM users.ankhar_users WHERE username = ?")) {
                 preparedStatement.setString(1, name);
@@ -61,7 +61,7 @@ public class DaoUsers implements DaoJdbcInterface<User> {
     @Override
     public User get(Long id) throws Exception {
         LOGGER.info("Trying to get User by Id.");
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement("SELECT * FROM users.ankhar_users WHERE contacts_id = ?")) {
                 preparedStatement.setLong(1, id);
@@ -86,7 +86,7 @@ public class DaoUsers implements DaoJdbcInterface<User> {
     public List<User> getAll() throws Exception {
         LOGGER.info("Trying to get all Users.");
         List<User> results = new ArrayList<>();
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery("SELECT * FROM users.ankhar_users")) {
                     LOGGER.info("Creating Users list.");
@@ -113,7 +113,7 @@ public class DaoUsers implements DaoJdbcInterface<User> {
     @Override
     public Long create(User record) throws Exception {
         LOGGER.info("Trying to create new User.");
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO users.ankhar_users (username, password) VALUES (?, ?)")) {
                 statement.setString(1, record.getUserName());
@@ -132,7 +132,7 @@ public class DaoUsers implements DaoJdbcInterface<User> {
     @Override
     public Long update(User record) throws Exception {
         LOGGER.info("Trying to update User.");
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE users.ankhar_users SET user_status = ? WHERE contacts_id = ?")) {
                 statement.setString(1, record.getUserStatus());
@@ -151,7 +151,7 @@ public class DaoUsers implements DaoJdbcInterface<User> {
     @Override
     public boolean delete(Long id) throws Exception {
         LOGGER.info("Trying to delete User.");
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 int i = statement.executeUpdate("DELETE FROM users.ankhar_users WHERE contacts_id = " + id);
                 if (i == 1) {

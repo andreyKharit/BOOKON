@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/19/20, 7:49 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 

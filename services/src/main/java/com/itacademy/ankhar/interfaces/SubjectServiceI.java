@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020
- * Last updated: 2/19/20, 12:44 AM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
@@ -10,7 +10,7 @@ import com.itacademy.ankhar.User;
 
 import java.util.List;
 
-public interface SubjectService {
+public interface SubjectServiceI {
     List<User> getSubjects();
     boolean deleteUser(Long userId) throws Exception;
     boolean updateUserStatus(Long userId, String status) throws Exception;

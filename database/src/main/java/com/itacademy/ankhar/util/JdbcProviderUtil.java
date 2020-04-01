@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/24/20, 6:27 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class JdbcProvider {
+public class JdbcProviderUtil {
 
     private static final String PROPERTIES_FILE_NAME = "connection.properties";
 
@@ -22,17 +22,17 @@ public class JdbcProvider {
     private static final String JDBC_USERNAME = "username";
     private static final String JDBC_PASSWORD = "password";
 
-    private static final JdbcProvider instance = new JdbcProvider();
+    private static final JdbcProviderUtil instance = new JdbcProviderUtil();
 
-    private JdbcProvider() {
+    private JdbcProviderUtil() {
     }
 
-    public static JdbcProvider getInstance() {
+    public static JdbcProviderUtil getInstance() {
         return instance;
     }
 
     public Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
-        InputStream in = JdbcProvider.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
+        InputStream in = JdbcProviderUtil.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME);
         Properties properties = new Properties();
         assert in != null;
         properties.load(in);

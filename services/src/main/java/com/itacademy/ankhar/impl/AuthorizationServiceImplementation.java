@@ -1,29 +1,29 @@
 /*
- * Copyright (c) 2020
- * Last updated: 2/19/20, 12:44 AM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.impl;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.DaoUsers;
-import com.itacademy.ankhar.interfaces.AuthorizationService;
-import com.itacademy.ankhar.util.HashMD5Converter;
-import com.itacademy.ankhar.util.UserDBUtils;
+import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.interfaces.AuthorizationServiceI;
+import com.itacademy.ankhar.util.HashMD5ConverterUtil;
+import com.itacademy.ankhar.util.UserDBUtil;
 
-public class AuthorizationServiceImplementation implements AuthorizationService {
+public class AuthorizationServiceImplementation implements AuthorizationServiceI {
     @Override
     public boolean authorize(String login, String password) {
-        DaoUsers daoUsers = DaoUsers.getEntity();
-        UserDBUtils userDBUtils = UserDBUtils.getInstance();
+        DaoUsersJdbc daoUsers = DaoUsersJdbc.getEntity();
+        UserDBUtil userDBUtils = UserDBUtil.getInstance();
         if (userDBUtils.exists(login)) {
             try {
                 User user = daoUsers.get(daoUsers.findByUsername(login));
                 //checking login and password
                 if (user.getUserName().equals(login) &&
                         user.getUserPassword().
-                                equals(HashMD5Converter.getInstance().stringToMD5(password))) {
+                                equals(HashMD5ConverterUtil.getInstance().stringToMD5(password))) {
                     return true;
                 }
             } catch (Exception e) {

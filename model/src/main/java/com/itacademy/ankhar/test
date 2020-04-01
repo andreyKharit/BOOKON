@@ -1,3 +1,9 @@
+/*
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
+ * Author: Andrey Kharitonenko
+ */
+
 SELECT pr.maker,
        IIF(pc1.pc IS NULL, 'no', CONCAT('yes(', pc1.pc, ')')),
        IIF(lp1.laptop IS NULL, 'no', CONCAT('yes(', lp1.laptop, ')')),

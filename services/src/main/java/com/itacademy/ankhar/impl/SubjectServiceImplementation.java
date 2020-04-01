@@ -1,26 +1,25 @@
 /*
- * Copyright (c) 2020
- * Last updated: 2/19/20, 12:44 AM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.impl;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.DaoJdbcInterface;
-import com.itacademy.ankhar.dao.DaoUsers;
-import com.itacademy.ankhar.interfaces.SubjectService;
-import com.itacademy.ankhar.util.HashMD5Converter;
+import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.interfaces.SubjectServiceI;
 
 import java.util.List;
 
-public class SubjectServiceImplementation implements SubjectService {
-    private static SubjectService subjectInstance;
+public class SubjectServiceImplementation implements SubjectServiceI {
+    private static SubjectServiceI subjectInstance;
 
     private SubjectServiceImplementation() {
     }
 
-    public static SubjectService getInstance() {
+    public static SubjectServiceI getInstance() {
         if (subjectInstance == null) {
             synchronized (SubjectServiceImplementation.class) {
                 if (subjectInstance == null) {
@@ -34,7 +33,7 @@ public class SubjectServiceImplementation implements SubjectService {
     @Override
     public List<User> getSubjects() {
         try {
-            DaoJdbcInterface<User> daoUsers = DaoUsers.getEntity();
+            DaoEntityI<User> daoUsers = DaoUsersJdbc.getEntity();
             return daoUsers.getAll();
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +43,7 @@ public class SubjectServiceImplementation implements SubjectService {
 
     public boolean deleteUser(Long userId) throws Exception {
         try {
-            DaoJdbcInterface<User> userDaoJdbc = DaoUsers.getEntity();
+            DaoEntityI<User> userDaoJdbc = DaoUsersJdbc.getEntity();
             userDaoJdbc.delete(userId);
             return true;
         } catch (Exception e) {
@@ -53,7 +52,7 @@ public class SubjectServiceImplementation implements SubjectService {
     }
     public boolean updateUserStatus(Long userId, String status) throws Exception {
         try {
-            DaoJdbcInterface<User> userDaoJdbc = DaoUsers.getEntity();
+            DaoEntityI<User> userDaoJdbc = DaoUsersJdbc.getEntity();
             User updateUser = userDaoJdbc.get(userId);
             updateUser.setUserStatus(status);
             userDaoJdbc.update(updateUser);

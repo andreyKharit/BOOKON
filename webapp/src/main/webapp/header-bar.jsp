@@ -1,6 +1,6 @@
 <%--
-  ~ Copyright (c) 2020
-  ~ Last updated: 2/26/20, 2:48 AM
+  ~ 2020
+  ~ Last updated: 4/2/20, 1:03 AM
   ~ Author: Andrey Kharitonenko
   --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

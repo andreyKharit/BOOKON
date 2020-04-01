@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020
- * Last updated: 2/19/20, 12:44 AM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
@@ -8,7 +8,7 @@ package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.impl.SubjectServiceImplementation;
-import com.itacademy.ankhar.interfaces.SubjectService;
+import com.itacademy.ankhar.interfaces.SubjectServiceI;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @WebServlet(name = "SubjectServlet", urlPatterns = {"/subjects"})
 public class SubjectServlet extends HttpServlet {
-    private SubjectService subjectService = SubjectServiceImplementation.getInstance();
+    private SubjectServiceI subjectService = SubjectServiceImplementation.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

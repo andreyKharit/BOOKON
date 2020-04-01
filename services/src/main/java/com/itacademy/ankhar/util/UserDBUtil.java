@@ -1,26 +1,25 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/25/20, 10:10 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.util;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.DaoJdbcInterface;
-import com.itacademy.ankhar.dao.DaoUsers;
+import com.itacademy.ankhar.dao.DaoUsersJdbc;
 
-public class UserDBUtils {
+public class UserDBUtil {
 
-    private static UserDBUtils userDBUtilsInstance;
-    private UserDBUtils() {
+    private static UserDBUtil userDBUtilsInstance;
+    private UserDBUtil() {
     }
 
-    public static UserDBUtils getInstance() {
+    public static UserDBUtil getInstance() {
         if (userDBUtilsInstance == null) {
-            synchronized (UserDBUtils.class) {
+            synchronized (UserDBUtil.class) {
                 if (userDBUtilsInstance == null) {
-                    userDBUtilsInstance = new UserDBUtils();
+                    userDBUtilsInstance = new UserDBUtil();
                 }
             }
         }
@@ -29,7 +28,7 @@ public class UserDBUtils {
 
     //checks if user already exists in db
     public boolean exists(String login) {
-        DaoUsers daoUsers = DaoUsers.getEntity();
+        DaoUsersJdbc daoUsers = DaoUsersJdbc.getEntity();
         try {
             if (daoUsers.findByUsername(login) != -1) {
                 return true;
@@ -42,8 +41,8 @@ public class UserDBUtils {
 
     //checks for user status
     public String getStatus(String login) {
-        DaoUsers daoUsers = DaoUsers.getEntity();
-        UserDBUtils userDBUtils = UserDBUtils.getInstance();
+        DaoUsersJdbc daoUsers = DaoUsersJdbc.getEntity();
+        UserDBUtil userDBUtils = UserDBUtil.getInstance();
         if (userDBUtils.exists(login)) {
             try {
                 User user = daoUsers.get(daoUsers.findByUsername(login));

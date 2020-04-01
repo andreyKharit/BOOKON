@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/25/20, 10:05 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.interfaces;
 
-public interface RegistrationService {
+public interface RegistrationServiceI {
     boolean createUser(String login, String password) throws Exception;
 }

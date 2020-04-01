@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/12/20, 8:39 PM
- * Book: Andrey Kharitonenko
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
+ * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Book;
-import com.itacademy.ankhar.util.JdbcProvider;
+import com.itacademy.ankhar.util.JdbcProviderUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,18 +15,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoBook implements DaoJdbcInterface<Book> {
+public class DaoBookJdbc implements DaoEntityI<Book> {
 
-    private static DaoBook entity = new DaoBook();
+    private static DaoBookJdbc entity = new DaoBookJdbc();
 
-    private DaoBook() {
+    private DaoBookJdbc() {
     }
 
-    public static DaoBook getEntity() {
+    public static DaoBookJdbc getEntity() {
         if (entity == null) {
-            synchronized (DaoBook.class) {
+            synchronized (DaoBookJdbc.class) {
                 if (entity == null) {
-                    entity = new DaoBook();
+                    entity = new DaoBookJdbc();
                 }
             }
         }
@@ -42,7 +42,7 @@ public class DaoBook implements DaoJdbcInterface<Book> {
     @Override
     public List<Book> getAll() throws Exception {
         List<Book> results = new ArrayList<>();
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery("SELECT * FROM users.ankhar_books")) {
                     while (resultSet.next()) {

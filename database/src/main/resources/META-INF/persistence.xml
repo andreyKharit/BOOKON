@@ -1,3 +1,9 @@
+<!--
+  ~ 2020
+  ~ Last updated: 4/2/20, 1:03 AM
+  ~ Author: Andrey Kharitonenko
+  -->
+
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">

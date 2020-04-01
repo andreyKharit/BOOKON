@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/31/20, 7:57 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
@@ -9,12 +9,12 @@ package com.itacademy.ankhar.util;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
-import com.itacademy.ankhar.dao.DaoAuthorsHibernate;
-import com.itacademy.ankhar.dao.DaoJdbcInterface;
+import com.itacademy.ankhar.dao.DaoAuthorHibernate;
+import com.itacademy.ankhar.dao.DaoEntityI;
 
 public class GuiceUtil implements Module {
     @Override
     public void configure(Binder binder) {
-        binder.bind(DaoJdbcInterface.class).to(DaoAuthorsHibernate.class).in(Scopes.SINGLETON);
+        binder.bind(DaoEntityI.class).to(DaoAuthorHibernate.class).in(Scopes.SINGLETON);
     }
 }

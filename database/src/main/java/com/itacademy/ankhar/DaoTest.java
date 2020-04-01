@@ -1,48 +1,57 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/12/20, 9:13 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar;
 
-import com.itacademy.ankhar.dao.DaoAuthors;
-import com.itacademy.ankhar.dao.DaoBook;
-import com.itacademy.ankhar.dao.DaoJdbcInterface;
-import com.itacademy.ankhar.dao.DaoUsers;
+import com.itacademy.ankhar.dao.DaoAuthorJdbc;
+import com.itacademy.ankhar.dao.DaoBookJdbc;
+import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.factory.DaoAuthorFactory;
+import com.itacademy.ankhar.factory.DaoTypeFactoryI;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
 
 import java.util.List;
 
 public class DaoTest {
     public static void main(String[] args) throws Exception {
-        DaoJdbcInterface<Author> daoAuthors = DaoAuthors.getEntity();
-        DaoJdbcInterface<User> daoUsers = DaoUsers.getEntity();
+        DaoTypeFactoryI daoFactory = DaoAuthorFactory.getInstance();
+        DaoEntityI<Author> daoAuthors = DaoAuthorJdbc.getEntity();
+        DaoEntityI<User> daoUsers = DaoUsersJdbc.getEntity();
 
-        List<Author> allAuthors = daoAuthors.getAll();
+//        List<Author> allAuthors = daoAuthors.getAll();
+//        allAuthors.stream().
+//                map(c -> c.getId() + " " + c.getName())
+//                .forEach(System.out::println);
+
+        List<Author> allAuthors = daoFactory.getDao(DaoTypesEnum.HIBERNATE).getAll();
         allAuthors.stream().
                 map(c -> c.getId() + " " + c.getName())
                 .forEach(System.out::println);
 
-        DaoJdbcInterface<Book> daoBook = DaoBook.getEntity();
-
-        List<Book> allBooks = daoBook.getAll();
-        allBooks.stream().
-                map(c -> c.getAuthorId() + " " + c.getName())
-                .forEach(System.out::println);
-
-        Author author = new Author();
-        author.setName("Mahalam");
-        daoAuthors.create(author);
-
-        allAuthors.stream().
-                map(c -> c.getId() + " " + c.getName())
-                .forEach(System.out::println);
-        System.out.println(daoAuthors.get((long) 5).getName());
-
-        List<User> allUsers = daoUsers.getAll();
-        allUsers.stream().
-                map(c -> c.getUserId() + " " + c.getUserName() + " " +
-                        c.getUserPassword() + " " + c.getUserStatus())
-                .forEach(System.out::println);
+//        DaoEntityI<Book> daoBook = DaoBookJdbc.getEntity();
+//
+//        List<Book> allBooks = daoBook.getAll();
+//        allBooks.stream().
+//                map(c -> c.getAuthorId() + " " + c.getName())
+//                .forEach(System.out::println);
+//
+//        Author author = new Author();
+//        author.setName("Mahalam");
+//        daoAuthors.create(author);
+//
+//        allAuthors.stream().
+//                map(c -> c.getId() + " " + c.getName())
+//                .forEach(System.out::println);
+//        System.out.println(daoAuthors.get((long) 5).getName());
+//
+//        List<User> allUsers = daoUsers.getAll();
+//        allUsers.stream().
+//                map(c -> c.getUserId() + " " + c.getUserName() + " " +
+//                        c.getUserPassword() + " " + c.getUserStatus())
+//                .forEach(System.out::println);
     }
 }

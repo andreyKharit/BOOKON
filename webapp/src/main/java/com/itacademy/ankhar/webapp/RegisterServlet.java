@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/25/20, 10:01 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.RegistrationServiceImplementation;
-import com.itacademy.ankhar.interfaces.RegistrationService;
+import com.itacademy.ankhar.interfaces.RegistrationServiceI;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import java.io.IOException;
         name = "RegistrationServlet",
         urlPatterns = {"/registration"})
 public class RegisterServlet extends HttpServlet {
-    private RegistrationService registrationService = new RegistrationServiceImplementation();
+    private RegistrationServiceI registrationService = new RegistrationServiceImplementation();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

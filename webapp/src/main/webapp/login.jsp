@@ -1,6 +1,6 @@
 <%--
-  ~ Copyright (c) 2020
-  ~ Last updated: 2/19/20, 12:44 AM
+  ~ 2020
+  ~ Last updated: 4/2/20, 1:03 AM
   ~ Author: Andrey Kharitonenko
   --%>
 
@@ -24,6 +24,7 @@
             <input type="submit" value="Proceed">
         </form>
         </p>
+        <p>New here? <a href="${pageContext.request.contextPath}/register.jsp">REGISTRATION FORM</a></p>
     </div>
 </div>
 

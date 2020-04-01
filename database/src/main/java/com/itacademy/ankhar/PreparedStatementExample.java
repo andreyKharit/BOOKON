@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/10/20, 6:58 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar;
 
-import com.itacademy.ankhar.util.JdbcProvider;
+import com.itacademy.ankhar.util.JdbcProviderUtil;
 
 import java.sql.*;
 
@@ -16,7 +16,7 @@ public class PreparedStatementExample {
                     "WHERE author_id > ? AND author_id < ?";
 
     public static void main(String[] args) throws Exception {
-        try (Connection connection = JdbcProvider.getInstance().getConnection()) {
+        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(AUTHOR_BY_NAME)) {
                 statement.setString(1, "2");
                 statement.setString(2, "5");

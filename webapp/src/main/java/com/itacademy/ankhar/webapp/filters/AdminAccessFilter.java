@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2020
- * Last updated: 3/29/20, 2:18 PM
+ * 2020
+ * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.webapp.filters;
 
-import com.itacademy.ankhar.util.UserDBUtils;
+import com.itacademy.ankhar.util.UserDBUtil;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -19,7 +19,7 @@ import java.io.IOException;
 )
 public class AdminAccessFilter implements Filter {
     private HttpServletRequest httpRequest;
-    private UserDBUtils utils = UserDBUtils.getInstance();
+    private UserDBUtil utils = UserDBUtil.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
