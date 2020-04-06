@@ -8,14 +8,14 @@ package com.itacademy.ankhar.impl;
 
 import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
-import com.itacademy.ankhar.interfaces.AuthorizationServiceI;
+import com.itacademy.ankhar.interfaces.IAuthorizationService;
 import com.itacademy.ankhar.util.HashMD5ConverterUtil;
 import com.itacademy.ankhar.util.UserDBUtil;
 
-public class AuthorizationServiceImplementation implements AuthorizationServiceI {
+public class ImplementationAuthorizationService implements IAuthorizationService {
     @Override
     public boolean authorize(String login, String password) {
-        DaoUsersJdbc daoUsers = DaoUsersJdbc.getEntity();
+        DaoUsersJdbc daoUsers = DaoUsersJdbc.getDao();
         UserDBUtil userDBUtils = UserDBUtil.getInstance();
         if (userDBUtils.exists(login)) {
             try {

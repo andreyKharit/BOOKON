@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO
-public class DaoAuthorHibernate implements DaoEntityI<Author> {
+public class DaoAuthorHibernate implements IDaoEntity<Author> {
 
     private static DaoAuthorHibernate entity = new DaoAuthorHibernate();
 
     private DaoAuthorHibernate() {
     }
 
-    public static DaoAuthorHibernate getEntity() {
+    public static DaoAuthorHibernate getDao() {
         if (entity == null) {
             synchronized (DaoAuthorHibernate.class) {
                 if (entity == null) {

@@ -8,8 +8,8 @@ package com.itacademy.ankhar;
 
 import javax.persistence.*;
 
-@Table(name = "ankhar_authors", uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
 @Entity(name = "author")
+@Table(name = "ankhar_authors", uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
 public class Author {
     @Id
     @Column(name = "author_id")
@@ -34,3 +34,4 @@ public class Author {
         this.id = id;
     }
 }
+

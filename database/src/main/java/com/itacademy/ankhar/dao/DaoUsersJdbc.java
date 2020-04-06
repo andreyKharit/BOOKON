@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO users
-public class DaoUsersJdbc implements DaoEntityI<User> {
+public class DaoUsersJdbc implements IDaoEntity<User> {
 
     private static final Logger LOGGER = LogManager.getLogger(DaoUsersJdbc.class);
     private static DaoUsersJdbc entity = new DaoUsersJdbc();
@@ -27,7 +27,7 @@ public class DaoUsersJdbc implements DaoEntityI<User> {
     private DaoUsersJdbc() {
     }
 
-    public static DaoUsersJdbc getEntity() {
+    public static DaoUsersJdbc getDao() {
         if (entity == null) {
             synchronized (DaoUsersJdbc.class) {
                 if (entity == null) {

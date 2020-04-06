@@ -6,8 +6,16 @@
 
 package com.itacademy.ankhar;
 
+import javax.persistence.*;
+
+@Entity(name = "publisher")
+@Table(name = "ankhar_publishers")
 public class Publisher {
+    @Id
+    @Column(name = "publisher_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long publisherId;
+    @Column(name = "publisher_name", unique = true, nullable = false)
     private String publisherName;
 
     public Long getPublisherId() {

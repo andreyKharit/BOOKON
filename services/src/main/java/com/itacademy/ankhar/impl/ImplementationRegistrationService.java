@@ -7,13 +7,13 @@
 package com.itacademy.ankhar.impl;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
-import com.itacademy.ankhar.interfaces.RegistrationServiceI;
+import com.itacademy.ankhar.interfaces.IRegistrationService;
 import com.itacademy.ankhar.util.HashMD5ConverterUtil;
 import com.itacademy.ankhar.util.UserDBUtil;
 
-public class RegistrationServiceImplementation implements RegistrationServiceI {
+public class ImplementationRegistrationService implements IRegistrationService {
 
     @Override
     public boolean createUser(String login, String password) throws Exception {
@@ -22,7 +22,7 @@ public class RegistrationServiceImplementation implements RegistrationServiceI {
                 User newUser = new User();
                 newUser.setUserName(login);
                 newUser.setUserPassword(HashMD5ConverterUtil.getInstance().stringToMD5(password));
-                DaoEntityI<User> userDaoJdbc = DaoUsersJdbc.getEntity();
+                IDaoEntity<User> userDaoJdbc = DaoUsersJdbc.getDao();
                 userDaoJdbc.create(newUser);
                 return true;
             } catch (Exception e) {

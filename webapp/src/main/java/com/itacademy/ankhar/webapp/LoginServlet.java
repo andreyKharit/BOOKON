@@ -6,8 +6,8 @@
 
 package com.itacademy.ankhar.webapp;
 
-import com.itacademy.ankhar.impl.AuthorizationServiceImplementation;
-import com.itacademy.ankhar.interfaces.AuthorizationServiceI;
+import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
+import com.itacademy.ankhar.interfaces.IAuthorizationService;
 import com.itacademy.ankhar.util.UserDBUtil;
 
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ import java.io.IOException;
         name = "LoginServlet",
         urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
-    private AuthorizationServiceI auth = new AuthorizationServiceImplementation();
+    private IAuthorizationService auth = new ImplementationAuthorizationService();
     private UserDBUtil utils = UserDBUtil.getInstance();
 
     @Override

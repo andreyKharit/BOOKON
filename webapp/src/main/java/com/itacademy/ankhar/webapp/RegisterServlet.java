@@ -6,8 +6,8 @@
 
 package com.itacademy.ankhar.webapp;
 
-import com.itacademy.ankhar.impl.RegistrationServiceImplementation;
-import com.itacademy.ankhar.interfaces.RegistrationServiceI;
+import com.itacademy.ankhar.impl.ImplementationRegistrationService;
+import com.itacademy.ankhar.interfaces.IRegistrationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import java.io.IOException;
         name = "RegistrationServlet",
         urlPatterns = {"/registration"})
 public class RegisterServlet extends HttpServlet {
-    private RegistrationServiceI registrationService = new RegistrationServiceImplementation();
+    private IRegistrationService registrationService = new ImplementationRegistrationService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

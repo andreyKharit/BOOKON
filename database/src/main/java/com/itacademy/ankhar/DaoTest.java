@@ -7,8 +7,7 @@
 package com.itacademy.ankhar;
 
 import com.itacademy.ankhar.dao.DaoAuthorJdbc;
-import com.itacademy.ankhar.dao.DaoBookJdbc;
-import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
 import com.itacademy.ankhar.factory.DaoAuthorFactory;
 import com.itacademy.ankhar.factory.DaoTypeFactoryI;
@@ -19,8 +18,8 @@ import java.util.List;
 public class DaoTest {
     public static void main(String[] args) throws Exception {
         DaoTypeFactoryI daoFactory = DaoAuthorFactory.getInstance();
-        DaoEntityI<Author> daoAuthors = DaoAuthorJdbc.getEntity();
-        DaoEntityI<User> daoUsers = DaoUsersJdbc.getEntity();
+        IDaoEntity<Author> daoAuthors = DaoAuthorJdbc.getDao();
+        IDaoEntity<User> daoUsers = DaoUsersJdbc.getDao();
 
 //        List<Author> allAuthors = daoAuthors.getAll();
 //        allAuthors.stream().

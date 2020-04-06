@@ -5,9 +5,9 @@
 
 package com.itacademy.ankhar.factory;
 
-import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.IDaoEntity;
 
 //TODO CHECK IF RIGHT
-public interface DaoTypeFactoryI <T extends DaoEntityI> {
+public interface DaoTypeFactoryI <T extends IDaoEntity> {
     T getDao(DaoTypesEnum daoType);
 }

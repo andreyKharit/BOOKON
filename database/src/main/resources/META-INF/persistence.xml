@@ -12,6 +12,10 @@
         <description>JPA Sample</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.itacademy.ankhar.Author</class>
+        <class>com.itacademy.ankhar.Book</class>
+        <class>com.itacademy.ankhar.Genre</class>
+        <class>com.itacademy.ankhar.Publisher</class>
+        <class>com.itacademy.ankhar.Request</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!-- database connection -->

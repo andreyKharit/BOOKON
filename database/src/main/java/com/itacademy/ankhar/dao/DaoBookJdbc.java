@@ -15,14 +15,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoBookJdbc implements DaoEntityI<Book> {
+public class DaoBookJdbc implements IDaoEntity<Book> {
 
     private static DaoBookJdbc entity = new DaoBookJdbc();
 
     private DaoBookJdbc() {
     }
 
-    public static DaoBookJdbc getEntity() {
+    public static DaoBookJdbc getDao() {
         if (entity == null) {
             synchronized (DaoBookJdbc.class) {
                 if (entity == null) {

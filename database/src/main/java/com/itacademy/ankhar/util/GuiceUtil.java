@@ -10,11 +10,11 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
 import com.itacademy.ankhar.dao.DaoAuthorHibernate;
-import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.IDaoEntity;
 
 public class GuiceUtil implements Module {
     @Override
     public void configure(Binder binder) {
-        binder.bind(DaoEntityI.class).to(DaoAuthorHibernate.class).in(Scopes.SINGLETON);
+        binder.bind(IDaoEntity.class).to(DaoAuthorHibernate.class).in(Scopes.SINGLETON);
     }
 }

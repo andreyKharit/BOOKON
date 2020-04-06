@@ -6,10 +6,26 @@
 
 package com.itacademy.ankhar;
 
+import javax.persistence.*;
+
+@Entity(name = "user")
+@Table(name = "ankhar_users")
 public class User {
+    @Id
+    @Column(name = "contacts_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+    @Column(name = "username", unique = true, nullable = false)
     private String userName;
+    @Column(name = "password", nullable = false)
     private String userPassword;
+    @PrePersist
+    private void prePersist() {
+        if (this.userStatus == null) {
+            this.userStatus = "user";
+        }
+    }
+    @Column(name = "user_status", nullable = false)
     private String userStatus;
 
     public Long getUserId() {

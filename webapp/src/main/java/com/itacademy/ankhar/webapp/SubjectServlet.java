@@ -7,8 +7,8 @@
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.impl.SubjectServiceImplementation;
-import com.itacademy.ankhar.interfaces.SubjectServiceI;
+import com.itacademy.ankhar.impl.ImplementationSubjectService;
+import com.itacademy.ankhar.interfaces.ISubjectService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @WebServlet(name = "SubjectServlet", urlPatterns = {"/subjects"})
 public class SubjectServlet extends HttpServlet {
-    private SubjectServiceI subjectService = SubjectServiceImplementation.getInstance();
+    private ISubjectService subjectService = ImplementationSubjectService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

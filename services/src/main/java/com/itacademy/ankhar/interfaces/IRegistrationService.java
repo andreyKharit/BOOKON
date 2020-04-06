@@ -6,6 +6,6 @@
 
 package com.itacademy.ankhar.interfaces;
 
-public interface RegistrationServiceI {
+public interface IRegistrationService {
     boolean createUser(String login, String password) throws Exception;
 }

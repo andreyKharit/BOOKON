@@ -6,6 +6,6 @@
 
 package com.itacademy.ankhar.interfaces;
 
-public interface AuthorizationServiceI {
+public interface IAuthorizationService {
     boolean authorize(String login, String password);
 }

@@ -10,7 +10,7 @@ import com.itacademy.ankhar.User;
 
 import java.util.List;
 
-public interface SubjectServiceI {
+public interface ISubjectService {
     List<User> getSubjects();
     boolean deleteUser(Long userId) throws Exception;
     boolean updateUserStatus(Long userId, String status) throws Exception;

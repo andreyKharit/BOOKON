@@ -5,11 +5,12 @@
 
 package com.itacademy.ankhar.factory;
 
+import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.dao.DaoAuthorHibernate;
 import com.itacademy.ankhar.dao.DaoAuthorJdbc;
-import com.itacademy.ankhar.dao.DaoEntityI;
+import com.itacademy.ankhar.dao.IDaoEntity;
 
-public class DaoAuthorFactory implements DaoTypeFactoryI<DaoEntityI> {
+public class DaoAuthorFactory implements DaoTypeFactoryI<IDaoEntity<Author>> {
     private static DaoAuthorFactory daoAuthorFactory;
 
     private DaoAuthorFactory(){}
@@ -26,10 +27,10 @@ public class DaoAuthorFactory implements DaoTypeFactoryI<DaoEntityI> {
     }
 
     @Override
-    public DaoEntityI getDao(DaoTypesEnum daoType) {
+    public IDaoEntity<Author> getDao(DaoTypesEnum daoType) {
         switch (daoType){
-            case JDBC: return DaoAuthorJdbc.getEntity();
-            case HIBERNATE: return DaoAuthorHibernate.getEntity();
+            case JDBC: return DaoAuthorJdbc.getDao();
+            case HIBERNATE: return DaoAuthorHibernate.getDao();
             //TODO SPRING IMPLEMENTATION?
             default: throw new IllegalArgumentException("Unknown DAO type.");
         }

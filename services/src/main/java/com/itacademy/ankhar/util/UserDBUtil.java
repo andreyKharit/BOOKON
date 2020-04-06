@@ -28,7 +28,7 @@ public class UserDBUtil {
 
     //checks if user already exists in db
     public boolean exists(String login) {
-        DaoUsersJdbc daoUsers = DaoUsersJdbc.getEntity();
+        DaoUsersJdbc daoUsers = DaoUsersJdbc.getDao();
         try {
             if (daoUsers.findByUsername(login) != -1) {
                 return true;
@@ -41,7 +41,7 @@ public class UserDBUtil {
 
     //checks for user status
     public String getStatus(String login) {
-        DaoUsersJdbc daoUsers = DaoUsersJdbc.getEntity();
+        DaoUsersJdbc daoUsers = DaoUsersJdbc.getDao();
         UserDBUtil userDBUtils = UserDBUtil.getInstance();
         if (userDBUtils.exists(login)) {
             try {
