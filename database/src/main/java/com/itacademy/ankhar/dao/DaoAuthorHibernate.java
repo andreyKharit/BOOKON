@@ -7,6 +7,7 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Author;
+import com.itacademy.ankhar.extensions.IDaoAuthors;
 import com.itacademy.ankhar.util.JdbcProviderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO
-public class DaoAuthorHibernate implements IDaoEntity<Author> {
+public class DaoAuthorHibernate implements IDaoAuthors {
 
     private static DaoAuthorHibernate entity = new DaoAuthorHibernate();
 

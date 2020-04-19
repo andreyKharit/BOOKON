@@ -8,6 +8,9 @@ package com.itacademy.ankhar.util;
 
 import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.extensions.IDaoUsers;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
+import com.itacademy.ankhar.factory.DaoUserFactory;
 
 public class UserDBUtil {
 
@@ -28,7 +31,7 @@ public class UserDBUtil {
 
     //checks if user already exists in db
     public boolean exists(String login) {
-        DaoUsersJdbc daoUsers = DaoUsersJdbc.getDao();
+        IDaoUsers daoUsers = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
         try {
             if (daoUsers.findByUsername(login) != -1) {
                 return true;

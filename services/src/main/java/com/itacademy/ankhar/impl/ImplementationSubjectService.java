@@ -9,6 +9,9 @@ package com.itacademy.ankhar.impl;
 import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.extensions.IDaoUsers;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
+import com.itacademy.ankhar.factory.DaoUserFactory;
 import com.itacademy.ankhar.interfaces.ISubjectService;
 
 import java.util.List;
@@ -33,8 +36,8 @@ public class ImplementationSubjectService implements ISubjectService {
     @Override
     public List<User> getSubjects() {
         try {
-            IDaoEntity<User> daoUsers = DaoUsersJdbc.getDao();
-            return daoUsers.getAll();
+            IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+            return userDao.getAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,8 +46,8 @@ public class ImplementationSubjectService implements ISubjectService {
 
     public boolean deleteUser(Long userId) throws Exception {
         try {
-            IDaoEntity<User> userDaoJdbc = DaoUsersJdbc.getDao();
-            userDaoJdbc.delete(userId);
+            IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+            userDao.delete(userId);
             return true;
         } catch (Exception e) {
             throw e;
@@ -52,10 +55,10 @@ public class ImplementationSubjectService implements ISubjectService {
     }
     public boolean updateUserStatus(Long userId, String status) throws Exception {
         try {
-            IDaoEntity<User> userDaoJdbc = DaoUsersJdbc.getDao();
-            User updateUser = userDaoJdbc.get(userId);
+            IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+            User updateUser = userDao.get(userId);
             updateUser.setUserStatus(status);
-            userDaoJdbc.update(updateUser);
+            userDao.update(updateUser);
             return true;
         } catch (Exception e) {
             throw e;

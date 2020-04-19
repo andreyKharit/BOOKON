@@ -6,6 +6,7 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.extensions.IDaoUsers;
 import com.itacademy.ankhar.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,9 +16,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
-public class DaoUsersHibernate implements IDaoEntity<User> {
+public class DaoUsersHibernate implements IDaoUsers {
     private static DaoUsersHibernate daoUsersHibernate;
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private static final Logger LOGGER = LogManager.getLogger(DaoUsersHibernate.class);
@@ -35,19 +37,6 @@ public class DaoUsersHibernate implements IDaoEntity<User> {
         }
         return daoUsersHibernate;
     }
-
-    public Long findByUsername(String name) throws Exception {
-        LOGGER.info("Trying to get User by name.");
-        try (Session session = sessionFactory.openSession()) {
-            final Query<User> query = session.createQuery("SELECT c FROM user c WHERE c.userName = :name", User.class);
-            query.setParameter("name", name);
-            return query.getSingleResult().getUserId();
-        } catch (HibernateException e) {
-            LOGGER.error(e);
-            throw e;
-        }
-    }
-
 
     @Override
     public User get(Long id) throws Exception {
@@ -124,5 +113,17 @@ public class DaoUsersHibernate implements IDaoEntity<User> {
         }
         LOGGER.info("Done deleting entity.");
         return true;
+    }
+
+    public Long findByUsername(String name) throws HibernateException {
+        LOGGER.info("Trying to get User by name.");
+        try (Session session = sessionFactory.openSession()) {
+            final Query<User> query = session.createQuery("SELECT c FROM user c WHERE c.userName = :name", User.class);
+            query.setParameter("name", name);
+            return query.getSingleResult().getUserId();
+        } catch (NoResultException e) {
+            LOGGER.error(e);
+            return (long) -1;
+        }
     }
 }

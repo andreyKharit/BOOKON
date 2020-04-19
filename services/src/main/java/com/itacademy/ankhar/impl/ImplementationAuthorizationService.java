@@ -7,15 +7,17 @@
 package com.itacademy.ankhar.impl;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.extensions.IDaoUsers;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
+import com.itacademy.ankhar.factory.DaoUserFactory;
 import com.itacademy.ankhar.interfaces.IAuthorizationService;
-import com.itacademy.ankhar.util.HashMD5ConverterUtil;
 import com.itacademy.ankhar.util.UserDBUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class ImplementationAuthorizationService implements IAuthorizationService {
     @Override
     public boolean authorize(String login, String password) {
-        DaoUsersJdbc daoUsers = DaoUsersJdbc.getDao();
+        IDaoUsers daoUsers = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
         UserDBUtil userDBUtils = UserDBUtil.getInstance();
         if (userDBUtils.exists(login)) {
             try {
@@ -23,7 +25,7 @@ public class ImplementationAuthorizationService implements IAuthorizationService
                 //checking login and password
                 if (user.getUserName().equals(login) &&
                         user.getUserPassword().
-                                equals(HashMD5ConverterUtil.getInstance().stringToMD5(password))) {
+                                equals(DigestUtils.md2Hex(password))) {
                     return true;
                 }
             } catch (Exception e) {

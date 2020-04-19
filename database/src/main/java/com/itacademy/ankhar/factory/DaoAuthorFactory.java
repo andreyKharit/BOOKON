@@ -9,8 +9,9 @@ import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.dao.DaoAuthorHibernate;
 import com.itacademy.ankhar.dao.DaoAuthorJdbc;
 import com.itacademy.ankhar.dao.IDaoEntity;
+import com.itacademy.ankhar.extensions.IDaoAuthors;
 
-public class DaoAuthorFactory implements DaoTypeFactoryI<IDaoEntity<Author>> {
+public class DaoAuthorFactory implements DaoTypeFactoryI<IDaoAuthors> {
     private static DaoAuthorFactory daoAuthorFactory;
 
     private DaoAuthorFactory(){}
@@ -27,7 +28,7 @@ public class DaoAuthorFactory implements DaoTypeFactoryI<IDaoEntity<Author>> {
     }
 
     @Override
-    public IDaoEntity<Author> getDao(DaoTypesEnum daoType) {
+    public IDaoAuthors getDao(DaoTypesEnum daoType) {
         switch (daoType){
             case JDBC: return DaoAuthorJdbc.getDao();
             case HIBERNATE: return DaoAuthorHibernate.getDao();

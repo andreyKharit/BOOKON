@@ -6,6 +6,7 @@
 package com.itacademy.ankhar.factory;
 
 import com.itacademy.ankhar.dao.IDaoEntity;
+import com.itacademy.ankhar.extensions.IDaoUsers;
 
 //TODO CHECK IF RIGHT
 public interface DaoTypeFactoryI <T extends IDaoEntity> {

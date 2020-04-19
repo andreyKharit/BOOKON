@@ -26,11 +26,6 @@ public class DaoTest {
 //                map(c -> c.getId() + " " + c.getName())
 //                .forEach(System.out::println);
 
-        List<Author> allAuthors = daoFactory.getDao(DaoTypesEnum.HIBERNATE).getAll();
-        allAuthors.stream().
-                map(c -> c.getId() + " " + c.getName())
-                .forEach(System.out::println);
-
 //        DaoEntityI<Book> daoBook = DaoBookJdbc.getEntity();
 //
 //        List<Book> allBooks = daoBook.getAll();

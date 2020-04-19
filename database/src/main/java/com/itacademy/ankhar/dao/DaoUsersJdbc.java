@@ -7,6 +7,7 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.extensions.IDaoUsers;
 import com.itacademy.ankhar.util.JdbcProviderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO users
-public class DaoUsersJdbc implements IDaoEntity<User> {
+public class DaoUsersJdbc implements IDaoUsers {
 
     private static final Logger LOGGER = LogManager.getLogger(DaoUsersJdbc.class);
     private static DaoUsersJdbc entity = new DaoUsersJdbc();

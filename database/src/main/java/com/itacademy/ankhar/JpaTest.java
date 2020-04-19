@@ -6,19 +6,12 @@
 
 package com.itacademy.ankhar;
 
-import com.itacademy.ankhar.dao.DaoGenreHibernate;
 import com.itacademy.ankhar.dao.DaoUsersHibernate;
 import com.itacademy.ankhar.dao.IDaoEntity;
-import com.itacademy.ankhar.factory.DaoAuthorFactory;
+import com.itacademy.ankhar.extensions.IDaoUsers;
 import com.itacademy.ankhar.factory.DaoTypeFactoryI;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.factory.DaoUserFactory;
-import com.itacademy.ankhar.util.HibernateUtil;
-import org.hibernate.Session;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import java.util.List;
 
 public class JpaTest {
 
@@ -35,16 +28,16 @@ public class JpaTest {
 //        IDaoEntity<Genre> daoEntity = DaoGenreHibernate.getDao();
 //        System.out.println(daoEntity.create(genreTest));
 
-        User user = new User();
-        user.setUserName("sasha");
-        user.setUserPassword("21232f297a57a5a743894a0e4a801fc3");
+//        User user = new User();
+//        user.setUserName("sasha");
+//        user.setUserPassword("21232f297a57a5a743894a0e4a801fc3");
 //        DaoUsersHibernate.getDao().create(user);
 //        System.out.println(DaoUsersHibernate.getDao().findByUsername("admin"));
 //        List<User> allAuthors = DaoUsersHibernate.getDao().getAll();
 //        allAuthors.stream().
 //                map(c -> c.getUserId() + " " + c.getUserName())
 //                .forEach(System.out::println);
-        DaoTypeFactoryI<IDaoEntity<User>> daoF = DaoUserFactory.getInstance();
-        IDaoEntity<User> dao = daoF.getDao(DaoTypesEnum.HIBERNATE);
+        DaoTypeFactoryI<IDaoUsers> daoTypeFactoryI = DaoUserFactory.getInstance();
+        IDaoUsers daoUsers = daoTypeFactoryI.getDao(DaoTypesEnum.HIBERNATE);
     }
 }

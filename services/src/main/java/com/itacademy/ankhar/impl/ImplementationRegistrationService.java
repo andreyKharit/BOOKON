@@ -7,11 +7,12 @@
 package com.itacademy.ankhar.impl;
 
 import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.IDaoEntity;
-import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.extensions.IDaoUsers;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
+import com.itacademy.ankhar.factory.DaoUserFactory;
 import com.itacademy.ankhar.interfaces.IRegistrationService;
-import com.itacademy.ankhar.util.HashMD5ConverterUtil;
 import com.itacademy.ankhar.util.UserDBUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class ImplementationRegistrationService implements IRegistrationService {
 
@@ -21,9 +22,9 @@ public class ImplementationRegistrationService implements IRegistrationService {
             try {
                 User newUser = new User();
                 newUser.setUserName(login);
-                newUser.setUserPassword(HashMD5ConverterUtil.getInstance().stringToMD5(password));
-                IDaoEntity<User> userDaoJdbc = DaoUsersJdbc.getDao();
-                userDaoJdbc.create(newUser);
+                newUser.setUserPassword(DigestUtils.md2Hex(password));
+                IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+                userDao.create(newUser);
                 return true;
             } catch (Exception e) {
                 throw e;
