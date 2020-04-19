@@ -7,15 +7,18 @@
 package com.itacademy.ankhar;
 
 import com.itacademy.ankhar.util.JdbcProviderUtil;
+import org.junit.Test;
 
 import java.sql.*;
 
 public class PreparedStatementExample {
+
     public static final String AUTHOR_BY_NAME =
             "SELECT * FROM users.ankhar_authors " +
                     "WHERE author_id > ? AND author_id < ?";
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void preparedStatementTest() throws Exception {
         try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(AUTHOR_BY_NAME)) {
                 statement.setString(1, "2");

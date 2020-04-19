@@ -1,4 +1,9 @@
 /*
+ * Last updated: 4/19/20, 6:22 PM
+ * Author: Andrey Kharitonenko
+ */
+
+/*
  * 2020
  * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
@@ -12,11 +17,13 @@ import com.itacademy.ankhar.dao.DaoUsersJdbc;
 import com.itacademy.ankhar.factory.DaoAuthorFactory;
 import com.itacademy.ankhar.factory.DaoTypeFactoryI;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
+import org.junit.Test;
 
 import java.util.List;
 
 public class DaoTest {
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void daoTest() throws Exception {
         DaoTypeFactoryI daoFactory = DaoAuthorFactory.getInstance();
         IDaoEntity<Author> daoAuthors = DaoAuthorJdbc.getDao();
         IDaoEntity<User> daoUsers = DaoUsersJdbc.getDao();

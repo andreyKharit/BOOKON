@@ -1,4 +1,9 @@
 /*
+ * Last updated: 4/19/20, 6:23 PM
+ * Author: Andrey Kharitonenko
+ */
+
+/*
  * 2020
  * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
@@ -12,10 +17,12 @@ import com.itacademy.ankhar.extensions.IDaoUsers;
 import com.itacademy.ankhar.factory.DaoTypeFactoryI;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.factory.DaoUserFactory;
+import org.junit.Test;
 
 public class JpaTest {
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void jpaTest() throws Exception {
 //        Genre genreTest = new Genre();
 //        genreTest.setGenreName("Romance");
 

@@ -122,7 +122,7 @@ public class DaoUsersHibernate implements IDaoUsers {
             query.setParameter("name", name);
             return query.getSingleResult().getUserId();
         } catch (NoResultException e) {
-            LOGGER.error(e);
+            LOGGER.error("User " + name + " not found.");
             return (long) -1;
         }
     }
