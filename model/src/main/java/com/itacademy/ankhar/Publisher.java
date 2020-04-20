@@ -7,6 +7,7 @@
 package com.itacademy.ankhar;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "publisher")
 @Table(name = "ankhar_publishers")
@@ -17,6 +18,16 @@ public class Publisher {
     private Long publisherId;
     @Column(name = "publisher_name", unique = true, nullable = false)
     private String publisherName;
+    @OneToMany(mappedBy = "publisher")
+    private List<Book> books;
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     public Long getPublisherId() {
         return publisherId;

@@ -17,6 +17,16 @@ public class Genre {
     private Long genreId;
     @Column(name = "genre_name", unique = true, nullable = false)
     private String genreName;
+    @ManyToOne
+    private Book book;
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     public Long getGenreId() {
         return genreId;

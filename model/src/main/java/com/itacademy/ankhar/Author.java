@@ -7,6 +7,7 @@
 package com.itacademy.ankhar;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "author")
 @Table(name = "ankhar_authors", uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
@@ -17,6 +18,16 @@ public class Author {
     private Long id;
     @Column(name = "author_name", nullable = false, unique = true)
     private String name;
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     public Long getId() {
         return id;

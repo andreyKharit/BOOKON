@@ -6,10 +6,72 @@
 
 package com.itacademy.ankhar;
 
-public class Book {
-    private String name;
-    private Long authorId;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity(name = "book")
+@Table(name = "ankhar_books")
+public class Book {
+    @Id
+    @Column(name = "book_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bookId;
+    @Column(name = "book_name", nullable = false)
+    private String name;
+    @ManyToOne
+    private Author author;
+    @PrePersist
+    void prePersist(){
+        if (this.bookStatus == null) {
+            this.bookStatus = 1;
+        }
+    }
+    @Column(name = "book_status", nullable = false)
+    private Integer bookStatus;
+    @ManyToOne
+    private Publisher publisher;
+    @OneToMany(mappedBy = "book")
+    private List<Genre> genres;
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Integer getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(Integer bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
 
     public String getName() {
         return name;
@@ -19,11 +81,4 @@ public class Book {
         this.name = name;
     }
 
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
 }
