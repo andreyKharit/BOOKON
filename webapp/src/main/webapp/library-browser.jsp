@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
-<title>BOOKON|Users List</title>
+<title>BOOKON|Library</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -35,14 +35,14 @@
 <%@include file="header-bar.jsp" %>
 
 <!-- Sidebar -->
-<%@include file="sidebar.jsp"%>
+<%@include file="sidebar.jsp"%>>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
 
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <h1 class="w3-text-teal">Users List</h1>
+            <h1 class="w3-text-teal">Library</h1>
             <p>
 
             <form action="subjects" method="post">

@@ -7,6 +7,7 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Book;
+import com.itacademy.ankhar.extensions.IDaoBooks;
 import com.itacademy.ankhar.util.JdbcProviderUtil;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoBookJdbc implements IDaoEntity<Book> {
+public class DaoBookJdbc implements IDaoBooks {
 
     private static DaoBookJdbc entity = new DaoBookJdbc();
 
@@ -47,7 +48,7 @@ public class DaoBookJdbc implements IDaoEntity<Book> {
                 try (ResultSet resultSet = statement.executeQuery("SELECT * FROM users.ankhar_books")) {
                     while (resultSet.next()) {
                         Book book = new Book();
-                        book.setAuthorId(resultSet.getLong("author_id"));
+//                        book.setAuthorId(resultSet.getLong("author_id"));
                         book.setName(resultSet.getString("book_name"));
                         results.add(book);
                     }

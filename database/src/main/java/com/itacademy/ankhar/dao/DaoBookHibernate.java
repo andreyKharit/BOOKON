@@ -14,6 +14,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public class DaoBookHibernate implements IDaoBooks {
@@ -50,21 +54,69 @@ public class DaoBookHibernate implements IDaoBooks {
 
     @Override
     public List<Book> getAll() throws Exception {
-        return null;
+        try (Session session = sessionFactory.openSession()) {
+            LOGGER.info("Trying to get all Book entities.");
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Book> criteriaQuery = criteriaBuilder.createQuery(Book.class);
+            final Root<Book> root = criteriaQuery.from(Book.class);
+            criteriaQuery.select(root);
+
+            final List<Book> found = session.createQuery(criteriaQuery).getResultList();
+
+            session.close();
+            return found;
+        } catch (HibernateException error) {
+            LOGGER.error("Error getting all Book entities.");
+            throw error;
+        }
     }
 
     @Override
     public Long create(Book record) throws Exception {
-        return null;
+        try (Session session = sessionFactory.openSession()) {
+            LOGGER.info("Creating new Book entity.");
+            session.getTransaction().begin();
+            session.persist(record);
+            session.getTransaction().commit();
+            session.close();
+        } catch (HibernateException error) {
+            LOGGER.error("Error creating Book: " + error);
+            throw error;
+        }
+        LOGGER.info("Done. Entity ID is: " + record.getBookId());
+        return record.getBookId();
     }
 
     @Override
     public Long update(Book record) throws Exception {
-        return null;
+        try (Session session = sessionFactory.openSession()) {
+            LOGGER.info("Updating Book entity with ID: " + record.getBookId());
+            session.getTransaction().begin();
+            session.update(record);
+            session.getTransaction().commit();
+            session.close();
+        } catch (HibernateException error) {
+            LOGGER.error("Error updating Book: " + error);
+            throw error;
+        }
+        LOGGER.info("Done. Updated entity ID is: " + record.getBookId());
+        return record.getBookId();
     }
 
     @Override
     public boolean delete(Long id) throws Exception {
-        return false;
+        final Book entityToDelete = get(id);
+        try (Session session = sessionFactory.openSession()) {
+            LOGGER.info("Deleting Book entity with ID: " + id);
+            session.getTransaction().begin();
+            session.delete(entityToDelete);
+            session.getTransaction().commit();
+            session.close();
+        } catch (HibernateException error) {
+            LOGGER.error("Error deleting Book: " + error);
+            throw error;
+        }
+        LOGGER.info("Done deleting entity.");
+        return true;
     }
 }

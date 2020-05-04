@@ -18,7 +18,8 @@ public class Publisher {
     private Long publisherId;
     @Column(name = "publisher_name", unique = true, nullable = false)
     private String publisherName;
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id")
     private List<Book> books;
 
     public List<Book> getBooks() {

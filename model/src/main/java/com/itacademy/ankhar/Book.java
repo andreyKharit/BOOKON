@@ -19,18 +19,25 @@ public class Book {
     @Column(name = "book_name", nullable = false)
     private String name;
     @ManyToOne
+    @JoinColumn(name = "author_id")
     private Author author;
+
     @PrePersist
-    void prePersist(){
+    void prePersist() {
         if (this.bookStatus == null) {
             this.bookStatus = 1;
         }
     }
+
     @Column(name = "book_status", nullable = false)
     private Integer bookStatus;
     @ManyToOne
+    @JoinColumn(name = "publisher_id")
     private Publisher publisher;
-    @OneToMany(mappedBy = "book")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "ankhar_books_genres",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;
 
     public Long getBookId() {

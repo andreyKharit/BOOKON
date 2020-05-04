@@ -32,9 +32,13 @@ public class RegisterServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         try {
-            registrationService.createUser(username, password);
-            req.getSession().setAttribute("currentMessage", "New user created!");
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            if (registrationService.createUser(username, password)) {
+                req.getSession().setAttribute("currentMessage", "New user created!");
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            } else {
+                req.getSession().setAttribute("currentMessage", "Username already exists, please change yours.");
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            }
         } catch (Exception e) {
             resp.sendRedirect(req.getContextPath() + "/error401.jsp");
         }

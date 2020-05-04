@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/main-menu.jsp").forward(req, resp);
         } else {
 //                req.setAttribute("error", "Wrong username or password.");
+            req.getSession().setAttribute("currentMessage", "Wrong username or password.");
             resp.sendRedirect(req.getContextPath() + "/error401.jsp");
         }
     }

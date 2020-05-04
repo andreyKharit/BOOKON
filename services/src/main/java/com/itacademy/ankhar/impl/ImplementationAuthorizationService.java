@@ -25,7 +25,7 @@ public class ImplementationAuthorizationService implements IAuthorizationService
                 //checking login and password
                 if (user.getUserName().equals(login) &&
                         user.getUserPassword().
-                                equals(DigestUtils.md2Hex(password))) {
+                                equals(DigestUtils.sha512Hex(password))) {
                     return true;
                 }
             } catch (Exception e) {

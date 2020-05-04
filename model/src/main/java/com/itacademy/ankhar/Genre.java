@@ -7,6 +7,7 @@
 package com.itacademy.ankhar;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "genre")
 @Table(name = "ankhar_genres")
@@ -17,14 +18,17 @@ public class Genre {
     private Long genreId;
     @Column(name = "genre_name", unique = true, nullable = false)
     private String genreName;
-    @ManyToOne
-    private Book book;
+    @ManyToMany
+    @JoinTable(name = "ankhar_books_genres",
+    joinColumns = @JoinColumn(name = "genre_id"),
+    inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> book;
 
-    public Book getBook() {
+    public List<Book> getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
+    public void setBook(List<Book> book) {
         this.book = book;
     }
 

@@ -108,7 +108,7 @@ public class DaoUsersHibernate implements IDaoUsers {
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException error) {
-            LOGGER.error("Error creating User: " + error);
+            LOGGER.error("Error deleting User: " + error);
             throw error;
         }
         LOGGER.info("Done deleting entity.");

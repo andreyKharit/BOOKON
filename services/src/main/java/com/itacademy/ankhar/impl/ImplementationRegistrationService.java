@@ -22,7 +22,7 @@ public class ImplementationRegistrationService implements IRegistrationService {
             try {
                 User newUser = new User();
                 newUser.setUserName(login);
-                newUser.setUserPassword(DigestUtils.md2Hex(password));
+                newUser.setUserPassword(DigestUtils.sha512Hex(password));
                 IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
                 userDao.create(newUser);
                 return true;

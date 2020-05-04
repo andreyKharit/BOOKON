@@ -19,7 +19,7 @@ import org.junit.Test;
 public class tests {
     @Test
     public void passwordHexTest() {
-        System.out.println(DigestUtils.md2Hex("admin"));
+        System.out.println(DigestUtils.sha512Hex("admin"));
         ImplementationAuthorizationService test = new ImplementationAuthorizationService();
         if (test.authorize("Harry", "pass")) {
             System.out.println("done");

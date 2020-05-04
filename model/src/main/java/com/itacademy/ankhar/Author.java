@@ -18,7 +18,8 @@ public class Author {
     private Long id;
     @Column(name = "author_name", nullable = false, unique = true)
     private String name;
-    @OneToMany(mappedBy = "author")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
     private List<Book> books;
 
     public List<Book> getBooks() {
