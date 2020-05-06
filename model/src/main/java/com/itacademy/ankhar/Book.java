@@ -18,8 +18,8 @@ public class Book {
     private Long bookId;
     @Column(name = "book_name", nullable = false)
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "author_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     @PrePersist
@@ -31,8 +31,8 @@ public class Book {
 
     @Column(name = "book_status", nullable = false)
     private Integer bookStatus;
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ankhar_books_genres",

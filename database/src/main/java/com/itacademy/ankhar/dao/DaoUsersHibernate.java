@@ -51,6 +51,7 @@ public class DaoUsersHibernate implements IDaoUsers {
         }
     }
 
+    //TODO
     @Override
     public List<User> getAll() throws Exception {
         try (Session session = sessionFactory.openSession()) {

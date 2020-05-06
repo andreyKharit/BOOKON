@@ -6,6 +6,7 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Genre;
+import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +17,7 @@ import org.hibernate.query.NativeQuery;
 
 import java.util.List;
 
-public class DaoGenreHibernate implements IDaoEntity<Genre> {
+public class DaoGenreHibernate implements IDaoGenres {
     private static DaoGenreHibernate daoGenreHibernate;
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private static final Logger LOGGER = LogManager.getLogger(DaoGenreHibernate.class);
@@ -100,7 +101,7 @@ public class DaoGenreHibernate implements IDaoEntity<Genre> {
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException error) {
-            LOGGER.error("Error creating Genre: " + error);
+            LOGGER.error("Error deleting Genre: " + error);
             throw error;
         }
         LOGGER.info("Done deleting entity.");

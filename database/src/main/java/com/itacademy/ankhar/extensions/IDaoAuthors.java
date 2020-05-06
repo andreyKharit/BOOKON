@@ -9,4 +9,5 @@ import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.dao.IDaoEntity;
 
 public interface IDaoAuthors extends IDaoEntity<Author> {
+    Long getByName(String authorName) throws Exception;
 }

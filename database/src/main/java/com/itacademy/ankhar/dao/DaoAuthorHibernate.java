@@ -7,11 +7,19 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Author;
+import com.itacademy.ankhar.Book;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
+import com.itacademy.ankhar.util.HibernateUtil;
 import com.itacademy.ankhar.util.JdbcProviderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +31,7 @@ import java.util.List;
 public class DaoAuthorHibernate implements IDaoAuthors {
 
     private static DaoAuthorHibernate entity = new DaoAuthorHibernate();
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     private DaoAuthorHibernate() {
     }
@@ -40,70 +49,62 @@ public class DaoAuthorHibernate implements IDaoAuthors {
 
     private static final Logger LOGGER = LogManager.getLogger(DaoAuthorHibernate.class);
 
-    public Author getByName(String name) throws Exception {
+    public Long getByName(String name) throws Exception {
         LOGGER.info("Trying to get Author by name.");
-        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
-            try (PreparedStatement preparedStatement =
-                         connection.prepareStatement("SELECT * FROM users.ankhar_authors WHERE author_name = ?")) {
-                preparedStatement.setString(1, name);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        Author author = new Author();
-                        author.setId(resultSet.getLong("author_id"));
-                        author.setName(resultSet.getString("author_name"));
-                        return author;
-                    }
-                    return null;
-                }
-            }
+        try (Session session = sessionFactory.openSession()) {
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
+            final Root<Author> root = criteriaQuery.from(Author.class);
+            criteriaQuery.select(root).
+                    where(criteriaBuilder.equal(root.get("name"), name));
+
+            final List<Author> found = session.createQuery(criteriaQuery).getResultList();
+            session.close();
+            if (found.size() != 1) {
+                return -1L;
+            } else
+                return found.get(0).getId();
+        } catch (HibernateException error) {
+            LOGGER.error("Error getting Author entity.");
+            throw error;
         }
     }
 
     @Override
     public Author get(Long id) throws Exception {
-        LOGGER.info("Trying to get Author by Id.");
-        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
-            try (PreparedStatement preparedStatement =
-                         connection.prepareStatement("SELECT * FROM users.ankhar_authors WHERE author_id = ?")) {
-                preparedStatement.setLong(1, id);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        Author author = new Author();
-                        author.setId(resultSet.getLong("author_id"));
-                        author.setName(resultSet.getString("author_name"));
-                        return author;
-                    }
-                    return null;
-                }
-            }
+        LOGGER.info("Trying to get Author by name.");
+        try (Session session = sessionFactory.openSession()) {
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
+            final Root<Author> root = criteriaQuery.from(Author.class);
+            criteriaQuery.select(root).
+                    where(criteriaBuilder.equal(root.get("id"), id));
+            final Author found = session.createQuery(criteriaQuery).getSingleResult();
+            session.close();
+            return found;
+        } catch (HibernateException error) {
+            LOGGER.error("Error getting Author entity.");
+            throw error;
         }
     }
 
     @Override
     public List<Author> getAll() throws Exception {
-        LOGGER.info("Trying to get all Authors.");
-        List<Author> results = new ArrayList<>();
-        try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
-            try (Statement statement = connection.createStatement()) {
-                try (ResultSet resultSet = statement.executeQuery("SELECT * FROM users.ankhar_authors")) {
-                    LOGGER.info("Creating Authors list.");
-                    while (resultSet.next()) {
-                        Author author = new Author();
-                        author.setId(resultSet.getLong("author_id"));
-                        author.setName(resultSet.getString("author_name"));
-                        results.add(author);
-                        LOGGER.info("Added Author " + author.getName() + " to results list.");
-                    }
-                    LOGGER.info("Finished creating list.");
-                }
-            } catch (Exception e) {
-                //TODO custom exception
-                LOGGER.error("Can't get all Authors.", e);
-                throw e;
-            }
+        try (Session session = sessionFactory.openSession()) {
+            LOGGER.info("Trying to get all Author entities.");
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
+            final Root<Author> root = criteriaQuery.from(Author.class);
+            criteriaQuery.select(root);
+
+            final List<Author> found = session.createQuery(criteriaQuery).getResultList();
+
+            session.close();
+            return found;
+        } catch (HibernateException error) {
+            LOGGER.error("Error getting all Author entities.");
+            throw error;
         }
-        LOGGER.info("HIBERNATE IMPLEMENTATION STUB");
-        return results;
     }
 
     @Override

@@ -36,7 +36,7 @@ public class DaoAuthorJdbc implements IDaoAuthors {
 
     private static final Logger LOGGER = LogManager.getLogger(DaoAuthorJdbc.class);
 
-    public Author getByName(String name) throws Exception {
+    public Long getByName(String name) throws Exception {
         LOGGER.info("Trying to get Author by name.");
         try (Connection connection = JdbcProviderUtil.getInstance().getConnection()) {
             try (PreparedStatement preparedStatement =
@@ -44,10 +44,7 @@ public class DaoAuthorJdbc implements IDaoAuthors {
                 preparedStatement.setString(1, name);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        Author author = new Author();
-                        author.setId(resultSet.getLong("author_id"));
-                        author.setName(resultSet.getString("author_name"));
-                        return author;
+                        return resultSet.getLong("author_id");
                     }
                     return null;
                 }

@@ -12,9 +12,15 @@
 package com.itacademy.ankhar;
 
 import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
+import com.itacademy.ankhar.impl.ImplementationBookCreatorService;
 import com.itacademy.ankhar.util.UserDBUtil;
+import com.itacademy.ankhar.util.libraryDBUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class tests {
     @Test
@@ -25,5 +31,21 @@ public class tests {
             System.out.println("done");
         }
         System.out.println(UserDBUtil.getInstance().getStatus("Harry"));
+    }
+
+    @Test
+    public void DBUtilTests() throws Exception {
+        System.out.println(libraryDBUtil.getInstance().authorExists("Mahalam"));
+        System.out.println(libraryDBUtil.getInstance().bookExists("Bible 2"));
+        Assert.assertEquals("6", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer and Hammer")));
+        Assert.assertEquals("-1", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer minus Hammer")));
+    }
+
+    @Test
+    public void createrTest() throws Exception {
+        ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
+        List<String> sample = new LinkedList<>();
+        sample.add("Bye");
+        bookCreatorService.createBookEntry("Harammer", "Tuskan Origami", "Two One", sample);
     }
 }
