@@ -18,7 +18,7 @@ public class Book {
     private Long bookId;
     @Column(name = "book_name", nullable = false)
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
@@ -31,7 +31,7 @@ public class Book {
 
     @Column(name = "book_status", nullable = false)
     private Integer bookStatus;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
     @ManyToMany(fetch = FetchType.EAGER)

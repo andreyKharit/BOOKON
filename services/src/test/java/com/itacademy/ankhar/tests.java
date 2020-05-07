@@ -46,6 +46,6 @@ public class tests {
         ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
         List<String> sample = new LinkedList<>();
         sample.add("Bye");
-        bookCreatorService.createBookEntry("Harammer", "Tuskan Origami", "Two One", sample);
+        bookCreatorService.createBookEntry("Bible 1", "Tuskan Origami", "Two One", sample);
     }
 }

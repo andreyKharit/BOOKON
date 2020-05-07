@@ -27,23 +27,26 @@ public class ImplementationBookCreatorService implements IBookCreatorService {
 
     @Override
     public boolean createBookEntry(String bookName, String authorName, String publisherName, List<String> genres) throws Exception {
+        //stops if entity is duplicate
         if (libraryDBUtil.getInstance().bookExists(bookName) != -1L) {
             return false;
         }
         Book newBook = new Book();
         newBook.setName(bookName);
-        //adding new author if needed
-            Author newAuthor = new Author();
-            newAuthor.setName(authorName);
-            newBook.setAuthor(newAuthor);
-        //adding new publisher if needed
-            Publisher newPublisher = new Publisher();
-            newPublisher.setPublisherName(publisherName);
-            newBook.setPublisher(newPublisher);
-//        Iterator<String> genreIterator = genres.iterator();
-//        while (genreIterator.hasNext()) {
-//
-//        }
+        Author newAuthor = new Author();
+        newAuthor.setName(authorName);
+        //adding existing author if needed
+        if (libraryDBUtil.getInstance().authorExists(authorName) != -1L) {
+            newAuthor.setId(libraryDBUtil.getInstance().authorExists(authorName));
+        }
+        newBook.setAuthor(newAuthor);
+        Publisher newPublisher = new Publisher();
+        newPublisher.setPublisherName(publisherName);
+        //adding existing publisher if needed
+        if (libraryDBUtil.getInstance().publisherExists(publisherName) != -1L) {
+            newPublisher.setPublisherId(libraryDBUtil.getInstance().publisherExists(publisherName));
+        }
+        newBook.setPublisher(newPublisher);
         daoEntity.create(newBook);
         return true;
     }

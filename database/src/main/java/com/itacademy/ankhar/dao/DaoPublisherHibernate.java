@@ -5,8 +5,6 @@
 
 package com.itacademy.ankhar.dao;
 
-import com.itacademy.ankhar.Author;
-import com.itacademy.ankhar.Book;
 import com.itacademy.ankhar.Publisher;
 import com.itacademy.ankhar.extensions.IDaoPublishers;
 import com.itacademy.ankhar.util.HibernateUtil;
@@ -50,7 +48,7 @@ public class DaoPublisherHibernate implements IDaoPublishers {
             final CriteriaQuery<Publisher> criteriaQuery = criteriaBuilder.createQuery(Publisher.class);
             final Root<Publisher> root = criteriaQuery.from(Publisher.class);
             criteriaQuery.select(root).
-                    where(criteriaBuilder.equal(root.get("id"), id));
+                    where(criteriaBuilder.equal(root.get("publisherId"), id));
             final Publisher found = session.createQuery(criteriaQuery).getSingleResult();
             session.close();
             return found;
