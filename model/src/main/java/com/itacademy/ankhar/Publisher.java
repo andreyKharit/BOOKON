@@ -7,26 +7,33 @@
 package com.itacademy.ankhar;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "publisher")
 @Table(name = "ankhar_publishers")
 public class Publisher {
     @Id
     @Column(name = "publisher_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long publisherId;
     @Column(name = "publisher_name", unique = true, nullable = false)
     private String publisherName;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "publisher_id")
-    private List<Book> books;
+    @OneToMany(mappedBy = "bkPublisher", fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REMOVE
+    }, orphanRemoval = true)
+    private Set<Book> books = new HashSet<>();
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void addBooks(Book book) {
+        book.setBkPublisher(this);
+        this.books.add(book);
+    }
+
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 

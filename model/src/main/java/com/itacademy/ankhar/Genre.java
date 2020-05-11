@@ -7,7 +7,9 @@
 package com.itacademy.ankhar;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "genre")
 @Table(name = "ankhar_genres")
@@ -22,13 +24,13 @@ public class Genre {
     @JoinTable(name = "ankhar_books_genres",
     joinColumns = @JoinColumn(name = "genre_id"),
     inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Book> book;
+    private Set<Book> book = new HashSet<>();
 
-    public List<Book> getBook() {
+    public Set<Book> getBook() {
         return book;
     }
 
-    public void setBook(List<Book> book) {
+    public void setBook(Set<Book> book) {
         this.book = book;
     }
 

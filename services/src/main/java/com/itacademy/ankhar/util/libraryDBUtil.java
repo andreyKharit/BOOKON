@@ -9,14 +9,12 @@ import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.Book;
 import com.itacademy.ankhar.Genre;
 import com.itacademy.ankhar.Publisher;
-import com.itacademy.ankhar.dao.DaoPublisherHibernate;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
 import com.itacademy.ankhar.extensions.IDaoBooks;
 import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.extensions.IDaoPublishers;
 import com.itacademy.ankhar.factory.*;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class libraryDBUtil {
@@ -41,7 +39,7 @@ public class libraryDBUtil {
         List<Author> authorList = daoAuthors.getAll();
         for (Author current : authorList) {
             if (current.getName().equals(authorName)) {
-                return current.getId();
+                return current.getAuthorId();
             }
         }
         return -1L;

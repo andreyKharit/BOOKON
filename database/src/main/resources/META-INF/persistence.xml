@@ -16,6 +16,7 @@
         <class>com.itacademy.ankhar.Genre</class>
         <class>com.itacademy.ankhar.Publisher</class>
         <class>com.itacademy.ankhar.Request</class>
+        <class>com.itacademy.ankhar.User</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!-- database connection -->

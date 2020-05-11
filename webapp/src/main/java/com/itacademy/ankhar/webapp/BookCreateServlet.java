@@ -6,6 +6,7 @@
 package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.ImplementationBookCreatorService;
+import com.itacademy.ankhar.interfaces.IBookCreatorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,16 +32,15 @@ public class BookCreateServlet extends HttpServlet {
         String bookName = req.getParameter("book");
         String authorName = req.getParameter("author");
         String publisherName = req.getParameter("publisher");
-        String[] genreArray = req.getParameterValues("genres");
-        List<String> genreList = Arrays.asList(genreArray);
+        List<String> genreList = Arrays.asList(req.getParameterValues("genres"));
 
-        ImplementationBookCreatorService service = new ImplementationBookCreatorService();
+        IBookCreatorService service = new ImplementationBookCreatorService();
         try {
             service.createBookEntry(bookName, authorName, publisherName, genreList);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //TODO
+        resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
 
     @Override

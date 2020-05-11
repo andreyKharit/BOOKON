@@ -42,10 +42,19 @@ public class tests {
     }
 
     @Test
-    public void createrTest() throws Exception {
+    public void createrTestExisting() throws Exception {
         ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
         List<String> sample = new LinkedList<>();
-        sample.add("Bye");
-        bookCreatorService.createBookEntry("Bible 1", "Tuskan Origami", "Two One", sample);
+        sample.add("7");
+        bookCreatorService.createBookEntry("Java 3", "Jim Rook", "Petrolium", sample);
+    }
+
+    @Test
+    public void createrTestNew() throws Exception {
+        ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
+        List<String> sample = new LinkedList<>();
+        sample.add("4");
+        sample.add("7");
+        bookCreatorService.createBookEntry("Bible", "St Peter", "Faith CO", sample);
     }
 }

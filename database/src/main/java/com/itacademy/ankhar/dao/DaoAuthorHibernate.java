@@ -7,7 +7,6 @@
 package com.itacademy.ankhar.dao;
 
 import com.itacademy.ankhar.Author;
-import com.itacademy.ankhar.Book;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
 import com.itacademy.ankhar.util.HibernateUtil;
 import com.itacademy.ankhar.util.JdbcProviderUtil;
@@ -22,9 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 //TODO
@@ -63,7 +60,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             if (found.size() != 1) {
                 return -1L;
             } else
-                return found.get(0).getId();
+                return found.get(0).getAuthorId();
         } catch (HibernateException error) {
             LOGGER.error("Error getting Author entity.");
             throw error;
@@ -132,7 +129,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE users.ankhar_authors SET author_name = ? WHERE author_id = ?")) {
                 statement.setString(1, record.getName());
-                statement.setLong(2, record.getId());
+                statement.setLong(2, record.getAuthorId());
                 int i = statement.executeUpdate();
                 if (i == 1) {
                     return null;

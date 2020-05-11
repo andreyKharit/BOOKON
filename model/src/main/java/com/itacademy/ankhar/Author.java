@@ -7,36 +7,41 @@
 package com.itacademy.ankhar;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "author")
 @Table(name = "ankhar_authors", uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
 public class Author {
     @Id
     @Column(name = "author_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private Long authorId;
     @Column(name = "author_name", nullable = false, unique = true)
     private String name;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id")
-    private List<Book> books;
+    @OneToMany(mappedBy = "bkAuthor", fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REMOVE
+    }, orphanRemoval = true)
+    private Set<Book> books = new HashSet<Book>();
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
+        if (books == null) {
+            books = new HashSet<Book>();
+        }
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 
-    public void addBook(Book book) {
+    public void addBooks(Book book) {
+        book.setBkAuthor(this);
         this.books.add(book);
-        book.setAuthor(this);
     }
 
-    public Long getId() {
-        return id;
+    public Long getAuthorId() {
+        return authorId;
     }
 
     public String getName() {
@@ -47,8 +52,8 @@ public class Author {
         this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAuthorId(Long id) {
+        this.authorId = id;
     }
 }
 

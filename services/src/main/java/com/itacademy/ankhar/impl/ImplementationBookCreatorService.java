@@ -15,7 +15,7 @@ import com.itacademy.ankhar.factory.*;
 import com.itacademy.ankhar.interfaces.IBookCreatorService;
 import com.itacademy.ankhar.util.libraryDBUtil;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImplementationBookCreatorService implements IBookCreatorService {
@@ -24,6 +24,19 @@ public class ImplementationBookCreatorService implements IBookCreatorService {
     private final IDaoEntity<Author> daoAuthor = DaoAuthorFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
     private final IDaoEntity<Publisher> daoPublisher = DaoPublisherFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
     private final IDaoEntity<Genre> daoGenre = DaoGenreFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+
+    private static IBookCreatorService instance;
+
+    public IBookCreatorService getInstance() {
+        if (instance == null) {
+            synchronized (ImplementationBookCreatorService.class) {
+                if (instance == null) {
+                    instance = new ImplementationBookCreatorService();
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public boolean createBookEntry(String bookName, String authorName, String publisherName, List<String> genres) throws Exception {
@@ -37,16 +50,47 @@ public class ImplementationBookCreatorService implements IBookCreatorService {
         newAuthor.setName(authorName);
         //adding existing author if needed
         if (libraryDBUtil.getInstance().authorExists(authorName) != -1L) {
-            newAuthor.setId(libraryDBUtil.getInstance().authorExists(authorName));
+            newAuthor = daoAuthor.get(libraryDBUtil.getInstance().authorExists(authorName));
         }
-        newBook.setAuthor(newAuthor);
+        newAuthor.addBooks(newBook);
         Publisher newPublisher = new Publisher();
         newPublisher.setPublisherName(publisherName);
         //adding existing publisher if needed
         if (libraryDBUtil.getInstance().publisherExists(publisherName) != -1L) {
-            newPublisher.setPublisherId(libraryDBUtil.getInstance().publisherExists(publisherName));
+            newPublisher = daoPublisher.get(libraryDBUtil.getInstance().publisherExists(publisherName));
         }
-        newBook.setPublisher(newPublisher);
+        newPublisher.addBooks(newBook);
+        //genres check
+        List<Genre> genreList = new ArrayList<>();
+        for (String genre : genres) {
+            int currentGenre = Integer.parseInt(genre);
+            switch (currentGenre) {
+                case 1:
+                    genreList.add(daoGenre.get(1L));
+                    break;
+                case 2:
+                    genreList.add(daoGenre.get(2L));
+                    break;
+                case 3:
+                    genreList.add(daoGenre.get(3L));
+                    break;
+                case 4:
+                    genreList.add(daoGenre.get(4L));
+                    break;
+                case 5:
+                    genreList.add(daoGenre.get(5L));
+                    break;
+                case 6:
+                    genreList.add(daoGenre.get(6L));
+                    break;
+                case 7:
+                    genreList.add(daoGenre.get(7L));
+                    break;
+                default:
+                    break;
+            }
+        }
+        newBook.setGenres(genreList);
         daoEntity.create(newBook);
         return true;
     }

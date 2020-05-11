@@ -14,13 +14,13 @@ import java.util.List;
 public class Book {
     @Id
     @Column(name = "book_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long bookId;
     @Column(name = "book_name", nullable = false)
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
+    private Author bkAuthor;
 
     @PrePersist
     void prePersist() {
@@ -31,9 +31,9 @@ public class Book {
 
     @Column(name = "book_status", nullable = false)
     private Integer bookStatus;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
+    private Publisher bkPublisher;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ankhar_books_genres",
             joinColumns = @JoinColumn(name = "book_id"),
@@ -48,12 +48,12 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Author getBkAuthor() {
+        return bkAuthor;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setBkAuthor(Author author) {
+        this.bkAuthor = author;
     }
 
     public Integer getBookStatus() {
@@ -64,12 +64,12 @@ public class Book {
         this.bookStatus = bookStatus;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public Publisher getBkPublisher() {
+        return bkPublisher;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setBkPublisher(Publisher publisher) {
+        this.bkPublisher = publisher;
     }
 
     public List<Genre> getGenres() {
@@ -87,5 +87,4 @@ public class Book {
     public void setName(String name) {
         this.name = name;
     }
-
 }

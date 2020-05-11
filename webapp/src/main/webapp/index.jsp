@@ -29,13 +29,13 @@
                 Publisher:
                 <input type="text" name="publisher">
                 <p>Genre: </p>
-                <input type = "checkbox" name = "genres" value="Mystery"/> Mystery
-                <input type = "checkbox" name = "genres" value="Comedy"/> Comedy
-                <input type = "checkbox" name = "genres" value="Romance"/> Romance
-                <input type = "checkbox" name = "genres" value="Classic"/> Classic
-                <input type = "checkbox" name = "genres" value="Thriller"/> Thriller
-                <input type = "checkbox" name = "genres" value="Horror"/> Horror
-                <input type = "checkbox" name = "genres" value="Non-Fiction"/> Non-Fiction
+                <input type = "checkbox" name = "genres" value="1"/> Mystery
+                <input type = "checkbox" name = "genres" value="2"/> Comedy
+                <input type = "checkbox" name = "genres" value="3"/> Romance
+                <input type = "checkbox" name = "genres" value="4"/> Classic
+                <input type = "checkbox" name = "genres" value="5"/> Thriller
+                <input type = "checkbox" name = "genres" value="6"/> Horror
+                <input type = "checkbox" name = "genres" value="7"/> Non-Fiction
                 <input type="submit" class="btn btn-primary" value="Create">
             </div>
         </form>

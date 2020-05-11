@@ -8,6 +8,9 @@ package com.itacademy.ankhar.impl;
 import com.itacademy.ankhar.Book;
 import com.itacademy.ankhar.Genre;
 import com.itacademy.ankhar.Publisher;
+import com.itacademy.ankhar.dao.IDaoEntity;
+import com.itacademy.ankhar.factory.DaoBookFactory;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.interfaces.ILibraryService;
 
 import java.util.List;
@@ -31,7 +34,14 @@ public class ImplementationDefaultLibraryService implements ILibraryService {
 
     @Override
     public List<Book> getBooks() {
-        return null;
+        IDaoEntity<Book> daoEntity = DaoBookFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+        List<Book> bookList = null;
+        try {
+            bookList = daoEntity.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookList;
     }
 
     @Override

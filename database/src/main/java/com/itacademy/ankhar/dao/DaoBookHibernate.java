@@ -44,7 +44,6 @@ public class DaoBookHibernate implements IDaoBooks {
         try (Session session = sessionFactory.openSession()) {
             LOGGER.info("Trying to get Book entity by id: " + id);
             Book found = session.find(Book.class, id);
-            session.close();
             return found;
         } catch (HibernateException error) {
             LOGGER.error("Error finding Book by id: " + id);
@@ -63,7 +62,6 @@ public class DaoBookHibernate implements IDaoBooks {
 
             final List<Book> found = session.createQuery(criteriaQuery).getResultList();
 
-            session.close();
             return found;
         } catch (HibernateException error) {
             LOGGER.error("Error getting all Book entities.");
@@ -76,9 +74,9 @@ public class DaoBookHibernate implements IDaoBooks {
         try (Session session = sessionFactory.openSession()) {
             LOGGER.info("Creating new Book entity.");
             session.getTransaction().begin();
-            session.persist(record);
+            session.save(record);
+            session.flush();
             session.getTransaction().commit();
-            session.close();
         } catch (HibernateException error) {
             LOGGER.error("Error creating Book: " + error);
             throw error;
@@ -94,7 +92,6 @@ public class DaoBookHibernate implements IDaoBooks {
             session.getTransaction().begin();
             session.update(record);
             session.getTransaction().commit();
-            session.close();
         } catch (HibernateException error) {
             LOGGER.error("Error updating Book: " + error);
             throw error;
@@ -111,7 +108,6 @@ public class DaoBookHibernate implements IDaoBooks {
             session.getTransaction().begin();
             session.delete(entityToDelete);
             session.getTransaction().commit();
-            session.close();
         } catch (HibernateException error) {
             LOGGER.error("Error deleting Book: " + error);
             throw error;

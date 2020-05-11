@@ -35,7 +35,7 @@
 <%@include file="header-bar.jsp" %>
 
 <!-- Sidebar -->
-<%@include file="sidebar.jsp"%>
+<%@include file="sidebar.jsp" %>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">

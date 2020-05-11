@@ -42,9 +42,7 @@ public class DaoUsersHibernate implements IDaoUsers {
     public User get(Long id) throws Exception {
         try (Session session = sessionFactory.openSession()) {
             LOGGER.info("Finding User entity with ID: " + id);
-            User found = session.find(User.class, id);
-            session.close();
-            return found;
+            return session.find(User.class, id);
         } catch (HibernateException error) {
             LOGGER.error("Error finding User with ID: " + id + ", error: " + error);
             throw error;
@@ -58,9 +56,7 @@ public class DaoUsersHibernate implements IDaoUsers {
             LOGGER.error("Creating native query.");
             final NativeQuery<User> nativeQuery = session.
                     createNativeQuery("SELECT * FROM users.ankhar_users;", User.class);
-            List<User> resultList = nativeQuery.getResultList();
-            session.close();
-            return resultList;
+            return nativeQuery.getResultList();
         } catch (HibernateException e) {
             LOGGER.error("Error getting all User entities: " + e);
             throw e;
@@ -74,7 +70,6 @@ public class DaoUsersHibernate implements IDaoUsers {
             session.getTransaction().begin();
             session.persist(record);
             session.getTransaction().commit();
-            session.close();
         } catch (HibernateException error) {
             LOGGER.error("Error creating User: " + error);
             throw error;
@@ -90,7 +85,6 @@ public class DaoUsersHibernate implements IDaoUsers {
             session.getTransaction().begin();
             session.update(record);
             session.getTransaction().commit();
-            session.close();
         } catch (HibernateException error) {
             LOGGER.error("Error updating User: " + error);
             throw error;
@@ -107,7 +101,6 @@ public class DaoUsersHibernate implements IDaoUsers {
             session.getTransaction().begin();
             session.delete(entityToDelete);
             session.getTransaction().commit();
-            session.close();
         } catch (HibernateException error) {
             LOGGER.error("Error deleting User: " + error);
             throw error;
