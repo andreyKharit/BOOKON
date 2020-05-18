@@ -35,26 +35,36 @@ public class tests {
 
     @Test
     public void DBUtilTests() throws Exception {
-        System.out.println(libraryDBUtil.getInstance().authorExists("Mahalam"));
-        System.out.println(libraryDBUtil.getInstance().bookExists("Bible 2"));
-        Assert.assertEquals("6", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer and Hammer")));
+        Assert.assertEquals("4", Long.toString(libraryDBUtil.getInstance().publisherExists("Petrolium")));
         Assert.assertEquals("-1", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer minus Hammer")));
     }
 
     @Test
     public void createrTestExisting() throws Exception {
-        ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
-        List<String> sample = new LinkedList<>();
-        sample.add("7");
-        bookCreatorService.createBookEntry("Java 3", "Jim Rook", "Petrolium", sample);
+        ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();        String[] sample = new String[2];
+        String[] sample2 = new String[1];
+        sample2[0] = "7";
+        bookCreatorService.createBookEntry("Java 9", "Jim Rook", "Petrolium", sample2);
     }
 
     @Test
     public void createrTestNew() throws Exception {
         ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
-        List<String> sample = new LinkedList<>();
-        sample.add("4");
-        sample.add("7");
-        bookCreatorService.createBookEntry("Bible", "St Peter", "Faith CO", sample);
+        String[] sample = new String[2];
+        sample[0] = "5";
+        sample[1] = "2";
+        bookCreatorService.createBookEntry("Test Book 7", "Test Author 7", "Test Publisher 7", sample);
+    }
+
+    @Test
+    public void genreListTest() throws Exception {
+        String[] list = new String[3];
+        list[0] = "1";
+        list[1] = "2";
+        list[2] = "3";
+        List<Genre> genres = libraryDBUtil.getInstance().genreListPackager(list);
+        for (Genre genre : genres) {
+            System.out.println(genre.getGenreName());
+        }
     }
 }

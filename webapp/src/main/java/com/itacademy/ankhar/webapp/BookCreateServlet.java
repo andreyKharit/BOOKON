@@ -32,7 +32,7 @@ public class BookCreateServlet extends HttpServlet {
         String bookName = req.getParameter("book");
         String authorName = req.getParameter("author");
         String publisherName = req.getParameter("publisher");
-        List<String> genreList = Arrays.asList(req.getParameterValues("genres"));
+        String[] genreList = req.getParameterValues("genres");
 
         IBookCreatorService service = new ImplementationBookCreatorService();
         try {

@@ -74,8 +74,7 @@ public class DaoBookHibernate implements IDaoBooks {
         try (Session session = sessionFactory.openSession()) {
             LOGGER.info("Creating new Book entity.");
             session.getTransaction().begin();
-            session.save(record);
-            session.flush();
+            session.saveOrUpdate(record); //todo
             session.getTransaction().commit();
         } catch (HibernateException error) {
             LOGGER.error("Error creating Book: " + error);

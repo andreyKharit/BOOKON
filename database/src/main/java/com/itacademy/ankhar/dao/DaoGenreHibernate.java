@@ -5,6 +5,7 @@
 
 package com.itacademy.ankhar.dao;
 
+import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.Genre;
 import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.util.HibernateUtil;
@@ -15,6 +16,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DaoGenreHibernate implements IDaoGenres {
@@ -106,5 +113,25 @@ public class DaoGenreHibernate implements IDaoGenres {
         }
         LOGGER.info("Done deleting entity.");
         return true;
+    }
+
+    @Override
+    public List<Genre> getGenresByIds(Long... incomingList) {
+        try (Session session = sessionFactory.openSession()) {
+            LOGGER.info("Trying to get specific Genre entities.");
+            final CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            final CriteriaQuery<Genre> criteriaQuery = criteriaBuilder.createQuery(Genre.class);
+            final Root<Genre> root = criteriaQuery.from(Genre.class);
+            Predicate[] predicates = new Predicate[incomingList.length];
+            for (int i = 0; i < predicates.length; i++) {
+                predicates[i] = criteriaBuilder.equal(root.get("genreId"), incomingList[i]);
+            }
+            criteriaQuery.select(root).where(criteriaBuilder.or(predicates));
+            final List<Genre> found = session.createQuery(criteriaQuery).getResultList();
+            return found;
+        } catch (HibernateException error) {
+            LOGGER.error("Error getting Genre entities.");
+            throw error;
+        }
     }
 }

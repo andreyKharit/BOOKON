@@ -3,3 +3,16 @@ CRUD
 sql
 sql dump
 sql ddl
+==========
+TODO
+GENRES CRITERIA BUILDER                 0
+OPTIMIZE BOOK CREATOR                   0
+FINALIZE BOOK CREATOR UI                1
+MAKE AUTHOR AND PUBLISHER CREATORS      2
+MAKE AUTHOR AND PUBLISHER UI            2
+FINISH REQUEST LOGIC                    3
+MAP REQUEST ENTITY                      3
+MAKE REQUEST CREATOR SERVICE            3
+MAKE REQUEST CREATOR UI                 3
+CREATE ACCESS FILTERS                   4
+UI                                      5

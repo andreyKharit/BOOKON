@@ -11,5 +11,5 @@ public interface IBookCreatorService {
     boolean createBookEntry(String bookName,
                             String authorName,
                             String publisherName,
-                            List<String> genres) throws Exception;
+                            String... genres) throws Exception;
 }

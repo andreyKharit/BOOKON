@@ -15,6 +15,8 @@ import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.extensions.IDaoPublishers;
 import com.itacademy.ankhar.factory.*;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class libraryDBUtil {
@@ -36,13 +38,7 @@ public class libraryDBUtil {
 
     public Long authorExists(String authorName) throws Exception {
         IDaoAuthors daoAuthors = DaoAuthorFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-        List<Author> authorList = daoAuthors.getAll();
-        for (Author current : authorList) {
-            if (current.getName().equals(authorName)) {
-                return current.getAuthorId();
-            }
-        }
-        return -1L;
+        return daoAuthors.getByName(authorName);
     }
 
     public Long bookExists(String bookName) throws Exception {
@@ -76,5 +72,14 @@ public class libraryDBUtil {
             }
         }
         return -1L;
+    }
+
+    public List<Genre> genreListPackager(String... stringGenreIDList) {
+        IDaoGenres daoGenres = DaoGenreFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+        Long[] arrayIds = new Long[stringGenreIDList.length];
+        for (int i = 0; i < arrayIds.length; i++) {
+            arrayIds[i] = Long.parseLong(stringGenreIDList[i]);
+        }
+        return daoGenres.getGenresByIds(arrayIds);
     }
 }

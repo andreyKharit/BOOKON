@@ -75,7 +75,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             final CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
             final Root<Author> root = criteriaQuery.from(Author.class);
             criteriaQuery.select(root).
-                    where(criteriaBuilder.equal(root.get("id"), id));
+                    where(criteriaBuilder.equal(root.get("authorId"), id));
             final Author found = session.createQuery(criteriaQuery).getSingleResult();
             session.close();
             return found;

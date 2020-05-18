@@ -5,3 +5,8 @@ firstProject/target
 */tester.*
 /target/
 /module/src/main/java/com/itacademy/ankhar/test
+/services/src/main/java/com/itacademy/ankhar/impl/TransactionDataInterceptor.java
+/services/src/main/java/com/itacademy/ankhar/impl/TransactionService.java
+/services/src/main/java/com/itacademy/ankhar/impl/TransactionServiceAdvice.java
+/model/src/main/java/com/itacademy/ankhar/TransactionData.java
+/model/src/main/java/com/itacademy/ankhar/TransactionResult.java

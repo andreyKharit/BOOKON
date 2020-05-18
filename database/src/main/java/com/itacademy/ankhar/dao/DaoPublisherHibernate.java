@@ -82,7 +82,7 @@ public class DaoPublisherHibernate implements IDaoPublishers {
         try (Session session = sessionFactory.openSession()) {
             LOGGER.info("Creating new Publisher entity.");
             session.getTransaction().begin();
-            session.persist(record);
+            session.saveOrUpdate(record);
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException error) {

@@ -18,7 +18,8 @@ public class Book {
     private Long bookId;
     @Column(name = "book_name", nullable = false)
     private String name;
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER,
+            targetEntity = Author.class, optional = false)
     @JoinColumn(name = "author_id", nullable = false)
     private Author bkAuthor;
 
@@ -31,7 +32,8 @@ public class Book {
 
     @Column(name = "book_status", nullable = false)
     private Integer bookStatus;
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, targetEntity = Publisher.class,
+    optional = false)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher bkPublisher;
     @ManyToMany(fetch = FetchType.EAGER)
