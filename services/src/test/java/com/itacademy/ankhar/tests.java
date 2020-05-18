@@ -11,6 +11,9 @@
 
 package com.itacademy.ankhar;
 
+import com.itacademy.ankhar.extensions.IDaoAuthors;
+import com.itacademy.ankhar.factory.DaoAuthorFactory;
+import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
 import com.itacademy.ankhar.impl.ImplementationBookCreatorService;
 import com.itacademy.ankhar.util.UserDBUtil;
@@ -66,5 +69,12 @@ public class tests {
         for (Genre genre : genres) {
             System.out.println(genre.getGenreName());
         }
+    }
+
+    @Test
+    public void authorDaoTest() throws Exception {
+        IDaoAuthors daoAuthors = DaoAuthorFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
+        Author test = daoAuthors.get(100L);
+        Assert.assertNull(test);
     }
 }

@@ -79,7 +79,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             final Author found = session.createQuery(criteriaQuery).getSingleResult();
             session.close();
             return found;
-        } catch (HibernateException error) {
+        } catch (Exception error) {
             LOGGER.error("Error getting Author entity.");
             throw error;
         }

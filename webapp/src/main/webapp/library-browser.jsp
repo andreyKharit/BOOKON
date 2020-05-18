@@ -35,7 +35,8 @@
 <%@include file="header-bar.jsp" %>
 
 <!-- Sidebar -->
-<%@include file="sidebar.jsp"%>>
+<%@include file="sidebar.jsp" %>
+>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
@@ -45,40 +46,24 @@
             <h1 class="w3-text-teal">Library</h1>
             <p>
 
-            <form action="subjects" method="post">
-                <table>
-                    <c:forEach items="${requestScope.subjects}" var="user">
-                        <tr>
-                            <td><c:out value="${user.userName}"/></td>
-                            <td><c:out value="${user.userStatus}"/></td>
-                            <c:if test="${!user.userStatus.equals('admin')}">
-                                <td>
-                                    <form action="subjects" method="post">
-                                        <select name="status">
-                                            <c:if test="${!user.userStatus.equals('user')}">
-                                                <option value="user">user</option>
-                                            </c:if>
-                                            <c:if test="${!user.userStatus.equals('worker')}">
-                                                <option value="worker">worker</option>
-                                            </c:if>
-                                            <c:if test="${!user.userStatus.equals('admin')}">
-                                                <option value="admin">admin</option>
-                                            </c:if>
-                                        </select>
-                                        <input type="hidden" name="hiddenId" value="${user.userId}">
-                                        <input type="submit" value="save status">
-                                    </form>
-                                </td>
-                            </c:if>
-                            <c:if test="${!user.userStatus.equals('admin')}">
-                                <td>
-                                    <button type="submit" name="delete" value="${user.userId}">delete</button>
-                                </td>
-                            </c:if>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </form>
+                <%--            <form action="library-browser" method="post">--%>
+            <table>
+                <c:forEach items="${requestScope.books}" var="book">
+                    <tr>
+                        <td><c:out value="${book.name}"/></td>
+                        <td><c:out value="${book.bkAuthor.name}"/></td>
+                        <td><c:out value="${book.bkPublisher.publisherName}"/></td>
+                    <tr>
+                        <c:forEach items="${book.genres}" var="genre">
+                            <td>
+                                <c:out value="${genre.genreName}"/>
+                            </td>
+                        </c:forEach>
+                    </tr>
+                    </tr>
+                </c:forEach>
+            </table>
+            <%--            </form>--%>
 
             <%--            <table border="1" cellpadding="5">--%>
             <%--                <tr>--%>

@@ -36,7 +36,7 @@
            href="${pageContext.request.contextPath}/main-menu.jsp">Welcome</a>
 
         <a class="w3-bar-item w3-button w3-hover-black"
-           href="${pageContext.request.contextPath}/library-browser.jsp">Browse Library</a>
+           href="${pageContext.request.contextPath}/library-browser">Browse Library</a>
 
         <c:if test="${sessionScope.status.equals('admin')}"><a class="w3-bar-item w3-button w3-hover-black"
                                                                href="${pageContext.request.contextPath}/subjects">Browse Users</a></c:if>
