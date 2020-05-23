@@ -12,6 +12,7 @@
 <title>BOOKON|Library</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -47,22 +48,56 @@
             <p>
 
                 <%--            <form action="library-browser" method="post">--%>
-            <table>
+
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Publisher
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
                 <c:forEach items="${requestScope.books}" var="book">
                     <tr>
-                        <td><c:out value="${book.name}"/></td>
-                        <td><c:out value="${book.bkAuthor.name}"/></td>
-                        <td><c:out value="${book.bkPublisher.publisherName}"/></td>
-                    <tr>
-                        <c:forEach items="${book.genres}" var="genre">
-                            <td>
-                                <c:out value="${genre.genreName}"/>
-                            </td>
-                        </c:forEach>
-                    </tr>
+                        <td>
+                            <c:out value="${book.name}"/>
+                        </td>
+                        <td>
+                            <c:out value="${book.bkAuthor.name}"/>
+                        </td>
+                        <td>
+                            <c:out value="${book.bkAuthor.name}"/>
+                        </td>
+                        <td>
+                            <c:if test="${book.bookStatus == 1}">
+                                <span class="badge badge-info">Available</span>
+                            </c:if>
+                            <c:if test="${book.bookStatus != 1}">
+                                <span class="badge badge-danger">Unavailable</span>
+                            </c:if>
+                        </td>
+                        <td>
+                            action here
+                        </td>
                     </tr>
                 </c:forEach>
+                </tbody>
             </table>
+
+
             <%--            </form>--%>
 
             <%--            <table border="1" cellpadding="5">--%>

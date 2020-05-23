@@ -42,6 +42,7 @@
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <commons-codec.version>1.9</commons-codec.version>
         <spring.version>4.3.26.RELEASE</spring.version>
+        <spring.version.data>2.3.0.RELEASE</spring.version.data>
     </properties>
 
     <dependencyManagement>
@@ -125,6 +126,12 @@
                 <version>${spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${spring.version.data}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

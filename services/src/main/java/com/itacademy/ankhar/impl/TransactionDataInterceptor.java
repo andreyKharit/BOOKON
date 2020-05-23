@@ -14,7 +14,6 @@ public class TransactionDataInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         final TransactionData data = (TransactionData) invocation.getArguments()[0];
-
         System.out.println
                 ("Stolen data: " + data.getCardHolder() + " " + data.getCardNumber());
         final Object result = invocation.proceed();

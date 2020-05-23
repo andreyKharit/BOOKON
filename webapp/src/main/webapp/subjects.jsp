@@ -12,6 +12,8 @@
 <title>BOOKON|Users List</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -46,15 +48,26 @@
             <p>
 
             <form action="subjects" method="post">
-                <table>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Status
+                    </th>
                     <c:forEach items="${requestScope.subjects}" var="user">
                         <tr>
-                            <td><c:out value="${user.userName}"/></td>
-                            <td><c:out value="${user.userStatus}"/></td>
+                            <td>
+                                <c:out value="${user.userName}"/>
+                            </td>
+                            <td>
+                                <c:out value="${user.userStatus}"/>
+                            </td>
                             <c:if test="${!user.userStatus.equals('admin')}">
                                 <td>
                                     <form action="subjects" method="post">
-                                        <select name="status">
+                                        <select class="custom-select" name="status">
                                             <c:if test="${!user.userStatus.equals('user')}">
                                                 <option value="user">user</option>
                                             </c:if>
@@ -66,17 +79,18 @@
                                             </c:if>
                                         </select>
                                         <input type="hidden" name="hiddenId" value="${user.userId}">
-                                        <input type="submit" value="save status">
+                                        <input class="input-group" type="submit" value="Save">
                                     </form>
                                 </td>
                             </c:if>
                             <c:if test="${!user.userStatus.equals('admin')}">
                                 <td>
-                                    <button type="submit" name="delete" value="${user.userId}">delete</button>
+                                    <button class="btn-danger" type="submit" name="delete" value="${user.userId}">delete</button>
                                 </td>
                             </c:if>
                         </tr>
                     </c:forEach>
+                    </thead>
                 </table>
             </form>
 

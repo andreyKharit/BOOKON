@@ -29,9 +29,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     <bean id="doAdvice" class="com.itacademy.ankhar.impl.TransactionServiceAdvice"/>
     
     <aop:config>
-        <aop:pointcut id="doTransaction" expression="execution(* com.itacademy.ankhar.impl.TransactionService.doTransaction(*))"/>
+        <aop:pointcut id="doTransaction" expression="execution(* com.itacademy.ankhar.impl.TransactionService.doTransaction(..))"/>
+        <aop:pointcut id="doTransactionWithParam" expression="execution(* com.itacademy.ankhar.impl.TransactionService.doTransaction(..)) and args(data)"/>
         <aop:aspect ref="doAdvice">
-            <aop:before method="beforeAction" pointcut="execution(* com.itacademy.ankhar.impl.TransactionService.doTransaction(*))"/>
+            <aop:around method="aroundMethod" pointcut-ref="doTransaction"/>
+            <aop:before method="beforeAction" pointcut="execution(* com.itacademy.ankhar.impl.TransactionService.doTransaction(..))"/>
+            <aop:before method="beforeActionArgs" pointcut-ref="doTransactionWithParam" arg-names="data"/>
             <aop:after method="afterAction" pointcut-ref="doTransaction"/>
             <aop:after-throwing method="afterExceptionAction" pointcut-ref="doTransaction" throwing="e"/>
         </aop:aspect>

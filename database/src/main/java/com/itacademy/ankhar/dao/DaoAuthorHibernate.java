@@ -81,7 +81,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             return found;
         } catch (Exception error) {
             LOGGER.error("Error getting Author entity.");
-            throw error;
+            return null;
         }
     }
 
