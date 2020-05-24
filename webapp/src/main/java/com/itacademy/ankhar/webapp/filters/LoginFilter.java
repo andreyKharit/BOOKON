@@ -7,48 +7,50 @@ package com.itacademy.ankhar.webapp.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @WebFilter(
         urlPatterns = {"/*"},
-        filterName = "authFilter"
+        filterName = "authFilter",
+        initParams = {
+                @WebInitParam(name = "active", value = "true", description = "authentication activation")
+        }
 )
 public class LoginFilter implements Filter {
     private HttpServletRequest httpRequest;
-    private static final String[] PROTECTED_URLS = {
-            "/main-menu", "/subjects", "/delete"
-    };
+
+    private static final Set<String> ALLOWED_URLS = Collections.unmodifiableSet(
+            new HashSet<>(Arrays.asList("/index", "/index.jsp", "/login.jsp", "/login", "/registration", "/error401.jsp", "/"))
+    );
+
+    private static final String ACTIVE_FILTER = "active";
+    private static final String PARAMETER_TO_CHECK = "authorized";
+    private boolean filterActive;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        //stub
+        String active = filterConfig.getInitParameter(ACTIVE_FILTER);
+        this.filterActive = active != null && active.toLowerCase().equals("true");
     }
 
     //TODO filter debug
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        httpRequest = (HttpServletRequest) servletRequest;
-        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String loginURI = httpRequest.getContextPath() + "/login";
-        boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
-        boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.jsp");
-
-        if (hasSessionAndUserId(httpRequest) && (isLoginRequest || isLoginPage)) {
-            //login page AND logged in
-            httpRequest.getRequestDispatcher("/main-menu.jsp").forward(servletRequest, servletResponse);
-
-        } else if (!hasSessionAndUserId(httpRequest) && isLoginRequired()) {
-            //protected page AND not logged in
-            String loginPage = "/login.jsp";
-            RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
-            dispatcher.forward(servletRequest, servletResponse);
+        if (!filterActive || bypass(request) || hasSessionAndUserId(request)) {
+            filterChain.doFilter(request, response);
         } else {
-            //either not protected page or already logged in
-            filterChain.doFilter(servletRequest, servletResponse);
+            response.sendError(401);
         }
     }
 
@@ -57,20 +59,16 @@ public class LoginFilter implements Filter {
         //stub
     }
 
-    //check if URL is in protected list (PROTECTED_URLS)
-    private boolean isLoginRequired() {
-        String reqURL = httpRequest.getRequestURL().toString();
-        for (String protectedUrl : PROTECTED_URLS) {
-            if (reqURL.contains(protectedUrl)) {
-                return true;
-            }
-        }
-        return false;
+    //check if URL is in unprotected list
+    private boolean bypass(HttpServletRequest request) {
+        String contextPath = request.getContextPath();
+        String path = request.getRequestURI().replaceFirst(contextPath, "");
+        return ALLOWED_URLS.stream().anyMatch(path::equals);
     }
 
     //check for login
     private boolean hasSessionAndUserId(HttpServletRequest req) {
-        HttpSession session = req.getSession(false);
-        return session != null && session.getAttribute("authorized") != null;
+        HttpSession session = req.getSession();
+        return session != null && session.getAttribute(PARAMETER_TO_CHECK) != null;
     }
 }
