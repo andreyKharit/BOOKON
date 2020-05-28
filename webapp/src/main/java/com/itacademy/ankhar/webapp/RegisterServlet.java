@@ -8,6 +8,8 @@ package com.itacademy.ankhar.webapp;
 
 import com.itacademy.ankhar.impl.ImplementationRegistrationService;
 import com.itacademy.ankhar.interfaces.IRegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +21,10 @@ import java.io.IOException;
 @WebServlet(
         name = "RegistrationServlet",
         urlPatterns = {"/registration"})
+@Component
 public class RegisterServlet extends HttpServlet {
-    private IRegistrationService registrationService = new ImplementationRegistrationService();
+    @Autowired
+    private IRegistrationService registrationService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,12 +38,13 @@ public class RegisterServlet extends HttpServlet {
         try {
             if (registrationService.createUser(username, password)) {
                 req.getSession().setAttribute("currentMessage", "New user created!");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
             } else {
                 req.getSession().setAttribute("currentMessage", "Username already exists, please change yours.");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
             }
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+
         } catch (Exception e) {
+            req.getSession().setAttribute("currentMessage", "Unexpected error.");
             resp.sendRedirect(req.getContextPath() + "/error401.jsp");
         }
     }

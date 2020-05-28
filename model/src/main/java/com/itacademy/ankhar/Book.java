@@ -6,11 +6,14 @@
 
 package com.itacademy.ankhar;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "book")
 @Table(name = "ankhar_books")
+@Component
 public class Book {
     @Id
     @Column(name = "book_id")

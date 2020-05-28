@@ -28,7 +28,7 @@ public class LoginFilter implements Filter {
     private HttpServletRequest httpRequest;
 
     private static final Set<String> ALLOWED_URLS = Collections.unmodifiableSet(
-            new HashSet<>(Arrays.asList("/index", "/index.jsp", "/login.jsp", "/login", "/registration", "/error401.jsp", "/"))
+            new HashSet<>(Arrays.asList("/index", "/index.jsp", "/login.jsp", "/login", "/registration", "/error401.jsp", "/", "/register.jsp"))
     );
 
     private static final String ACTIVE_FILTER = "active";

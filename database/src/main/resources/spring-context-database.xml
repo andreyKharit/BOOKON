@@ -6,11 +6,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/data/jpa
+       https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:component-scan base-package="com.itacademy.ankhar"/>
-    <context:annotation-config>
-    </context:annotation-config>
+    <jpa:repositories base-package="com.itacademy.ankhar.repositories"/>
 
     <!-- reading properties files -->
     <bean id="dbProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -30,10 +31,13 @@
         </property>
     </bean>
 
-    <!-- hibernate session factory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="hibernateProperties">
+        <property name="packagesToScan" value="com.itacademy.ankhar"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
@@ -43,19 +47,11 @@
                 <prop key="hibernate.connection.isolation">2</prop>
             </props>
         </property>
-        <property name="packagesToScan" value="com.itacademy.ankhar"/>
     </bean>
 
-    <!-- hibernate transaction manager -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <!-- transaction manager -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-<!--        <property name=""-->
-    </bean>
-
-    <jpa:repositories base-package="com.itacademy.ankhar.repositories"/>
 
 </beans>

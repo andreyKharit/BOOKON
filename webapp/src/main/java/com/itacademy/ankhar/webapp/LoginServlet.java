@@ -9,6 +9,10 @@ package com.itacademy.ankhar.webapp;
 import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
 import com.itacademy.ankhar.interfaces.IAuthorizationService;
 import com.itacademy.ankhar.util.UserDBUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,9 +24,11 @@ import java.io.IOException;
 @WebServlet(
         name = "LoginServlet",
         urlPatterns = {"/login"})
+@Component
 public class LoginServlet extends HttpServlet {
-    private IAuthorizationService auth = new ImplementationAuthorizationService();
-    private UserDBUtil utils = UserDBUtil.getInstance();
+    @Autowired
+    private IAuthorizationService auth;
+    private final UserDBUtil utils = UserDBUtil.getInstance();
 
     @Override
     public void init() throws ServletException {

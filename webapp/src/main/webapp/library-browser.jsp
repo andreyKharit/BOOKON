@@ -44,6 +44,27 @@
 
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
+
+            <form action="create_book" method="post">
+                <div class="container">
+                    Book:
+                    <input class="input-group-text" type="text" name="book">
+                    Author:
+                    <input class="dropdown input-group-text" type="text" name="author">
+                    Publisher:
+                    <input class="dropdown-item-text" type="text" name="publisher">
+                    <p>Genre: </p>
+                    <input class="custom-checkbox" type = "checkbox" name = "genres" value="1"/> Mystery
+                    <input type = "checkbox" name = "genres" value="2"/> Comedy
+                    <input type = "checkbox" name = "genres" value="3"/> Romance
+                    <input type = "checkbox" name = "genres" value="4"/> Classic
+                    <input type = "checkbox" name = "genres" value="5"/> Thriller
+                    <input type = "checkbox" name = "genres" value="6"/> Horror
+                    <input type = "checkbox" name = "genres" value="7"/> Non-Fiction
+                    <input type="submit" class="btn btn-primary" value="Create">
+                </div>
+            </form>
+
             <h1 class="w3-text-teal">Library</h1>
             <p>
 
@@ -79,7 +100,7 @@
                             <c:out value="${book.bkAuthor.name}"/>
                         </td>
                         <td>
-                            <c:out value="${book.bkAuthor.name}"/>
+                            <c:out value="${book.bkPublisher.publisherName}"/>
                         </td>
                         <td>
                             <c:if test="${book.bookStatus == 1}">

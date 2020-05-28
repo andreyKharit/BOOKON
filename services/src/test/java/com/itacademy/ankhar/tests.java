@@ -16,16 +16,26 @@ import com.itacademy.ankhar.factory.DaoAuthorFactory;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
 import com.itacademy.ankhar.impl.ImplementationBookCreatorService;
+import com.itacademy.ankhar.repositories.UserRepository;
 import com.itacademy.ankhar.util.UserDBUtil;
 import com.itacademy.ankhar.util.libraryDBUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.LinkedList;
 import java.util.List;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:spring-context-database.xml"})
 public class tests {
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
     public void passwordHexTest() {
         System.out.println(DigestUtils.sha512Hex("admin"));
@@ -40,6 +50,12 @@ public class tests {
     public void DBUtilTests() throws Exception {
         Assert.assertEquals("4", Long.toString(libraryDBUtil.getInstance().publisherExists("Petrolium")));
         Assert.assertEquals("-1", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer minus Hammer")));
+    }
+
+    @Test
+    public void userCreateTest() throws Exception {
+        User test = (userRepository.findByUserName("afsfd").orElse(null));
+        Assert.assertNull(test);
     }
 
     @Test

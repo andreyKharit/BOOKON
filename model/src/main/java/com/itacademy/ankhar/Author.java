@@ -6,12 +6,15 @@
 
 package com.itacademy.ankhar;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "author")
 @Table(name = "ankhar_authors", uniqueConstraints = @UniqueConstraint(columnNames = {"author_id", "author_name"}))
+@Component
 public class Author {
     @Id
     @Column(name = "author_id")
