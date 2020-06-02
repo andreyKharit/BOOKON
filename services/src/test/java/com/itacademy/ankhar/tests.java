@@ -30,7 +30,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:spring-context-database.xml"})
+@ContextConfiguration(locations = {"classpath*:spring-context-services.xml"})
 public class tests {
 
     @Autowired
@@ -54,7 +54,7 @@ public class tests {
 
     @Test
     public void userCreateTest() throws Exception {
-        User test = (userRepository.findByUserName("afsfd").orElse(null));
+        User test = (userRepository.findByUserName("admin").orElse(null));
         Assert.assertNull(test);
     }
 

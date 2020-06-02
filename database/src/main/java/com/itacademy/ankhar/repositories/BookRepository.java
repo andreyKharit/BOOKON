@@ -1,30 +1,28 @@
 /*
- * Last updated: 5/26/20, 12:38 AM
+ * Last updated: 6/2/20, 11:27 AM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.repositories;
 
-import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.Book;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface BookRepository extends CrudRepository<Book, Long> {
     @Override
     @Transactional
-    <S extends User> S save(S s);
+    <S extends Book> S save(S s);
 
     @Override
-    Optional<User> findById(Long id);
+    Optional<Book> findById(Long id);
 
-    Optional<User> findByUserName(String name);
+    Optional<Book> findByName(String name);
 
     @Override
-    Iterable<User> findAll();
+    Iterable<Book> findAll();
 
     @Override
     @Transactional
@@ -33,5 +31,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Override
     boolean existsById(Long id);
 
-    boolean existsByUserName(String name);
+    boolean existsByName(String name);
 }

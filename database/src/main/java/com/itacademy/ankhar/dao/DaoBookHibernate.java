@@ -17,7 +17,6 @@ import org.hibernate.SessionFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.List;
 
 public class DaoBookHibernate implements IDaoBooks {
@@ -80,14 +79,14 @@ public class DaoBookHibernate implements IDaoBooks {
             LOGGER.error("Error creating Book: " + error);
             throw error;
         }
-        LOGGER.info("Done. Entity ID is: " + record.getBookId());
-        return record.getBookId();
+        LOGGER.info("Done. Entity ID is: " + record.getId());
+        return record.getId();
     }
 
     @Override
     public Long update(Book record) throws Exception {
         try (Session session = sessionFactory.openSession()) {
-            LOGGER.info("Updating Book entity with ID: " + record.getBookId());
+            LOGGER.info("Updating Book entity with ID: " + record.getId());
             session.getTransaction().begin();
             session.update(record);
             session.getTransaction().commit();
@@ -95,8 +94,8 @@ public class DaoBookHibernate implements IDaoBooks {
             LOGGER.error("Error updating Book: " + error);
             throw error;
         }
-        LOGGER.info("Done. Updated entity ID is: " + record.getBookId());
-        return record.getBookId();
+        LOGGER.info("Done. Updated entity ID is: " + record.getId());
+        return record.getId();
     }
 
     @Override

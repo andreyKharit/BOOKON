@@ -18,7 +18,7 @@ public class Book {
     @Id
     @Column(name = "book_id")
     @GeneratedValue
-    private Long bookId;
+    private Long id;
     @Column(name = "book_name", nullable = false)
     private String name;
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER,
@@ -45,12 +45,12 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;
 
-    public Long getBookId() {
-        return bookId;
+    public Long getId() {
+        return id;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setId(Long bookId) {
+        this.id = bookId;
     }
 
     public Author getBkAuthor() {

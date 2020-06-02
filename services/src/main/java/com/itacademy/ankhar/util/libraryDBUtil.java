@@ -5,7 +5,6 @@
 
 package com.itacademy.ankhar.util;
 
-import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.Book;
 import com.itacademy.ankhar.Genre;
 import com.itacademy.ankhar.Publisher;
@@ -15,8 +14,6 @@ import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.extensions.IDaoPublishers;
 import com.itacademy.ankhar.factory.*;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class libraryDBUtil {
@@ -46,7 +43,7 @@ public class libraryDBUtil {
         List<Book> bookList = daoBooks.getAll();
         for (Book current : bookList) {
             if (current.getName().equals(bookName)) {
-                return current.getBookId();
+                return current.getId();
             }
         }
         return -1L;
