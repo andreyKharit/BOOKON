@@ -60,7 +60,9 @@ public class tests {
         User test = (userRepository.findByUserName("admin").orElse(null));
         Assert.assertNotNull(test);
         Book book = bookRepository.findById(22L).orElse(null);
-        book.getGenres().stream().map(Genre::getGenreName).forEach(System.out::println);
+        if (book != null) {
+            book.getGenres().stream().map(Genre::getGenreName).forEach(System.out::println);
+        }
     }
 
     @Test
