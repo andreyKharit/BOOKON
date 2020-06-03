@@ -13,10 +13,14 @@ import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.extensions.IDaoBooks;
 import com.itacademy.ankhar.factory.*;
 import com.itacademy.ankhar.interfaces.IBookCreatorService;
+import com.itacademy.ankhar.repositories.BookRepository;
 import com.itacademy.ankhar.util.libraryDBUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ImplementationBookCreatorService implements IBookCreatorService {
     private final DaoTypeFactoryI<IDaoBooks> daoTypeFactoryI = DaoBookFactory.getInstance();
     private final IDaoEntity<Book> daoBook = daoTypeFactoryI.getDao(DaoTypesEnum.HIBERNATE);
@@ -24,6 +28,10 @@ public class ImplementationBookCreatorService implements IBookCreatorService {
     private final IDaoEntity<Publisher> daoPublisher = DaoPublisherFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
 
     private static IBookCreatorService instance;
+
+    //spring
+    @Autowired
+    private BookRepository bookRepository;
 
     public IBookCreatorService getInstance() {
         if (instance == null) {

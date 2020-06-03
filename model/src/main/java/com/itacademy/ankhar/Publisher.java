@@ -16,7 +16,7 @@ public class Publisher {
     @Id
     @Column(name = "publisher_id")
     @GeneratedValue
-    private Long publisherId;
+    private Long id;
     @Column(name = "publisher_name", unique = true, nullable = false)
     private String publisherName;
     @OneToMany(mappedBy = "bkPublisher", fetch = FetchType.EAGER, cascade = {
@@ -37,12 +37,12 @@ public class Publisher {
         this.books = books;
     }
 
-    public Long getPublisherId() {
-        return publisherId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPublisherId(Long publisherId) {
-        this.publisherId = publisherId;
+    public void setId(Long publisherId) {
+        this.id = publisherId;
     }
 
     public String getPublisherName() {

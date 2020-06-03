@@ -1,11 +1,11 @@
 /*
- * Last updated: 6/2/20, 11:27 AM
+ * Last updated: 6/3/20, 4:35 PM
  * Author: Andrey Kharitonenko
  */
 
 package com.itacademy.ankhar.repositories;
 
-import com.itacademy.ankhar.Book;
+import com.itacademy.ankhar.Genre;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,18 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, Long> {
+public interface GenreRepository extends CrudRepository<Genre, Long> {
     @Override
     @Transactional
-    <S extends Book> S save(S s);
+    <S extends Genre> S save(S s);
 
     @Override
-    Optional<Book> findById(Long id);
+    Optional<Genre> findById(Long id);
 
-    Optional<Book> findByName(String name);
+    Optional<Genre> findByGenreName(String name);
 
     @Override
-    Iterable<Book> findAll();
+    Iterable<Genre> findAll();
 
     @Override
     @Transactional
@@ -33,5 +33,5 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     @Override
     boolean existsById(Long id);
 
-    boolean existsByName(String name);
+    boolean existsByGenreName(String name);
 }

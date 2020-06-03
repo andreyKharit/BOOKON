@@ -54,7 +54,7 @@ public class libraryDBUtil {
         List<Publisher> publisherList = daoPublishers.getAll();
         for (Publisher current : publisherList) {
             if (current.getPublisherName().equals(publisherName)) {
-                return current.getPublisherId();
+                return current.getId();
             }
         }
         return -1L;
@@ -65,7 +65,7 @@ public class libraryDBUtil {
         List<Genre> publisherList = daoGenres.getAll();
         for (Genre current : publisherList) {
             if (current.getGenreName().equals(genreName)) {
-                return current.getGenreId();
+                return current.getId();
             }
         }
         return -1L;

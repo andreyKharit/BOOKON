@@ -5,7 +5,6 @@
 
 package com.itacademy.ankhar.dao;
 
-import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.Genre;
 import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.util.HibernateUtil;
@@ -20,8 +19,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DaoGenreHibernate implements IDaoGenres {
@@ -78,14 +75,14 @@ public class DaoGenreHibernate implements IDaoGenres {
             LOGGER.error("Error creating Genre: " + error);
             throw error;
         }
-        LOGGER.info("Done. Entity ID is: " + record.getGenreId());
-        return record.getGenreId();
+        LOGGER.info("Done. Entity ID is: " + record.getId());
+        return record.getId();
     }
 
     @Override
     public Long update(Genre record) throws Exception {
         try (Session session = sessionFactory.openSession()) {
-            LOGGER.info("Updating Genre entity with ID: " + record.getGenreId());
+            LOGGER.info("Updating Genre entity with ID: " + record.getId());
             session.getTransaction().begin();
             session.update(record);
             session.getTransaction().commit();
@@ -94,8 +91,8 @@ public class DaoGenreHibernate implements IDaoGenres {
             LOGGER.error("Error updating Genre: " + error);
             throw error;
         }
-        LOGGER.info("Done. Updated entity ID is: " + record.getGenreId());
-        return record.getGenreId();
+        LOGGER.info("Done. Updated entity ID is: " + record.getId());
+        return record.getId();
     }
 
     @Override

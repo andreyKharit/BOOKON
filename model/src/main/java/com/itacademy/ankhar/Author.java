@@ -19,7 +19,7 @@ public class Author {
     @Id
     @Column(name = "author_id")
     @GeneratedValue
-    private Long authorId;
+    private Long id;
     @Column(name = "author_name", nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "bkAuthor", fetch = FetchType.EAGER, cascade = {
@@ -43,8 +43,8 @@ public class Author {
         this.books.add(book);
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -55,8 +55,8 @@ public class Author {
         this.name = name;
     }
 
-    public void setAuthorId(Long id) {
-        this.authorId = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

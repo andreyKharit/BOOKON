@@ -8,7 +8,6 @@ package com.itacademy.ankhar;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "genre")
@@ -17,7 +16,7 @@ public class Genre {
     @Id
     @Column(name = "genre_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long genreId;
+    private Long id;
     @Column(name = "genre_name", unique = true, nullable = false)
     private String genreName;
     @ManyToMany
@@ -34,12 +33,12 @@ public class Genre {
         this.book = book;
     }
 
-    public Long getGenreId() {
-        return genreId;
+    public Long getId() {
+        return id;
     }
 
-    public void setGenreId(Long genreId) {
-        this.genreId = genreId;
+    public void setId(Long genreId) {
+        this.id = genreId;
     }
 
     public String getGenreName() {

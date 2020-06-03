@@ -89,14 +89,14 @@ public class DaoPublisherHibernate implements IDaoPublishers {
             LOGGER.error("Error creating Publisher: " + error);
             throw error;
         }
-        LOGGER.info("Done. Entity ID is: " + record.getPublisherId());
-        return record.getPublisherId();
+        LOGGER.info("Done. Entity ID is: " + record.getId());
+        return record.getId();
     }
 
     @Override
     public Long update(Publisher record) throws Exception {
         try (Session session = sessionFactory.openSession()) {
-            LOGGER.info("Updating Publisher entity with ID: " + record.getPublisherId());
+            LOGGER.info("Updating Publisher entity with ID: " + record.getId());
             session.getTransaction().begin();
             session.update(record);
             session.getTransaction().commit();
@@ -105,8 +105,8 @@ public class DaoPublisherHibernate implements IDaoPublishers {
             LOGGER.error("Error updating Publisher: " + error);
             throw error;
         }
-        LOGGER.info("Done. Updated entity ID is: " + record.getPublisherId());
-        return record.getPublisherId();
+        LOGGER.info("Done. Updated entity ID is: " + record.getId());
+        return record.getId();
     }
 
     @Override

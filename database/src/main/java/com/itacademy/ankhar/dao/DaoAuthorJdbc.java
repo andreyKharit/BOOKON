@@ -62,7 +62,7 @@ public class DaoAuthorJdbc implements IDaoAuthors {
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         Author author = new Author();
-                        author.setAuthorId(resultSet.getLong("author_id"));
+                        author.setId(resultSet.getLong("author_id"));
                         author.setName(resultSet.getString("author_name"));
                         return author;
                     }
@@ -82,7 +82,7 @@ public class DaoAuthorJdbc implements IDaoAuthors {
                     LOGGER.info("Creating Authors list.");
                     while (resultSet.next()) {
                         Author author = new Author();
-                        author.setAuthorId(resultSet.getLong("author_id"));
+                        author.setId(resultSet.getLong("author_id"));
                         author.setName(resultSet.getString("author_name"));
                         results.add(author);
                         LOGGER.info("Added Author " + author.getName() + " to results list.");
@@ -123,7 +123,7 @@ public class DaoAuthorJdbc implements IDaoAuthors {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE users.ankhar_authors SET author_name = ? WHERE author_id = ?")) {
                 statement.setString(1, record.getName());
-                statement.setLong(2, record.getAuthorId());
+                statement.setLong(2, record.getId());
                 int i = statement.executeUpdate();
                 if (i == 1) {
                     return null;

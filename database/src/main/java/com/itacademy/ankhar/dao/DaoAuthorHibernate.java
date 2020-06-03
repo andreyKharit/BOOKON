@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -61,7 +60,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             if (found.size() != 1) {
                 return -1L;
             } else
-                return found.get(0).getAuthorId();
+                return found.get(0).getId();
         } catch (HibernateException error) {
             LOGGER.error("Error getting Author entity.");
             throw error;
@@ -130,7 +129,7 @@ public class DaoAuthorHibernate implements IDaoAuthors {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE users.ankhar_authors SET author_name = ? WHERE author_id = ?")) {
                 statement.setString(1, record.getName());
-                statement.setLong(2, record.getAuthorId());
+                statement.setLong(2, record.getId());
                 int i = statement.executeUpdate();
                 if (i == 1) {
                     return null;

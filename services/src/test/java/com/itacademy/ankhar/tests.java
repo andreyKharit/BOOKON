@@ -16,6 +16,7 @@ import com.itacademy.ankhar.factory.DaoAuthorFactory;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
 import com.itacademy.ankhar.impl.ImplementationBookCreatorService;
+import com.itacademy.ankhar.repositories.BookRepository;
 import com.itacademy.ankhar.repositories.UserRepository;
 import com.itacademy.ankhar.util.UserDBUtil;
 import com.itacademy.ankhar.util.libraryDBUtil;
@@ -35,6 +36,8 @@ public class tests {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
     @Test
     public void passwordHexTest() {
@@ -55,7 +58,9 @@ public class tests {
     @Test
     public void userCreateTest() throws Exception {
         User test = (userRepository.findByUserName("admin").orElse(null));
-        Assert.assertNull(test);
+        Assert.assertNotNull(test);
+        Book book = bookRepository.findById(22L).orElse(null);
+        book.getGenres().stream().map(Genre::getGenreName).forEach(System.out::println);
     }
 
     @Test
