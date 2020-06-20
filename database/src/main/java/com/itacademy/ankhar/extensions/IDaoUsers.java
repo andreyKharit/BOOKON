@@ -5,7 +5,7 @@
 
 package com.itacademy.ankhar.extensions;
 
-import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.dao.IDaoEntity;
 
 public interface IDaoUsers extends IDaoEntity<User> {

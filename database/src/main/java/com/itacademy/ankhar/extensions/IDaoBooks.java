@@ -5,7 +5,7 @@
 
 package com.itacademy.ankhar.extensions;
 
-import com.itacademy.ankhar.Book;
+import com.itacademy.ankhar.entities.Book;
 import com.itacademy.ankhar.dao.IDaoEntity;
 
 public interface IDaoBooks extends IDaoEntity<Book> {

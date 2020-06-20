@@ -5,8 +5,7 @@
 
 package com.itacademy.ankhar.repositories;
 
-import com.itacademy.ankhar.Author;
-import com.itacademy.ankhar.Book;
+import com.itacademy.ankhar.entities.Author;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public interface AuthorRepository extends CrudRepository<Author, Long> {
     @Override
     Optional<Author> findById(Long id);
 
-    Optional<Author> findByName(String name);
+    Optional<Author> findByNameIgnoreCase(String name);
 
     @Override
     Iterable<Author> findAll();

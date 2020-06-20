@@ -5,10 +5,8 @@
 
 package com.itacademy.ankhar.factory;
 
-import com.itacademy.ankhar.Author;
 import com.itacademy.ankhar.dao.DaoAuthorHibernate;
 import com.itacademy.ankhar.dao.DaoAuthorJdbc;
-import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
 
 public class DaoAuthorFactory implements DaoTypeFactoryI<IDaoAuthors> {

@@ -6,7 +6,7 @@
 
 package com.itacademy.ankhar.dao;
 
-import com.itacademy.ankhar.Author;
+import com.itacademy.ankhar.entities.Author;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
 import com.itacademy.ankhar.util.JdbcProviderUtil;
 import org.apache.logging.log4j.LogManager;

@@ -6,7 +6,7 @@
 
 package com.itacademy.ankhar.impl;
 
-import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.interfaces.IAuthorizationService;
 import com.itacademy.ankhar.repositories.UserRepository;
 import org.apache.commons.codec.digest.DigestUtils;

@@ -5,7 +5,7 @@
 
 package com.itacademy.ankhar.repositories;
 
-import com.itacademy.ankhar.Genre;
+import com.itacademy.ankhar.entities.Genre;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

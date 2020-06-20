@@ -5,7 +5,7 @@
 
 package com.itacademy.ankhar.extensions;
 
-import com.itacademy.ankhar.Genre;
+import com.itacademy.ankhar.entities.Genre;
 import com.itacademy.ankhar.dao.IDaoEntity;
 
 import java.util.List;

@@ -6,7 +6,7 @@
 
 package com.itacademy.ankhar.interfaces;
 
-import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.entities.User;
 
 import java.util.List;
 

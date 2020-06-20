@@ -5,10 +5,8 @@
 
 package com.itacademy.ankhar.factory;
 
-import com.itacademy.ankhar.User;
 import com.itacademy.ankhar.dao.DaoUsersHibernate;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
-import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.extensions.IDaoUsers;
 
 public class DaoUserFactory implements DaoTypeFactoryI<IDaoUsers> {

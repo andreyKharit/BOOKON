@@ -5,6 +5,7 @@
 
 package com.itacademy.ankhar;
 
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;

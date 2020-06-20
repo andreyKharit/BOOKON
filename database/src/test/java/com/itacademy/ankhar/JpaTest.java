@@ -12,6 +12,8 @@
 package com.itacademy.ankhar;
 
 import com.itacademy.ankhar.dao.IDaoEntity;
+import com.itacademy.ankhar.entities.Book;
+import com.itacademy.ankhar.entities.Genre;
 import com.itacademy.ankhar.extensions.IDaoBooks;
 import com.itacademy.ankhar.factory.DaoBookFactory;
 import com.itacademy.ankhar.factory.DaoTypeFactoryI;

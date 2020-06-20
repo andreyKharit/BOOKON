@@ -36,12 +36,12 @@
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
-        <mapping class="com.itacademy.ankhar.Author"/>
-        <mapping class="com.itacademy.ankhar.Book"/>
-        <mapping class="com.itacademy.ankhar.Genre"/>
-        <mapping class="com.itacademy.ankhar.Publisher"/>
-        <mapping class="com.itacademy.ankhar.Request"/>
-        <mapping class="com.itacademy.ankhar.User"/>
+        <mapping class="com.itacademy.ankhar.entities.Author"/>
+        <mapping class="com.itacademy.ankhar.entities.Book"/>
+        <mapping class="com.itacademy.ankhar.entities.Genre"/>
+        <mapping class="com.itacademy.ankhar.entities.Publisher"/>
+        <mapping class="com.itacademy.ankhar.entities.Request"/>
+        <mapping class="com.itacademy.ankhar.entities.User"/>
 <!--        <mapping class=""/>-->
 <!--        <mapping class=""/>-->
     </session-factory>

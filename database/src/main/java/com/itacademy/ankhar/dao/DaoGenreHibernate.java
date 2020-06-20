@@ -5,7 +5,7 @@
 
 package com.itacademy.ankhar.dao;
 
-import com.itacademy.ankhar.Genre;
+import com.itacademy.ankhar.entities.Genre;
 import com.itacademy.ankhar.extensions.IDaoGenres;
 import com.itacademy.ankhar.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;

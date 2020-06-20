@@ -5,8 +5,7 @@
 
 package com.itacademy.ankhar.repositories;
 
-import com.itacademy.ankhar.Book;
-import com.itacademy.ankhar.Publisher;
+import com.itacademy.ankhar.entities.Publisher;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public interface PublisherRepository extends CrudRepository<Publisher, Long> {
     @Override
     Optional<Publisher> findById(Long id);
 
-    Optional<Publisher> findByPublisherName(String name);
+    Optional<Publisher> findByPublisherNameIgnoreCase(String name);
 
     @Override
     Iterable<Publisher> findAll();

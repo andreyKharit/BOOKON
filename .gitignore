@@ -10,3 +10,5 @@ firstProject/target
 /services/src/main/java/com/itacademy/ankhar/impl/TransactionServiceAdvice.java
 /model/src/main/java/com/itacademy/ankhar/TransactionData.java
 /model/src/main/java/com/itacademy/ankhar/TransactionResult.java
+/web-mvc/
+/webapp/

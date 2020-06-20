@@ -5,7 +5,7 @@
 
 package com.itacademy.ankhar.extensions;
 
-import com.itacademy.ankhar.Author;
+import com.itacademy.ankhar.entities.Author;
 import com.itacademy.ankhar.dao.IDaoEntity;
 
 public interface IDaoAuthors extends IDaoEntity<Author> {

@@ -11,12 +11,12 @@
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <description>JPA Sample</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.itacademy.ankhar.Author</class>
-        <class>com.itacademy.ankhar.Book</class>
-        <class>com.itacademy.ankhar.Genre</class>
-        <class>com.itacademy.ankhar.Publisher</class>
-        <class>com.itacademy.ankhar.Request</class>
-        <class>com.itacademy.ankhar.User</class>
+        <class>com.itacademy.ankhar.entities.Author</class>
+        <class>com.itacademy.ankhar.entities.Book</class>
+        <class>com.itacademy.ankhar.entities.Genre</class>
+        <class>com.itacademy.ankhar.entities.Publisher</class>
+        <class>com.itacademy.ankhar.entities.Request</class>
+        <class>com.itacademy.ankhar.entities.User</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!-- database connection -->

@@ -12,14 +12,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <bean id="transactionService" class="com.itacademy.ankhar.impl.TransactionService"/>
 
-    <bean id="transactionData" class="com.itacademy.ankhar.TransactionData">
+    <bean id="transactionData" class="TransactionData">
         <property name="cardNumber" value="123331212"/>
         <property name="cardHolder" value="Pavel"/>
         <property name="cvv" value="324"/>
         <property name="expire" value="#{(T(java.time.LocalDate).now())}"/>
     </bean>
 
-    <bean id="transactionData2" class="com.itacademy.ankhar.TransactionData">
+    <bean id="transactionData2" class="TransactionData">
         <property name="cardNumber" value="12341324"/>
         <property name="cardHolder" value="Misha"/>
         <property name="cvv" value="424"/>

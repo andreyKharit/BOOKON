@@ -1,9 +1,17 @@
 /*
- * Last updated: 5/14/20, 7:33 PM
+ * Last updated: 6/11/20, 10:53 PM
  * Author: Andrey Kharitonenko
  */
 
-package com.itacademy.ankhar;
+/*
+ * Last updated: 6/11/20, 10:53 PM
+ * Author: Andrey Kharitonenko
+ */
+
+/*
+ * Last updated: 5/14/20, 7:33 PM
+ * Author: Andrey Kharitonenko
+ */
 
 import java.time.LocalDate;
 

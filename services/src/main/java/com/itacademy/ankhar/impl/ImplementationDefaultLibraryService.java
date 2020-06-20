@@ -5,9 +5,9 @@
 
 package com.itacademy.ankhar.impl;
 
-import com.itacademy.ankhar.Book;
-import com.itacademy.ankhar.Genre;
-import com.itacademy.ankhar.Publisher;
+import com.itacademy.ankhar.entities.Book;
+import com.itacademy.ankhar.entities.Genre;
+import com.itacademy.ankhar.entities.Publisher;
 import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.factory.DaoBookFactory;
 import com.itacademy.ankhar.factory.DaoTypesEnum;

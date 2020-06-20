@@ -1,9 +1,14 @@
 /*
+ * Last updated: 6/11/20, 10:53 PM
+ * Author: Andrey Kharitonenko
+ */
+
+/*
  * Last updated: 4/6/20, 4:56 PM
  * Author: Andrey Kharitonenko
  */
 
-package com.itacademy.ankhar;
+package com.itacademy.ankhar.entities;
 
 import javax.persistence.*;
 

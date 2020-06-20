@@ -6,7 +6,7 @@
 
 package com.itacademy.ankhar.util;
 
-import com.itacademy.ankhar.User;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
 import com.itacademy.ankhar.extensions.IDaoUsers;
 import com.itacademy.ankhar.factory.DaoTypesEnum;

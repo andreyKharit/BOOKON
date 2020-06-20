@@ -6,13 +6,9 @@
 
 package com.itacademy.ankhar.impl;
 
-import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.extensions.IDaoUsers;
-import com.itacademy.ankhar.factory.DaoTypesEnum;
-import com.itacademy.ankhar.factory.DaoUserFactory;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.interfaces.IRegistrationService;
 import com.itacademy.ankhar.repositories.UserRepository;
-import com.itacademy.ankhar.util.UserDBUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

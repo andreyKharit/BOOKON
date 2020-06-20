@@ -6,63 +6,42 @@
 
 package com.itacademy.ankhar.impl;
 
-import com.itacademy.ankhar.User;
-import com.itacademy.ankhar.dao.IDaoEntity;
-import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.extensions.IDaoUsers;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.factory.DaoUserFactory;
 import com.itacademy.ankhar.interfaces.ISubjectService;
+import com.itacademy.ankhar.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
+@Service
 public class ImplementationSubjectService implements ISubjectService {
-    private static ISubjectService subjectInstance;
-
-    private ImplementationSubjectService() {
-    }
-
-    public static ISubjectService getInstance() {
-        if (subjectInstance == null) {
-            synchronized (ImplementationSubjectService.class) {
-                if (subjectInstance == null) {
-                    subjectInstance = new ImplementationSubjectService();
-                }
-            }
-        }
-        return subjectInstance;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<User> getSubjects() {
-        try {
-            IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-            return userDao.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        final List<User> userList = new LinkedList<>();
+        userRepository.findAll().iterator().forEachRemaining(userList::add);
+        return userList;
     }
 
-    public boolean deleteUser(Long userId) throws Exception {
-        try {
-            IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-            userDao.delete(userId);
-            return true;
-        } catch (Exception e) {
-            throw e;
-        }
+    public boolean deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+        return true;
     }
     public boolean updateUserStatus(Long userId, String status) throws Exception {
-        try {
-            IDaoUsers userDao = DaoUserFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-            User updateUser = userDao.get(userId);
-            updateUser.setUserStatus(status);
-            userDao.update(updateUser);
+        User user = userRepository.findById(userId).orElseGet(null);
+        if (user != null) {
+            user.setUserStatus(status);
+            userRepository.save(user);
             return true;
-        } catch (Exception e) {
-            throw e;
         }
+        else return false;
     }
 
 }

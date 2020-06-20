@@ -1,10 +1,15 @@
 /*
+ * Last updated: 6/11/20, 10:53 PM
+ * Author: Andrey Kharitonenko
+ */
+
+/*
  * 2020
  * Last updated: 4/2/20, 1:03 AM
  * Author: Andrey Kharitonenko
  */
 
-package com.itacademy.ankhar;
+package com.itacademy.ankhar.entities;
 
 import org.springframework.stereotype.Component;
 
@@ -12,7 +17,6 @@ import javax.persistence.*;
 
 @Entity(name = "user")
 @Table(name = "ankhar_users")
-@Component
 public class User {
     @Id
     @Column(name = "contacts_id")

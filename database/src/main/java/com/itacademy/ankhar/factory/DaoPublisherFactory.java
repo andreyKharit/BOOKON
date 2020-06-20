@@ -5,7 +5,6 @@
 
 package com.itacademy.ankhar.factory;
 
-import com.itacademy.ankhar.Publisher;
 import com.itacademy.ankhar.dao.DaoPublisherHibernate;
 import com.itacademy.ankhar.extensions.IDaoPublishers;
 

@@ -5,9 +5,9 @@
 
 package com.itacademy.ankhar.interfaces;
 
-import com.itacademy.ankhar.Book;
-import com.itacademy.ankhar.Genre;
-import com.itacademy.ankhar.Publisher;
+import com.itacademy.ankhar.entities.Book;
+import com.itacademy.ankhar.entities.Genre;
+import com.itacademy.ankhar.entities.Publisher;
 
 import java.util.List;
 

@@ -5,18 +5,29 @@
 
 package com.itacademy.ankhar.util;
 
-import com.itacademy.ankhar.Book;
-import com.itacademy.ankhar.Genre;
-import com.itacademy.ankhar.Publisher;
+import com.itacademy.ankhar.entities.Book;
+import com.itacademy.ankhar.entities.Genre;
+import com.itacademy.ankhar.entities.Publisher;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
-import com.itacademy.ankhar.extensions.IDaoBooks;
 import com.itacademy.ankhar.extensions.IDaoGenres;
-import com.itacademy.ankhar.extensions.IDaoPublishers;
 import com.itacademy.ankhar.factory.*;
+import com.itacademy.ankhar.repositories.BookRepository;
+import com.itacademy.ankhar.repositories.GenreRepository;
+import com.itacademy.ankhar.repositories.PublisherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class libraryDBUtil {
+    @Autowired
+    private GenreRepository genreRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
+    @Autowired
+    private BookRepository bookRepository;
+
     private static libraryDBUtil libraryDBUtilInstance;
 
     private libraryDBUtil() {
@@ -39,35 +50,20 @@ public class libraryDBUtil {
     }
 
     public Long bookExists(String bookName) throws Exception {
-        IDaoBooks daoBooks = DaoBookFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-        List<Book> bookList = daoBooks.getAll();
-        for (Book current : bookList) {
-            if (current.getName().equals(bookName)) {
-                return current.getId();
-            }
-        }
+        Book book = bookRepository.findByName(bookName).orElseGet(null);
+        if (book != null) return book.getId();
         return -1L;
     }
 
     public Long publisherExists(String publisherName) throws Exception {
-        IDaoPublishers daoPublishers = DaoPublisherFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-        List<Publisher> publisherList = daoPublishers.getAll();
-        for (Publisher current : publisherList) {
-            if (current.getPublisherName().equals(publisherName)) {
-                return current.getId();
-            }
-        }
+        Publisher publisher = publisherRepository.findByPublisherNameIgnoreCase(publisherName).orElseGet(null);
+        if (publisher != null) return publisher.getId();
         return -1L;
     }
 
     public Long genreExists(String genreName) throws Exception {
-        IDaoGenres daoGenres = DaoGenreFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);
-        List<Genre> publisherList = daoGenres.getAll();
-        for (Genre current : publisherList) {
-            if (current.getGenreName().equals(genreName)) {
-                return current.getId();
-            }
-        }
+        Genre genreFound = genreRepository.findByGenreName(genreName).orElseGet(null);
+        if (genreFound != null) return genreFound.getId();
         return -1L;
     }
 

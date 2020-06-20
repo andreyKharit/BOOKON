@@ -14,12 +14,11 @@ package com.itacademy.ankhar;
 import com.itacademy.ankhar.dao.DaoAuthorJdbc;
 import com.itacademy.ankhar.dao.IDaoEntity;
 import com.itacademy.ankhar.dao.DaoUsersJdbc;
+import com.itacademy.ankhar.entities.Author;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.factory.DaoAuthorFactory;
 import com.itacademy.ankhar.factory.DaoTypeFactoryI;
-import com.itacademy.ankhar.factory.DaoTypesEnum;
 import org.junit.Test;
-
-import java.util.List;
 
 public class DaoTest {
     @Test

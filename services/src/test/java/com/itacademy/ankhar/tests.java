@@ -11,12 +11,16 @@
 
 package com.itacademy.ankhar;
 
+import com.itacademy.ankhar.entities.Author;
+import com.itacademy.ankhar.entities.Genre;
+import com.itacademy.ankhar.entities.User;
 import com.itacademy.ankhar.extensions.IDaoAuthors;
 import com.itacademy.ankhar.factory.DaoAuthorFactory;
 import com.itacademy.ankhar.factory.DaoTypesEnum;
 import com.itacademy.ankhar.impl.ImplementationAuthorizationService;
 import com.itacademy.ankhar.impl.ImplementationBookCreatorService;
 import com.itacademy.ankhar.repositories.BookRepository;
+import com.itacademy.ankhar.repositories.GenreRepository;
 import com.itacademy.ankhar.repositories.UserRepository;
 import com.itacademy.ankhar.util.UserDBUtil;
 import com.itacademy.ankhar.util.libraryDBUtil;
@@ -38,6 +42,8 @@ public class tests {
     private UserRepository userRepository;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private GenreRepository genreRepository;
 
     @Test
     public void passwordHexTest() {
@@ -50,7 +56,7 @@ public class tests {
     }
 
     @Test
-    public void DBUtilTests() throws Exception {
+    public void dbUtilTests() throws Exception {
         Assert.assertEquals("4", Long.toString(libraryDBUtil.getInstance().publisherExists("Petrolium")));
         Assert.assertEquals("-1", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer minus Hammer")));
     }
@@ -59,14 +65,11 @@ public class tests {
     public void userCreateTest() throws Exception {
         User test = (userRepository.findByUserName("admin").orElse(null));
         Assert.assertNotNull(test);
-        Book book = bookRepository.findById(22L).orElse(null);
-        if (book != null) {
-            book.getGenres().stream().map(Genre::getGenreName).forEach(System.out::println);
-        }
+        bookRepository.findById(22L).ifPresent(book -> book.getGenres().stream().map(Genre::getGenreName).forEach(System.out::println));
     }
 
     @Test
-    public void createrTestExisting() throws Exception {
+    public void createTestExisting() throws Exception {
         ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();        String[] sample = new String[2];
         String[] sample2 = new String[1];
         sample2[0] = "7";
@@ -74,7 +77,7 @@ public class tests {
     }
 
     @Test
-    public void createrTestNew() throws Exception {
+    public void createTestNew() throws Exception {
         ImplementationBookCreatorService bookCreatorService = new ImplementationBookCreatorService();
         String[] sample = new String[2];
         sample[0] = "5";
