@@ -26,6 +26,7 @@ public class ControllerTest {
     public ModelAndView modelAndView(ModelAndView modelAndView) {
         final List<User> userList = new LinkedList<>();
         userRepository.findAll().iterator().forEachRemaining(userList::add);
+        modelAndView.addObject("test", "Hello!");
         return modelAndView.addObject("users", userList);
     }
 }

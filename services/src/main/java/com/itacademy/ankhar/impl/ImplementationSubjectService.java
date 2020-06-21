@@ -30,10 +30,18 @@ public class ImplementationSubjectService implements ISubjectService {
         return userList;
     }
 
+    @Override
+    public User getSubjectById(Long id) {
+        return userRepository.findById(id).orElseGet(null);
+    }
+
+    @Override
     public boolean deleteUser(Long userId) {
         userRepository.deleteById(userId);
         return true;
     }
+
+    @Override
     public boolean updateUserStatus(Long userId, String status) throws Exception {
         User user = userRepository.findById(userId).orElseGet(null);
         if (user != null) {
@@ -43,5 +51,4 @@ public class ImplementationSubjectService implements ISubjectService {
         }
         else return false;
     }
-
 }
