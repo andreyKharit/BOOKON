@@ -20,20 +20,10 @@ public class ImplementationAuthorizationService implements IAuthorizationService
     private UserRepository userRepository;
 
     @Override
-    public boolean authorize(String login, String password) {
-        if (userRepository.existsByUserName(login)) {
-            try {
-                User user = userRepository.findByUserName(login).orElse(null);
-                //checking login and password
-                if (user != null && user.getUserName().equals(login) &&
-                        user.getUserPassword().
-                                equals(DigestUtils.sha512Hex(password))) {
-                    return true;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+    public String authorize(String login) {
+        User user = userRepository.findByUserName(login).orElse(null);
+        if (user != null) {
+            return user.getUserPassword();
+        } else return null;
     }
 }

@@ -5,13 +5,14 @@
 
 package com.itacademy.ankhar.controllers;
 
+import com.itacademy.ankhar.interfaces.IAuthorizationService;
+import com.itacademy.ankhar.interfaces.IRegistrationService;
 import com.itacademy.ankhar.interfaces.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControllerUsers {
     @Autowired
     private ISubjectService subjectService;
+    @Autowired
+    private IRegistrationService registrationService;
 
     @RequestMapping("")
     public ModelAndView userList(ModelAndView modelAndView) {
@@ -29,29 +32,39 @@ public class ControllerUsers {
 
     @RequestMapping(path = {"/edit/{id}"})
     public ModelAndView editUserById(ModelAndView modelAndView, @PathVariable Long id)
-            throws HttpClientErrorException.NotFound {
+            throws Exception {
         if (id != null) {
-            modelAndView.addObject("user", subjectService.getSubjectById(id));
+            modelAndView.addObject("editUser", subjectService.getSubjectById(id));
             modelAndView.setViewName("user-editor");
             return modelAndView;
         } else {
-            modelAndView.setViewName("redirect:/users");
+            modelAndView.setViewName("user-list");
             return modelAndView;
         }
     }
 
     @RequestMapping(path = "/delete/{id}")
-    public ModelAndView deleteUserById(ModelAndView modelAndView, @PathVariable Long id)
+    public String deleteUserById(@PathVariable Long id)
             throws Exception {
         subjectService.deleteUser(id);
-        modelAndView.setViewName("redirect:/users");
+        return "redirect:/users";
+    }
+
+    @RequestMapping(path = "/edit/update", method = RequestMethod.POST)
+    public String updateUser(@RequestParam("id") Long id, @RequestParam("status") String status) throws Exception {
+        subjectService.updateUserStatus(id, status);
+        return "redirect:/users";
+    }
+
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
+    public ModelAndView createUser(ModelAndView modelAndView) throws Exception {
+        modelAndView.setViewName("registration");
         return modelAndView;
     }
 
-    @RequestMapping(path = "/update", method = RequestMethod.POST)
-    public ModelAndView updateUser(ModelAndView modelAndView, Long id, String status) throws Exception {
-        subjectService.updateUserStatus(id, status);
-        modelAndView.setViewName("redirect:/users");
-        return modelAndView;
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
+    public String createUser(String name, String password) throws Exception {
+        registrationService.createUser(name, BCrypt.hashpw(password, BCrypt.gensalt(11)));
+        return "redirect:/users";
     }
 }

@@ -15,4 +15,5 @@ public interface ISubjectService {
     boolean deleteUser(Long userId) throws Exception;
     boolean updateUserStatus(Long userId, String status) throws Exception;
     User getSubjectById(Long id);
+    User getUserByName(String username);
 }

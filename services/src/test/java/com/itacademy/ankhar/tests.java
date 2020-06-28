@@ -49,9 +49,6 @@ public class tests {
     public void passwordHexTest() {
         System.out.println(DigestUtils.sha512Hex("admin"));
         ImplementationAuthorizationService test = new ImplementationAuthorizationService();
-        if (test.authorize("Harry", "pass")) {
-            System.out.println("done");
-        }
         System.out.println(UserDBUtil.getInstance().getStatus("Harry"));
     }
 

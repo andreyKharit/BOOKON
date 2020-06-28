@@ -25,7 +25,7 @@ public class ImplementationRegistrationService implements IRegistrationService {
             if (newUser == null) {
                 newUser = new User();
                 newUser.setUserName(login);
-                newUser.setUserPassword(DigestUtils.sha512Hex(password));
+                newUser.setUserPassword(password);
                 userRepository.save(newUser);
                 return true;
             }

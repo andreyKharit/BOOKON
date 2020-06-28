@@ -31,6 +31,11 @@ public class ImplementationSubjectService implements ISubjectService {
     }
 
     @Override
+    public User getUserByName(String username) {
+        return userRepository.findByUserName(username).orElse(null);
+    }
+
+    @Override
     public User getSubjectById(Long id) {
         return userRepository.findById(id).orElseGet(null);
     }
