@@ -31,7 +31,7 @@
                                        th:value="${editUser.userId}" readonly>
                                 <label th:for="status" class="col-form-label">Status
                                     <input class="form-control" th:id="status" placeholder="User Status"
-                                           th:name="status" th:value="${editUser.userStatus}" th:type="text"/>
+                                           th:name="status" th:value="${editUser.userStatus}" required th:type="text"/>
                                 </label>
                             </div>
                             <div class="col-md-6">

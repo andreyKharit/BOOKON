@@ -20,11 +20,10 @@
 <div layout:fragment="content">
     <p class="text-center text-info">Welcome to BOOKON.</p>
     <div class="container col-3" sec:authorize="!isAuthenticated()">
-        <p>Submit your credentials to proceed. <a th:href="@{/login}">LOGIN</a></p>
         <p>New here? <a th:href="@{/register}">REGISTRATION FORM</a></p>
     </div>
     <div class="container col-3" sec:authorize="isAuthenticated()">
-        <p>Proceed <a th:href="@{/users}">next</a></p>
+        <p>You are logged in.</p>
     </div>
 </div>
 

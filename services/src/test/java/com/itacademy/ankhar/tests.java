@@ -53,12 +53,6 @@ public class tests {
     }
 
     @Test
-    public void dbUtilTests() throws Exception {
-        Assert.assertEquals("4", Long.toString(libraryDBUtil.getInstance().publisherExists("Petrolium")));
-        Assert.assertEquals("-1", Long.toString(libraryDBUtil.getInstance().publisherExists("Hammer minus Hammer")));
-    }
-
-    @Test
     public void userCreateTest() throws Exception {
         User test = (userRepository.findByUserName("admin").orElse(null));
         Assert.assertNotNull(test);
@@ -88,10 +82,6 @@ public class tests {
         list[0] = "1";
         list[1] = "2";
         list[2] = "3";
-        List<Genre> genres = libraryDBUtil.getInstance().genreListPackager(list);
-        for (Genre genre : genres) {
-            System.out.println(genre.getGenreName());
-        }
     }
 
     @Test

@@ -15,11 +15,11 @@ import com.itacademy.ankhar.repositories.BookRepository;
 import com.itacademy.ankhar.repositories.GenreRepository;
 import com.itacademy.ankhar.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service(value = "library")
 public class libraryDBUtil {
     @Autowired
     private GenreRepository genreRepository;
@@ -27,22 +27,6 @@ public class libraryDBUtil {
     private PublisherRepository publisherRepository;
     @Autowired
     private BookRepository bookRepository;
-
-    private static libraryDBUtil libraryDBUtilInstance;
-
-    private libraryDBUtil() {
-    }
-
-    public static libraryDBUtil getInstance() {
-        if (libraryDBUtilInstance == null) {
-            synchronized (UserDBUtil.class) {
-                if (libraryDBUtilInstance == null) {
-                    libraryDBUtilInstance = new libraryDBUtil();
-                }
-            }
-        }
-        return libraryDBUtilInstance;
-    }
 
     public Long authorExists(String authorName) throws Exception {
         IDaoAuthors daoAuthors = DaoAuthorFactory.getInstance().getDao(DaoTypesEnum.HIBERNATE);

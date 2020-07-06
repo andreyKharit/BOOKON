@@ -16,10 +16,11 @@ import com.itacademy.ankhar.repositories.PublisherRepository;
 import com.itacademy.ankhar.util.libraryDBUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class ImplementationBookCreatorService implements IBookCreatorService {
 
     //spring

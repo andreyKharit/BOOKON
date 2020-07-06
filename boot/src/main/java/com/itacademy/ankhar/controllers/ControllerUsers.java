@@ -5,23 +5,19 @@
 
 package com.itacademy.ankhar.controllers;
 
-import com.itacademy.ankhar.interfaces.IAuthorizationService;
-import com.itacademy.ankhar.interfaces.IRegistrationService;
 import com.itacademy.ankhar.interfaces.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/users")
+@PreAuthorize("hasRole({'ROLE_ADMIN'})")
 public class ControllerUsers {
     @Autowired
     private ISubjectService subjectService;
-    @Autowired
-    private IRegistrationService registrationService;
 
     @RequestMapping("")
     public ModelAndView userList(ModelAndView modelAndView) {
@@ -53,18 +49,6 @@ public class ControllerUsers {
     @RequestMapping(path = "/edit/update", method = RequestMethod.POST)
     public String updateUser(@RequestParam("id") Long id, @RequestParam("status") String status) throws Exception {
         subjectService.updateUserStatus(id, status);
-        return "redirect:/users";
-    }
-
-    @RequestMapping(path = "/register", method = RequestMethod.GET)
-    public ModelAndView createUser(ModelAndView modelAndView) throws Exception {
-        modelAndView.setViewName("registration");
-        return modelAndView;
-    }
-
-    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
-    public String createUser(String name, String password) throws Exception {
-        registrationService.createUser(name, BCrypt.hashpw(password, BCrypt.gensalt(11)));
         return "redirect:/users";
     }
 }
