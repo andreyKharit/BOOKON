@@ -30,8 +30,13 @@
                                 <input th:type="hidden" th:name="id" th:id="id" class="form-control"
                                        th:value="${editUser.userId}" readonly>
                                 <label th:for="status" class="col-form-label">Status
-                                    <input class="form-control" th:id="status" placeholder="User Status"
-                                           th:name="status" th:value="${editUser.userStatus}" required th:type="text"/>
+<!--                                    <input class="form-control" th:id="status" placeholder="User Status"-->
+<!--                                           th:name="status" th:value="${editUser.userStatus}" required th:type="text"/>-->
+                                    <select th:id="status" th:name="status">
+                                        <option th:type="text" th:value="'admin'" th:selected="${editUser.userStatus=='admin'}" th:text="Admin"></option>
+                                        <option th:type="text" th:value="'worker'" th:selected="${editUser.userStatus=='worker'}" th:text="Worker"></option>
+                                        <option th:type="text" th:value="'user'" th:selected="${editUser.userStatus=='user'}" th:text="User"></option>
+                                    </select>
                                 </label>
                             </div>
                             <div class="col-md-6">

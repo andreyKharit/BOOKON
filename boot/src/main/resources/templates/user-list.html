@@ -35,13 +35,21 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="user : ${users}">
+                                    <form action="#" th:action="@{/users/edit/update}" th:object="${user}" method="post">
                                     <td th:text="${user.userName}"></td>
-                                    <td th:text="${user.userStatus}"></td>
                                     <td>
-                                        <a th:href="@{/users/edit/{id}(id=${user.userId})}"
-                                           class="btn btn-primary">
-                                            <i class="fas fa-user-edit ml-2"></i>
-                                        </a>
+                                        <input th:type="hidden" th:name="id" th:id="id" class="form-control"
+                                               th:value="${user.userId}" readonly>
+                                        <select th:id="status" th:name="status">
+                                            <option th:type="text" th:value="'admin'" th:selected="${user.userStatus=='admin'}" th:text="Admin"></option>
+                                            <option th:type="text" th:value="'worker'" th:selected="${user.userStatus=='worker'}" th:text="Worker"></option>
+                                            <option th:type="text" th:value="'user'" th:selected="${user.userStatus=='user'}" th:text="User"></option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6">
+                                            <input type="submit" class="btn btn-primary" value=" Save ">
+                                        </div>
                                     </td>
                                     <td>
                                         <a th:href="@{/users/delete/{id}(id=${user.userId})}"
@@ -49,6 +57,7 @@
                                             <i class="fas fa-user-times ml-2"></i>
                                         </a>
                                     </td>
+                                    </form>
                                 </tr>
                                 </tbody>
                             </table>
