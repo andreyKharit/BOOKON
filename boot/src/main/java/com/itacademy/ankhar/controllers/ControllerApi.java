@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,11 @@ public class ControllerApi {
     @Autowired
     public ControllerApi(ISubjectService subjectService) {
         this.subjectService = subjectService;
+    }
+
+    @GetMapping(path = "/user")
+    public String getCurrentUser(Principal principal) {
+        return principal.getName();
     }
 
     @GetMapping(path = "/users", produces = {MediaType.APPLICATION_JSON_VALUE})

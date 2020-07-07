@@ -11,8 +11,6 @@
 
 package com.itacademy.ankhar.entities;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,7 +23,8 @@ public class Book {
     private Long id;
     @Column(name = "book_name", nullable = false)
     private String name;
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER,
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY,
             targetEntity = Author.class, optional = false)
     @JoinColumn(name = "author_id", nullable = false)
     private Author bkAuthor;
@@ -39,8 +38,9 @@ public class Book {
 
     @Column(name = "book_status", nullable = false)
     private Integer bookStatus;
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, targetEntity = Publisher.class,
-    optional = false)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY,
+            targetEntity = Publisher.class, optional = false)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher bkPublisher;
     @ManyToMany(fetch = FetchType.EAGER)

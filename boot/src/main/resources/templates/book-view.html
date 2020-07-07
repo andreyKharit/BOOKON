@@ -3,11 +3,6 @@
   ~ Author: Andrey Kharitonenko
   -->
 
-<!--
-  ~ Last updated: 6/29/20, 9:13 PM
-  ~ Author: Andrey Kharitonenko
-  -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorate="~{layout}" lang="en">
@@ -17,7 +12,7 @@
     <div class="container my-5">
         <h3>Book</h3>
         <!-- editable-->
-        <div class="card" sec:authorize="hasRole('ROLE_ADMIN')">
+        <div class="card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_WORKER')">
             <div class="card-body">
                 <div class="col-md-10">
                     <form action="#" th:action="@{/books/update-book}" th:object="${viewBook}"
@@ -46,48 +41,53 @@
                                            th:id="bookStatus" th:name="bookStatus"
                                            th:checked="${viewBook.getBookStatus()==1}"/>
                                 </label>
-<!--                                genres-->
+                                <!--                                genres-->
                                 <div>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' + Mystery" value="1"
-                                        th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(0))}">
                                     </label>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' +  Comedy" value="2"
-                                               th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(1))}">
                                     </label>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' +  Romance" value="3"
-                                               th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(2))}">
                                     </label>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' +  Classic" value="4"
-                                               th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(3))}">
                                     </label>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' +  Thriller" value="5"
-                                               th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(4))}">
                                     </label>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' +  Horror" value="6"
-                                               th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(5))}">
                                     </label>
                                     <label>
                                         <input th:type="checkbox" class="checkbox" th:name="bookGenre"
                                                th:id="bookGenre" th:text="' ' +  Non-fiction" value="7"
-                                               th:checked="${allGenres.contains(viewBook.getGenres())}">
+                                               th:checked="${viewBook.getGenres().contains(allGenres.get(6))}">
                                     </label>
                                 </div>
 
                             </div>
                             <div class="col-md-6">
                                 <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+                            <div th:if="${viewBook.getBookStatus()==1}" class="col-md-6">
+                                <a th:href="@{/books/delete/{id}(id=${viewBook.getId()})}"
+                                   class="btn btn-danger">Delete
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -129,6 +129,14 @@
                                 <div th:each="bookGenre : ${viewBook.getGenres()}">
                                     <span class="badge badge-info"
                                           th:text="' ' + ${bookGenre.getGenreName()}"></span>
+                                </div>
+                                <div th:if="${viewBook.getBookStatus()==1}">
+                                    <label th:for="comment" class="col-form-label">Your comment
+                                        <input class="form-control" th:id="comment" placeholder="Request comment"
+                                               th:name="comment"
+                                               th:default="'Hello'" th:type="text"
+                                               required/>
+                                    </label>
                                 </div>
 
                             </div>

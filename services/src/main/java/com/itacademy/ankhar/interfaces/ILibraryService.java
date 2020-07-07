@@ -16,9 +16,18 @@ public interface ILibraryService {
     List<Book> getBooks();
     List<Book> getBooksByPage(int page);
     void updateBook(Long id, String title, List<Long> genres, Integer status, String publisher, String author);
+    void deleteBook(Long id);
     int getBooksPages(int page);
     Book getBookById(Long id);
     List<Publisher> getPublishers();
+    Publisher getPublisherById(Long id);
+    void updatePublisher(Long id, String name);
+    void updatePublisher(String name);
+    void deletePublisher(Long id);
     List<Genre> getGenres();
     List<Author> getAuthors();
+    Author getAuthorById(Long id);
+    void updateAuthor(Long id, String name);
+    void updateAuthor(String name);
+    void deleteAuthor(Long id);
 }

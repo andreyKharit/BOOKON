@@ -16,9 +16,9 @@ import com.itacademy.ankhar.repositories.GenreRepository;
 import com.itacademy.ankhar.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -68,17 +68,35 @@ public class ImplementationDefaultLibraryService implements ILibraryService {
 
     @Override
     public List<Genre> getGenres() {
-        final List<Genre> genres = new LinkedList<>();
+        List<Genre> genres = new LinkedList<>();
         genreRepository.findAll().iterator().forEachRemaining(genres::add);
+        genres.sort(Comparator.comparingLong(Genre::getId));
         return genres;
     }
 
     @Override
-    public void updateBook(Long id, String title, List<Long> genres, Integer status, String publisher, String author) {
+    public void deleteBook(Long id) {
         Book book = bookRepository.findById(id).orElseGet(Book::new);
-        Publisher publisher1 = publisherRepository.findByPublisherNameIgnoreCase(publisher).orElseGet(Publisher::new);
+        if (book.getBookStatus()==1) {
+            bookRepository.deleteById(id);
+        }
+    }
+
+    @Override
+    public void updateBook(Long id, String title, List<Long> genres, Integer status,
+                           String publisher, String author) {
+        Book book;
+        if (id == null) {
+            book = new Book();
+        } else {
+            book = bookRepository.findById(id)
+                    .orElseGet(Book::new);
+        }
+        Publisher publisher1 = publisherRepository.findByPublisherNameIgnoreCase(publisher)
+                .orElseGet(Publisher::new);
         publisher1.setPublisherName(publisher);
-        Author author1 = authorRepository.findByNameIgnoreCase(author).orElseGet(Author::new);
+        Author author1 = authorRepository.findByNameIgnoreCase(author)
+                .orElseGet(Author::new);
         author1.setName(author);
         List<Genre> genres1 = genreRepository.findByIdIn(genres);
         book.setGenres(genres1);
@@ -94,5 +112,53 @@ public class ImplementationDefaultLibraryService implements ILibraryService {
         final List<Author> authors = new LinkedList<>();
         authorRepository.findAll().iterator().forEachRemaining(authors::add);
         return authors;
+    }
+
+    @Override
+    public void deleteAuthor(Long id) {
+        authorRepository.deleteById(id);
+    }
+
+    @Override
+    public Author getAuthorById(Long id) {
+        return authorRepository.findById(id).orElseGet(Author::new);
+    }
+
+    @Override
+    public void updateAuthor(Long id, String name) {
+        Author author = authorRepository.findById(id).orElseGet(Author::new);
+        author.setName(name);
+        authorRepository.save(author);
+    }
+
+    @Override
+    public void updateAuthor(String name) {
+        Author author = new Author();
+        author.setName(name);
+        authorRepository.save(author);
+    }
+
+    @Override
+    public Publisher getPublisherById(Long id) {
+        return publisherRepository.findById(id).orElseGet(Publisher::new);
+    }
+
+    @Override
+    public void updatePublisher(Long id, String name) {
+        Publisher publisher = publisherRepository.findById(id).orElseGet(Publisher::new);
+        publisher.setPublisherName(name);
+        publisherRepository.save(publisher);
+    }
+
+    @Override
+    public void updatePublisher(String name) {
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName(name);
+        publisherRepository.save(publisher);
+    }
+
+    @Override
+    public void deletePublisher(Long id) {
+        publisherRepository.deleteById(id);
     }
 }

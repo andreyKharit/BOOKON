@@ -11,8 +11,6 @@
 
 package com.itacademy.ankhar.entities;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

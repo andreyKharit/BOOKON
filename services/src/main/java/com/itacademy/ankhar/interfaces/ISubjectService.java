@@ -6,6 +6,7 @@
 
 package com.itacademy.ankhar.interfaces;
 
+import com.itacademy.ankhar.entities.Request;
 import com.itacademy.ankhar.entities.User;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface ISubjectService {
     boolean updateUserStatus(Long userId, String status) throws Exception;
     User getSubjectById(Long id);
     User getUserByName(String username);
+    Request getUserRequest(String userName);
+    List<Request> getAllRequests();
+    void saveRequest(Long id, Long bookId, String userName, String status);
+    void deleteRequest(Long id);
 }

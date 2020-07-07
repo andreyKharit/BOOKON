@@ -4,12 +4,50 @@
   -->
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorate="~{layout}" lang="en">
 
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <h3>Publisher</h3>
+        <!-- editable-->
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <h4 th:text="${publisherView.getPublisherName()}"></h4>
+
+                            <label th:if="${publisherView.getBooks().size()>0}" class="col-form-label">
+                                Books:
+                            </label>
+                            <label th:if="${publisherView.getBooks().size()==0}" class="col-form-label">
+                                This publisher still published nothing...
+                            </label>
+                            <div th:each="book : ${publisherView.getBooks()}">
+                                <a
+                                        th:href="@{/books/view/{id}(id=${book.getId()})}"
+                                        th:text="${book.getName()}"></a>
+                                <span class="badge badge-info"
+                                      th:if="${book.getBookStatus()==1}">Available</span>
+                                <span class="badge badge-danger"
+                                      th:if="${book.getBookStatus()==0}">Unavailable</span>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
 </html>
