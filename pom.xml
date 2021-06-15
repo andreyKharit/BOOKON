@@ -41,7 +41,7 @@
         <guice.version>4.0</guice.version>
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <commons-codec.version>1.9</commons-codec.version>
-        <spring.version>5.2.5.RELEASE</spring.version>
+        <spring.version>5.2.9.RELEASE</spring.version>
         <spring.version.data>2.3.0.RELEASE</spring.version.data>
         <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
     </properties>
