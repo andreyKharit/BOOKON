@@ -35,7 +35,7 @@
         <jquery.version>2.1.1</jquery.version>
         <bootstrap.version>3.2.0</bootstrap.version>
         <my-sql.connector.version>8.0.19</my-sql.connector.version>
-        <log4j.version-core>2.13.1</log4j.version-core>
+        <log4j.version-core>2.15.0</log4j.version-core>
         <log4j.version>2.13.1</log4j.version>
         <hibernate.version>5.4.12.Final</hibernate.version>
         <guice.version>4.0</guice.version>
