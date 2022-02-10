@@ -37,7 +37,7 @@
         <my-sql.connector.version>8.0.19</my-sql.connector.version>
         <log4j.version-core>2.13.1</log4j.version-core>
         <log4j.version>2.13.1</log4j.version>
-        <hibernate.version>5.4.12.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <guice.version>4.0</guice.version>
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <commons-codec.version>1.9</commons-codec.version>
